@@ -1,0 +1,51 @@
+#mech-bug-tracker {
+	bottom: 0;
+	left: -300px;
+	position: absolute;
+	width: 300px;
+}
+#mech-bug-tracker .mech-bug-wrap {
+	background-color: #00CCFF;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-right-radius:5px;
+	border-top-right-radius:5px;
+	padding: 20px;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+}
+#mech-bug-tracker.active .mech-bug-wrap {
+	transform: translate(300px, 0px);
+	-webkit-transform: translate(300px, 0px);
+	-moz-transform: translate(300px, 0px);
+	-o-transform: translate(300px, 0px);
+	-ms-transform: translate(300px, 0px);
+}
+#mech-bug-tracker .mech-bug-wrap .mech-bug-close {
+	background: #FF5D1C;
+	-moz-border-radius:0 5px;
+	-webkit-border-radius:0 5px;
+	border-radius:0 5px;
+	cursor: pointer;
+	padding: 3px 6px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#mech-bug-tracker .mech-pull-tab {
+	background: #00CCFF;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-right-radius:5px;
+	border-top-right-radius:5px;
+	bottom: 0;
+	color: white;
+	cursor: pointer;
+	font-weight: 600;
+	padding: 5px;
+	position: absolute;
+	right: -100px;
+	text-align: center;
+	width: 100px;
+}
