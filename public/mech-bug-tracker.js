@@ -2,7 +2,8 @@
 
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
-		'bowser': 'js/bowser.min.js'
+		'bowser': 'js/bowser.min.js',
+		'Modernizr': 'js/modernizr.js'
 	};
 
 	var scriptCount = 0;
@@ -53,11 +54,22 @@
 			// 	crossDomain: true
 			// }).done(function(data) {
 			// 	$(script_tag).after(data.html);
+				if (!Modernizr.csstransforms) {
+					var bugTrackerLeft = $('#mech-bug-tracker').css('left');
+				}
 				$('#mech-pull-tab').click(function(e) {
-					$('#mech-bug-tracker').addClass('active');
+					if(!bugTrackerLeft) {
+						$('#mech-bug-tracker').addClass('active');
+					} else {
+						$('#mech-bug-tracker').animate({'left': '0'});
+					}
 				});
 				$('#mech-bug-close').click(function(e) {
-					$('#mech-bug-tracker').removeClass('active');
+					if(!bugTrackerLeft) {
+						$('#mech-bug-tracker').removeClass('active');
+					} else {
+						$('#mech-bug-tracker').animate({'left': bugTrackerLeft});
+					}
 				});
 				$('#bugTrackForm button').click(function(e) {
 					e.preventDefault();
