@@ -1,7 +1,8 @@
 (function() {
 
-	var scriptName 	= 'mech-bug-tracker.js',	// should match the name of this script
-		jsonURL 	= 'bug-form.json';			// url of the bug form HTML content
+	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
+		formURL 	= 'mech-bug-tracker.html',			// url of the bug form HTML content
+		cssURL		= 'mech-bug-track.css';
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 		'bowser': 'js/bowser.min.js',
@@ -47,10 +48,15 @@
 	function main() {
 		jQuery(document).ready(function($) {
 			var script_tag = getScriptTag(scriptName);
-			// $.getJSON(jsonURL, {
-			// 	crossDomain: true
-			// }).done(function(data) {
-			// 	$(script_tag).after(data.html);
+			$.ajax({
+				url: cssURL
+			}).done(function(data) {
+				$('head').append("<style>" + data + "</style>");
+			});
+			$.ajax({
+				url: formURL
+			}).done(function(data) {
+				$(script_tag).after(data);
 				if (!Modernizr.csstransforms) {
 					var bugTrackerLeft = $('#mech-bug-tracker').css('left');
 				}
@@ -100,7 +106,7 @@
 					}
 					$(bugFrom).trigger('reset');
 				});
-			// });
+			});
 		});
 
 
