@@ -3,7 +3,7 @@
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 		'bowser': 'js/bowser.min.js',
-		'Modernizr': 'js/modernizr.js'
+		'Modernizr.csstransforms': 'js/modernizr.js'
 	};
 
 	var scriptCount = 0;
@@ -34,10 +34,11 @@
 					scriptLoadHandler();
 				};
 			}
+			(document.getElementsByTagName("head")[0] || document.documentElement).appendChild(scriptTag);
 		} else {
-			return;
+			scriptLoads++;
+			scriptLoadHandler();
 		}
-		(document.getElementsByTagName("head")[0] || document.documentElement).appendChild(scriptTag);
 
 		function scriptLoadHandler () {
 			if (scriptLoads === scriptCount) {
