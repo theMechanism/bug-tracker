@@ -58,12 +58,6 @@
         </div>
 
 
-        <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
-
-        <script src="js/bootstrap.min.js"></script>
-
-        <script src="js/bowser.min.js"></script>
-
         <script src="mech-bug-tracker.js?projectID=23"></script>
     </body>
 </html>
