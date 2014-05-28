@@ -48,15 +48,12 @@
 	function main() {
 		jQuery(document).ready(function($) {
 			var script_tag = getScriptTag(scriptName);
-			$.ajax({
-				url: cssURL
-			}).done(function(data) {
-				$('head').append("<style>" + data + "</style>");
-			});
-			$.ajax({
-				url: formURL
-			}).done(function(data) {
-				$(script_tag).after(data);
+			$.when(
+				$.ajax(cssURL),
+				$.ajax(formURL)
+			).done(function(css, form) {
+				$('head').append("<style>" + css[0] + "</style>");
+				$(script_tag).after(form[0]);
 				if (!Modernizr.csstransforms) {
 					var bugTrackerLeft = $('#mech-bug-tracker').css('left');
 				}
