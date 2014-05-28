@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>Bug tracker Remote</title>
+	</head>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        function addBug(bug) {
+          $('#bugs').append('<li>' + task.url + '</ul>');
+        }
+
+        $('#new_bug').submit(function(e) {
+          $.post('http://localhost:3000/clients/1/projects/1/bugs?callback=?', $(this).serialize(), addBug);
+          this.reset();
+          e.preventDefault();
+        });
+
+        $.getJSON('http://localhost:3000/clients/1/projects/1/bugs?callback=?', function(bugs) {
+          $.each(bugs, function() { addBug(this); });
+        });
+      });
+    </script>
+
+	<body>
+	<form id="new_bug">
+		project_id: <input type="number" name="project_id"><br>
+		url: <input type="text" name="url"><br>
+		browser: <input type="text" name="browser"><br>
+		status: <input type="text" name="status"><br>
+		params: <input type="text" name="params"><br>
+		width: <input type="number" name="width"><br>
+		height: <input type="number" name="height"><br>
+		description: <input type="text" name="description"><br>
+		<input type="submit" value="Add">
+	</form>
+
+	<ul id="bugs"></ul>
+
+	</body>
+	</html>
+

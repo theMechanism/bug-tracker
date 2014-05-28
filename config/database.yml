@@ -19,6 +19,7 @@ development:
   encoding: unicode
   database: bug-tracker_development
   pool: 5
+  host: localhost
   username: 
   password:
 
@@ -48,6 +49,7 @@ test:
   encoding: unicode
   database: bug-tracker_test
   pool: 5
+  host: localhost
   username: 
   password:
 
@@ -56,5 +58,6 @@ production:
   encoding: unicode
   database: bug-tracker_production
   pool: 5
+  host: localhost
   username: 
   password:
