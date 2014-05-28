@@ -6,44 +6,38 @@
 		'Modernizr.csstransforms': 'js/modernizr.js'
 	};
 
-	var scriptCount = 0;
-	var scriptLoads = 0;
+	var scriptCount = 0;	// count of scripts required
+	var scriptLoads = 0;	// count of script loaded
 
 	for (var key in depends) {
 		if (depends.hasOwnProperty(key)) {
 			scriptCount++;
-			loadScript(key, depends[key]);
+			loadScript(key, depends[key], function() {
+				scriptLoads++;
+				if (scriptLoads === scriptCount) {
+					main();
+				}
+			});
 		}
 	}
 
-	function loadScript (dependency, src) {
-		if (window[dependency] === undefined) {
+	function loadScript (dependency, src, callback) {
+		if (window[dependency] === undefined) {	// if dependency is not present
 			var scriptTag = document.createElement('script');
 			scriptTag.setAttribute('type', 'text/javascript');
 			scriptTag.setAttribute('src', src);
 			if (scriptTag.readyState) {
 				scriptTag.onreadystatechange = function () { // For old versions of IE
 					if (this.readyState == 'complete' || this.readyState == 'loaded') {
-						scriptLoads++;
-						scriptLoadHandler();
+						callback();
 					}
 				};
 			} else { // Other browsers
-				scriptTag.onload = function() {
-					scriptLoads++;
-					scriptLoadHandler();
-				};
+				scriptTag.onload = callback;
 			}
 			(document.getElementsByTagName("head")[0] || document.documentElement).appendChild(scriptTag);
 		} else {
-			scriptLoads++;
-			scriptLoadHandler();
-		}
-
-		function scriptLoadHandler () {
-			if (scriptLoads === scriptCount) {
-				main();
-			}
+			callback();
 		}
 	}
 
