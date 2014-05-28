@@ -1,9 +1,16 @@
 #mech-bug-tracker {
 	background-color: red;
 	bottom: 0;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-size: 14px;
+	font-weight: 300;
 	left: -300px;
 	position: absolute;
 	width: 300px;
+}
+#mech-bug-tracker,
+#mech-bug-tracker * {
+	box-sizing: border-box;
 }
 #mech-bug-tracker .mech-bug-wrap {
 	background-color: #00CCFF;
@@ -16,6 +23,20 @@
 	-ms-transition: all 1s ease;
 	-o-transition: all 1s ease;
 	transition: all 1s ease;
+}
+#mech-bug-tracker .mech-bug-wrap .form-group {
+	margin-bottom: 15px;
+}
+#mech-bug-tracker .mech-bug-wrap label {
+	display: block;
+	font-weight: bold;
+}
+#mech-bug-tracker .mech-bug-wrap input,
+#mech-bug-tracker .mech-bug-wrap textarea {
+	width: 100%;
+}
+#mech-bug-tracker .mech-bug-wrap textarea {
+	height: 60px;
 }
 #mech-bug-tracker.active .mech-bug-wrap {
 	transform: translate(300px, 0px);

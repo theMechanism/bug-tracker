@@ -7,8 +7,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="mech-bug-track.css">
     </head>
@@ -16,12 +14,6 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#">Bug Tracker</a>
         </div>
       </div>
@@ -46,11 +38,11 @@
             <form id="bugTrackForm" role="form" action="params.php" method="post" target="_blank">
               <div class="form-group">
                 <label for="formName">Name</label>
-                <input type="text" name="name" class="form-control" id="formName" placeholder="Enter name">
+                <input type="text" name="name" class="form-control" id="formName" placeholder="Enter a name so we know who to contact">
               </div>
               <div class="form-group">
                 <label for="fromDescription">Description</label>
-                <textarea class="form-control" name="description" id="fromDescription" placeholder="Enter description"></textarea>
+                <textarea class="form-control" name="description" id="fromDescription" placeholder="Enter description of bug"></textarea>
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
             </form>

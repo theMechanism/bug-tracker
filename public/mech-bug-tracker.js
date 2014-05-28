@@ -1,10 +1,13 @@
 (function() {
 
+	var scriptName 	= 'mech-bug-tracker.js',	// should match the name of this script
+		jsonURL 	= 'bug-form.json';			// url of the bug form HTML content
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 		'bowser': 'js/bowser.min.js',
 		'Modernizr.csstransforms': 'js/modernizr.js'
 	};
+
 
 	var scriptCount = 0;	// count of scripts required
 	var scriptLoads = 0;	// count of script loaded
@@ -43,8 +46,7 @@
 
 	function main() {
 		jQuery(document).ready(function($) {
-			var script_tag = getScriptTag('mech-bug-tracker.js');
-			// var jsonURL = 'bug-form.json';
+			var script_tag = getScriptTag(scriptName);
 			// $.getJSON(jsonURL, {
 			// 	crossDomain: true
 			// }).done(function(data) {
@@ -90,7 +92,13 @@
 					});
 					window.open('', 'formpopup', 'width=400,height=400,scrollbars=no,menubar=no,resizable=yes,toolbar=no,status=no');
 			        bugFrom.get(0).target = 'formpopup';
-				    bugFrom.append(inputArray).submit();		    
+				    bugFrom.append(inputArray).submit();
+					if(!bugTrackerLeft) {
+						$('#mech-bug-tracker').removeClass('active');
+					} else {
+						$('#mech-bug-tracker').animate({'left': bugTrackerLeft});
+					}
+					$(bugFrom).trigger('reset');
 				});
 			// });
 		});
