@@ -2,12 +2,14 @@ class BugsController < ApplicationController
 	include ActionController::Helpers
   	include ActionController::Cookies
 	
+	# before_filter :authenticate_user!, :except => [:show, :index, :create, :new]  
+	skip_before_action :verify_authenticity_token
 	def new
 		@bug = Bug.new
 	end
 
 	def create
-		@bug = Bug.new(bug_params)
+		@bug = Bug.build(bug_params)
 
 
 		if @bug.save
@@ -49,7 +51,8 @@ class BugsController < ApplicationController
 
 	private
 		def bug_params
-			params.require(:bug).permit!
+			# params.require(:bug).permit!
+			params.fetch(:bug, {})
 		end
 
 end
