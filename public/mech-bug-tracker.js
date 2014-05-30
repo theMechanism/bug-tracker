@@ -1,8 +1,8 @@
 (function() {
 
 	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
-		formURL 	= 'mech-bug-tracker.html',			// url of the bug form HTML content
-		cssURL		= 'mech-bug-track.css';
+		formURL 	= 'http://localhost:3000/getform?callback=?',			// url of the bug form HTML content
+		cssURL		= 'http://localhost:3000/getformstyle?callback=?';
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 		'bowser': 'js/bowser.min.js',
@@ -49,11 +49,12 @@
 		jQuery(document).ready(function($) {
 			var script_tag = getScriptTag(scriptName);
 			$.when(
-				$.ajax(cssURL),
-				$.ajax(formURL)
+				$.getJSON(cssURL),
+				$.getJSON(formURL)
 			).done(function(css, form) {
-				$('head').append("<style>" + css[0] + "</style>");
-				$(script_tag).after(form[0]);
+				debugger;
+				$('head').append("<style>" + css[0].css + "</style>");
+				$(script_tag).after(form[0].html);
 				if (!Modernizr.csstransforms) {
 					var bugTrackerLeft = $('#mech-bug-tracker').css('left');
 				}
@@ -81,14 +82,14 @@
 					var bugFrom = $("#bugTrackForm");
 					var inputArray = [];
 					var makeArray = {
-						'projectID': projectID,
-						'url': document.URL,
-						'os': navigator.platform,
-						'ua': navigator.userAgent,
-						'browser': bowser.name,
-						'browserVersion': bowser.version,
-						'browserWidth': $(window).width(),
-						'browserHeight': $(window).height()
+						'bug[project_id]': projectID,
+						'bug[url]': document.URL,
+						'bug[os]': navigator.platform,
+						'bug[ua]': navigator.userAgent,
+						'bug[browser]': bowser.name,
+						'bug[browser_version]': bowser.version,
+						'bug[width]': $(window).width(),
+						'bug[height]': $(window).height()
 					};
 					$.each(makeArray, function(key, value) {
 						inputArray.push(makeInput(key, value));

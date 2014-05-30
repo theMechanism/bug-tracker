@@ -4,13 +4,13 @@ BugTracker::Application.routes.draw do
   devise_for :clients, :controllers => { :registrations => 'clients' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :clients do
-    resources :projects do
+
      resources :bugs
-    end
-  end
+ 
+   match "/getform" => "bugs#form", via: [:get]
+   match "/getformstyle" => "bugs#style", via: [:get]
   # You can have the root of your site routed with "root"
-  root 'projects#index'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
