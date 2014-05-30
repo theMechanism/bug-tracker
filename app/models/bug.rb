@@ -5,4 +5,5 @@ class Bug < ActiveRecord::Base
  	  inverse_of: :bugs
  	validates_inclusion_of :status,
     	in: VALID_STATUS
+    	
 end

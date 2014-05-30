@@ -1,6 +1,6 @@
 ActiveAdmin.register Bug do
   menu :priority => 2
-  
+  config.clear_action_items!
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -17,7 +17,7 @@ ActiveAdmin.register Bug do
   form do |f|
       f.inputs "Bug" do
         f.input :description
-        f.input :status, :as=> :select, :collection => ['Open', "Closed", "Verify"]
+        f.input :status, :as=> :select,:include_blank => false, :collection => ['Open', "Closed", "Verify"]
       end
       f.actions
     end
