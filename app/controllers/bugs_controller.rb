@@ -5,13 +5,21 @@ class BugsController < ApplicationController
 	# before_filter :authenticate_user!, :except => [:show, :index, :create, :new]  
 	skip_before_action :verify_authenticity_token
 
+	def index
+		
+	end
+
+	def show
+		@bug = Bug.find(params[:id])
+		
+	end
 
 	def create
 		@bug = Bug.new(bug_params)
 		if @bug.save
-			render json: @bug, status: :created, location: @bug, callback: params[:callback] 
+			redirect_to @bug, location: @bug, callback: params[:callback]
 		else
-			render json: @bug.errors, status: :unprocessable_entity, callback: params[:callback]
+			redirect_to bugs_path, notice: @bug.errors.full_messages
 		end
 	end
 	def form

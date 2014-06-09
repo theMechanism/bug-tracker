@@ -9,7 +9,6 @@
 		'Modernizr.csstransforms': 'js/modernizr.js'
 	};
 
-
 	var scriptCount = 0;	// count of scripts required
 	var scriptLoads = 0;	// count of script loaded
 
@@ -24,7 +23,6 @@
 			});
 		}
 	}
-
 	function loadScript (dependency, src, callback) {
 		if (window[dependency] === undefined) {	// if dependency is not present
 			var scriptTag = document.createElement('script');
@@ -44,7 +42,6 @@
 			callback();
 		}
 	}
-
 	function main() {
 		jQuery(document).ready(function($) {
 			var script_tag = getScriptTag(scriptName);
@@ -52,7 +49,7 @@
 				$.getJSON(cssURL),
 				$.getJSON(formURL)
 			).done(function(css, form) {
-				debugger;
+				
 				$('head').append("<style>" + css[0].css + "</style>");
 				$(script_tag).after(form[0].html);
 				if (!Modernizr.csstransforms) {
