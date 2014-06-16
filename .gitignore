@@ -16,3 +16,4 @@
 /tmp
 # ds store ignore
 .DS_Store.env
+.env
