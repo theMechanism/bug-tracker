@@ -5,8 +5,8 @@
 		cssURL		= 'http://arcane-coast-4951.herokuapp.com/getformstyle?callback=?';
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
-		'bowser': 'js/bowser.min.js',
-		'Modernizr.csstransforms': 'js/modernizr.js'
+		'bowser': 'http://arcane-coast-4951.herokuapp.com/js/bowser.min.js',
+		'Modernizr.csstransforms': 'http://arcane-coast-4951.herokuapp.com/js/modernizr.js'
 	};
 
 	var scriptCount = 0;	// count of scripts required
