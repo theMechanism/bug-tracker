@@ -15,4 +15,4 @@
 /log/*.log
 /tmp
 # ds store ignore
-.DS_Store
+.DS_Store.env
