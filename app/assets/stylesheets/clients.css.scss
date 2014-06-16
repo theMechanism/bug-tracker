@@ -26,6 +26,9 @@
 		margin-bottom:0px;
 	}
 }
+.sortable{
+	cursor:pointer;
+}
 .tb-wrp{
 	margin-top:100px;
 }
@@ -77,17 +80,19 @@ background-position:0 22px;
 	float:left;
 }
 .see-more{
-	@include transition(all, .5s, ease);
+	@include transition(background, .5s, ease);
 	float:right;
 	padding:0px 15px;
 	background:#a6e7fe;
 	font-weight:600;
 	cursor:pointer;
 }
-.see-more:hover, .see-more.active{
+.see-more:hover, .see-more.active, .contact:hover{
 	background:#5eacdd;
 	color:white;
 }
+.see-more.active{padding: 0px 20px;}
+
 .contact-wrap{
 	width: 38%;
 	margin:auto;
@@ -95,6 +100,7 @@ background-position:0 22px;
 	float:right;
 }
 .contact{
+	@include transition(all, .5s, ease);
 	padding:0px 15px;
 	background:#a6e7fe;
 	font-weight:600;
@@ -121,6 +127,9 @@ tr.more-info{
 	padding:5px 0px;
 	}
 
+}
+.contact a{
+	color:black;
 }
 
 @media all and (max-width: 1053px){

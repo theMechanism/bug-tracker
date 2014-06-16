@@ -1,26 +1,40 @@
+<% if current_client.id != @client.id %>
+  <div class="full-width-header">
+  <div class="bar"></div>
+  <div class="absolute-content-wrp extra-padding">
+    <h1 class='col-md-12'>Oops!</h1>
+    <div class="expiration">It looks like this isn't your project, try signing in as a different user.</div>
+    
+  </div>
+
+</div>
+<div style='text-align:center; font-size:350px;width:100%; margin:150px auto;'>&#x21dd;</div>
+<div style='text-align:center; font-size:30px;width:100%; margin:20px auto;'><%= link_to('Logout', destroy_client_session_path, :method => :delete) %>  </div>
+<%else%>
 <div class="full-width-header">
   <div class="bar"></div>
   <div class="absolute-content-wrp extra-padding">
     <h1 class='col-md-12'><%=@client.project.name.upcase%></h1>
     <div class="expiration"><span style='font-weight:500'>Bug tracking ends on: </span><%=@client.project.expiration.to_date.strftime('%a %b %d %Y')%></div>
   </div>
+
 </div>
 <div class="tb-wrp">
     <table class="tablesorter client-table">
       <thead>
         <tr class='order'>
-          <th>Status</th>
-          <th class='hide-on-medium'>ID</th>
-          <th class='hide-on-medium'>Date Submitted</th>
-          <th class='hide-on-small'>Submitted By</th>
-          <th>URL</th>
-          <th>Description</th>
+          <th class='sortable'>Status</th>
+          <th class='hide-on-medium sortable'>ID</th>
+          <th class='hide-on-medium sortable'>Date Submitted</th>
+          <th class='hide-on-small sortable'>Submitted By</th>
+          <th class='sortable'>URL</th>
+          <th class='sortable'>Description</th>
         </tr>
       </thead>
       <tbody>
         <% @client.project.bugs.each do |bug| %>
 
-          <tr class='col-md-12 margin-top '>
+          <tr class='col-md-12 margin-top'>
             <td class="status <%= bug.status.downcase %>"><div class="bug-icn"></div></td>
             <td class='hide-on-medium'> <%= bug.id %> </td>
             <td class='hide-on-medium'> <%= bug.created_at.to_date %> </td>
@@ -34,15 +48,18 @@
           <tr class='more-info <%=bug.id%>'>
             <td colspan='0' class='data-cont'>
             <div class="full-text">> <%=bug.description.to_s%></div> 
-              <div class="contact-wrap"><div class="contact">Contact The Mechanism about this issue...</div></div>
+              <div class="contact-wrap"><div class="contact"> <a href="mailto:dev@themechanism.com?Subject=Issue%20with%20Bug%20Number%20<%=bug.id%>">Contact The Mechanism about this issue...</a></div></div>
             </td>
           </tr>
        <%end%>
       </tbody>
     </table>
 </div>
+
+<%end%>
 <script type="text/javascript">
   $(document).ready(function(){
+       $(".tablesorter").tablesorter(); 
     $(".see-more").click(function() {
       var data = this.classList[1];
       $(this).toggleClass('active');
