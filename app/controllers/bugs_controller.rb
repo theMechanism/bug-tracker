@@ -11,7 +11,6 @@ class BugsController < ApplicationController
 
 	def show
 		@bug = Bug.find(params[:id])
-		
 	end
 
 	def create
@@ -38,7 +37,7 @@ class BugsController < ApplicationController
 	end
 	private
 		def bug_params
-				params.require(:bug).permit(:project_id, :url, :browser, :status, 
+				params.require(:bug).permit(:project_id, :name, :url, :browser, :status, 
 					:params, :width, :height, :description, :os, :ua, 
 					:browser_version)
 		end

@@ -3,6 +3,6 @@ class Project < ActiveRecord::Base
 	 has_many :bugs,
     	dependent: :destroy
     belongs_to :client,
- 	  inverse_of: :projects
+ 	  inverse_of: :project
  	validates :name, uniqueness: { scope: :client }
 end

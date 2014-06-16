@@ -4,7 +4,7 @@ ActiveAdmin.register Project do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-   permit_params [:name, :blurb, :expiration, :client]
+   permit_params [:name, :blurb, :expiration, :client_id]
   #
   # or
   #
@@ -29,7 +29,7 @@ ActiveAdmin.register Project do
         f.input :client_id, :as=> :select,:include_blank => false, :collection => Client.all, member_label: :email
         f.input :name
         f.input :blurb
-        f.input :expiration
+        f.input :expiration, :as => :datepicker
         
       end
       f.actions
@@ -37,7 +37,7 @@ ActiveAdmin.register Project do
   controller do
     def create
       @project = Project.new(name: params[:project][:name], blurb: params[:project][:blurb], 
-        expiration: DateTime.new(params[:project]["expiration(1i)"].to_i,params[:project]["expiration(2i)"].to_i,params[:project]["expiration(3i)"].to_i, params[:project]["expiration(4i)"].to_i,params[:project]["expiration(5i)"].to_i),
+        expiration: Date.parse(params[:project][:expiration]),
         client_id: params[:project][:client_id] )
      
       create! #or super

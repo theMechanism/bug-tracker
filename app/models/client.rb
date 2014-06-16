@@ -4,6 +4,6 @@ class Client < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :projects,
+  has_one :project,
     	dependent: :destroy
 end

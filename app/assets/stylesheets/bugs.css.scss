@@ -1,3 +1,52 @@
 // Place all the styles related to the bugs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header{
+	position:absolute;
+	width:100%;
+	top:0px;
+	left:0px;
+	text-align:center;
+	box-shadow: 0px 2px 9px grey;
+	background: -moz-linear-gradient(45deg,  #59bae3 0%, #59aae3 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#59bae3), color-stop(100%,#59aae3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* IE10+ */
+	background: linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59bae3', endColorstr='#59aae3',GradientType=1 );
+	z-index:2;
+	h1{
+		color:white;
+	color: white;
+	margin: 0px;
+	font-weight: 300;
+	font-size: 30px;
+	}
+	.more{
+		float:right;
+		margin:10px 10px;
+		padding:0px 15px;
+		background:#a6e7fe;
+		font-weight:600;
+		cursor:pointer;
+	}
+}
+.branding{
+	text-align:left;
+	padding:10px;
+}
+.bold{
+	font-weight:700;
+}
+.info{
+	display:none;
+	position:absolute;
+	max-width:100%;
+	z-index:1;
+	top:132px;
+	left:0px;
+	padding:20px;
+	background:#a2e8fc;
+}

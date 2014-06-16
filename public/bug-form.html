@@ -13,12 +13,12 @@
         }
 
         $('#new_bug').submit(function(e) {
-          $.post('http://localhost:3000/clients/1/projects/1/bugs?callback=?', $(this).serialize(), addBug);
+          $.post('http://arcane-coast-4951.herokuapp.com/clients/1/projects/1/bugs?callback=?', $(this).serialize(), addBug);
           this.reset();
           e.preventDefault();
         });
 
-        $.getJSON('http://localhost:3000/clients/1/projects/1/bugs?callback=?', function(bugs) {
+        $.getJSON('http://arcane-coast-4951.herokuapp.com/clients/1/projects/1/bugs?callback=?', function(bugs) {
           $.each(bugs, function() { addBug(this); });
         });
       });

@@ -1,8 +1,8 @@
 (function() {
 
 	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
-		formURL 	= 'http://localhost:3000/getform?callback=?',			// url of the bug form HTML content
-		cssURL		= 'http://localhost:3000/getformstyle?callback=?';
+		formURL 	= 'http://arcane-coast-4951.herokuapp.com/getform?callback=?',			// url of the bug form HTML content
+		cssURL		= 'http://arcane-coast-4951.herokuapp.com/getformstyle?callback=?';
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 		'bowser': 'js/bowser.min.js',

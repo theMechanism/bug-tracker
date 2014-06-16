@@ -14,10 +14,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-
+gem 'jquery-tablesorter'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
+gem 'therubyracer', platforms: :ruby
+gem "twitter-bootstrap-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -41,6 +41,8 @@ group :development, :test do
   gem 'capybara'
   gem 'quiet_assets'
 end
+
+gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
@@ -52,3 +54,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+ruby "2.0.0"

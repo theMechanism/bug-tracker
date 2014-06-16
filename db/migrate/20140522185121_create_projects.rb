@@ -3,8 +3,8 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :name
       t.string :blurb
-      t.integer :client_id, null:false
-      t.datetime :expiration
+      t.belongs_to :client
+      t.date :expiration
       t.timestamps
     end
   end

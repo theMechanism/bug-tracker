@@ -10,7 +10,9 @@ ActiveAdmin.register Bug do
     id_column
     column :project
     column :url
-    column :created_at
+    column :created_at do |obj|
+      obj.created_at.to_date
+    end
     column("Status")   {|bug| status_tag(bug.status)} 
     actions
   end

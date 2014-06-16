@@ -1,0 +1,39 @@
+<div class='header'>
+	<div class="branding"><img src="http://arcane-coast-4951.herokuapp.com/images/TheMech_FullLogo.png" alt=""></div>
+	<h1>Thank you for your submission.</h1>
+	<div class="more">See more...</div>	
+</div>
+<div class="info">
+	<div class="row"><span class="bold">ID #: </span><%=@bug.id%></div>
+	<div class="row"><span class="bold">User Name: </span><%=@bug.name%></div>
+	<div class="row"><span class="bold">URL: </span><%=@bug.url%></div>
+	<div class="row"><span class="bold">Browser: </span><%=@bug.browser%></div>
+	<div class="row"><span class="bold">Browser Version: </span><%=@bug.browser_version%></div>
+	<div class="row"><span class="bold">Parameters: </span><%=@bug.params%></div>
+	<div class="row"><span class="bold">Browser Width: </span><%=@bug.width%></div>
+	<div class="row"><span class="bold">Browser Height: </span><%=@bug.height%></div>
+	<div class="row"><span class="bold">Created At: </span><%=@bug.created_at.to_date%></div>
+	<div class="row"><span class="bold">User Agent: </span><%=@bug.ua%></div>
+	<div class="row"><span class="bold">Operating System: </span><%=@bug.os%></div>
+</div>
+<script>
+
+$(document).ready(function(){
+	window.resizeTo(600,184);
+	window.focus();
+	var show = false;
+    $(".more").click(function() {
+      show = !show;
+      $(".info").toggle();
+      var txt = $(".info").is(':visible') ? 'See less...' : 'See more...';
+      $(".more").text(txt); 
+      if (show){
+      	window.resizeTo(600,454);
+		window.focus();
+      }else{
+      	window.resizeTo(600,184);
+		window.focus();
+      }
+    });
+  })
+</script>

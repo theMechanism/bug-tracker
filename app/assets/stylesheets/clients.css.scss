@@ -1,3 +1,155 @@
 // Place all the styles related to the clients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin transition($property, $time, $ease) {
+  -webkit-transition: $property $time $ease;  /* Chrome 1-25, Safari 3.2+ */
+     -moz-transition: $property $time $ease;  /* Firefox 4-15 */
+       -o-transition: $property $time $ease;  /* Opera 10.50–12.00 */
+          transition: $property $time $ease;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+.full-width-header{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	background:#a2e8fc;
+	height:98px;
+	border-bottom: 2px solid #c5f0fd;
+	.bar{
+		height:5px;
+		width:100%;
+		background:#5eacdd;
+		border-bottom: 2px solid #95ceec;
+	}
+	h1{
+		font-size:32.5px;
+		margin-bottom:0px;
+	}
+}
+.tb-wrp{
+	margin-top:100px;
+}
+.absolute-content-wrp{
+	padding:0px 35px;
+}
+.expiration{
+	color:#656e82;
+	font-size:18px;
+	font-weight:100;
+}
+
+.status .bug-icn{
+background-image:url("/images/bugs_sprite_sheet.png");
+height: 22px;
+width: 22px;
+margin: auto;
+}
+.status.closed .bug-icn{
+background-position:0 22px;
+
+}
+.client-table{
+	thead th {
+	background: white;
+	font-weight: 600;
+	font-size: 18px;
+	text-align:center;
+	}
+	td{
+	text-align:center;
+	}
+	tr{
+		height: 35px;
+		position:relative;
+
+	}
+	a{
+		color:#70cdf5;
+		text-decoration: none;
+	}
+	
+}
+.align-left{
+	text-align:left !important;
+
+}
+.bug-desc{
+	float:left;
+}
+.see-more{
+	@include transition(all, .5s, ease);
+	float:right;
+	padding:0px 15px;
+	background:#a6e7fe;
+	font-weight:600;
+	cursor:pointer;
+}
+.see-more:hover, .see-more.active{
+	background:#5eacdd;
+	color:white;
+}
+.contact-wrap{
+	width: 38%;
+	margin:auto;
+	text-align:center;
+	float:right;
+}
+.contact{
+	padding:0px 15px;
+	background:#a6e7fe;
+	font-weight:600;
+	width:300px;
+	margin:auto;
+}
+.full-text{
+float:left;
+margin-left:20px;
+max-width:60%;
+}
+tr.more-info{
+
+	width:100%;
+	height:0px;
+	display:none;	
+
+	td.data-cont {
+	position: absolute;
+	width: 100%;
+	text-align: left;
+	background: #edfbff;
+	left: 0px;
+	padding:5px 0px;
+	}
+
+}
+
+@media all and (max-width: 1053px){
+	.hide-on-medium{
+		display:none;
+	}
+	.contact-wrap{
+		width:50%;
+	}
+	.full-text{
+		max-width:40%;
+	}
+}
+@media all and (max-width: 881px){
+	.hide-on-small{
+		display:none;
+	}
+	.contact-wrap{
+		width:60%;
+	}
+	.full-text{
+		max-width:30%;
+	}
+
+}
+@media all and (max-width: 742px){
+	.see-more{
+		clear:both;
+		float:left;
+	}
+}
+
