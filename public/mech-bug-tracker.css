@@ -12,6 +12,9 @@
 #mech-bug-tracker * {
 	box-sizing: border-box;
 }
+.branding img{
+	max-width:300px;
+}
 #mech-bug-tracker .mech-bug-wrap {
 	background: #59bae3; /* Old browsers */
 background: -moz-linear-gradient(45deg,  #59bae3 0%, #59aae3 100%); /* FF3.6+ */
