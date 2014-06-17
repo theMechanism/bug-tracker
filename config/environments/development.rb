@@ -8,7 +8,15 @@ BugTracker::Application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
-
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "6vdf-pwpq.accessdomain.com",
+    :authentication => :login,
+    :user_name => "safeFareTesting@gmail.com",
+    :password => "linux*1989"
+  }
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
