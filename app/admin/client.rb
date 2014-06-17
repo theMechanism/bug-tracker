@@ -1,5 +1,5 @@
 ActiveAdmin.register Client do
-  menu :priority => 4
+  menu :priority => 2
   
 permit_params [:email, :password, :password_confirmation] 
   

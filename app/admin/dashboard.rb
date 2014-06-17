@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Bugs" do
           table_for Bug.order('id desc').limit(10) do
-            column("Bug ID")   {|bug| link_to(bug.id, admin_bug_path(bug.id)) } 
+            column("Bug ID")   {|bug| link_to(bug.id, admin_project_bug_path(bug.project.id, bug.id)) } 
             column("Project"){|bug| link_to(bug.project.name, admin_project_path(bug.project)) } 
             column("Reported At"){|bug| bug.created_at } 
             column("Status")   {|bug| status_tag(bug.status)} 

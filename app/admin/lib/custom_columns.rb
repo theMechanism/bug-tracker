@@ -9,6 +9,7 @@ module ActiveAdmin
         html = _select list, val, { "attrs" => %{
                                                     data-path='#{resource.class.name.tableize}' 
                                                     data-attr='#{attr}' 
+                                                    data-project-id='#{resource.project.id}'
                                                     data-resource-id='#{resource.id}' 
                                                     class='admin-selectable' 
                                                 } 

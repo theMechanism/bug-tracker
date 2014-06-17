@@ -1,6 +1,8 @@
 ActiveAdmin.register Bug do
-  menu :priority => 2
+    menu :priority => 4
+
   config.clear_action_items!
+  belongs_to :project, :optional => true
   actions :all, :except => [:edit]
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -30,7 +32,7 @@ ActiveAdmin.register Bug do
       @bug = Bug.find(params[:id])
       if params[:authenticity_token].present?     
         Bug.update(@bug.id, status: params[:bug][:status])
-        redirect_to '/admin/bugs'
+        redirect_to admin_project_bugs_path(@bug.project.id)
       else
         Bug.update(@bug.id, status: params[:bug][:status])
         render :nothing => true, :status => 200, :content_type => 'text/html'
@@ -61,7 +63,7 @@ ActiveAdmin.register Bug do
         row :ua
     end
     div do # <- Note the div
-      semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
+      semantic_form_for [:admin, resource.project, resource], builder: ActiveAdmin::FormBuilder do |f|
         f.inputs "Update Status" do
         f.input :status, :as=> :select,:include_blank => false, :collection => ['Open', "Closed", "Verify"]
         end

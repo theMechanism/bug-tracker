@@ -20,8 +20,8 @@ ActiveAdmin.register Project do
     column :name
     column :client
     column :expiration
-    column("Total Bugs"){|project| link_to("#{project.bugs.length} bugs", "/admin/bugs?utf8=✓&q%5Bproject_id_eq%5D=#{project.id}&commit=Filter&order=id_desc") } 
-    column("Open Bugs"){|project| link_to("#{project.bugs.where(status:'Open').length} bugs", "/admin/bugs?utf8=✓&q%5Bproject_id_eq%5D=#{project.id}&q%5Bstatus_contains%5D=Open&commit=Filter&order=id_desc") } 
+    column("Total Bugs"){|project| link_to("#{project.bugs.length} bugs", admin_project_bugs_path(project.id)) } 
+    column("Open Bugs"){|project| link_to("#{project.bugs.where(status:'Open').length} bugs", "/admin/projects/#{project.id}/bugs?utf8=✓&q%5Bproject_id_eq%5D=#{project.id}&q%5Bstatus_contains%5D=Open&commit=Filter&order=id_desc") } 
     actions
   end
   form do |f|

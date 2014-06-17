@@ -11,6 +11,7 @@ var admin = {
       var path        = $( e.currentTarget ).attr("data-path");
       var attr        = $( e.currentTarget ).attr("data-attr");
       var resource_id = $( e.currentTarget ).attr("data-resource-id");
+      var project_id = $( e.currentTarget ).attr("data-project-id");
       var val         = $( e.currentTarget ).val();
 
       val = $.trim(val)
@@ -19,8 +20,9 @@ var admin = {
       resource_class = path.slice(0,-1)
       payload[resource_class] = {};
       payload[resource_class][attr] = val;
+      debugger;
       $.ajax({
-	    url: "/admin/"+path+"/"+resource_id ,
+	    url: "/admin/projects/"+project_id+"/"+path+"/"+resource_id ,
 	    type: 'PUT',
 	    data: payload,
 	    success: function(result) {
