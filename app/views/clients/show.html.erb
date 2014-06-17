@@ -61,11 +61,20 @@
   $(document).ready(function(){
        $(".tablesorter").tablesorter(); 
     $(".see-more").click(function() {
+      if ( !$(this).hasClass('active') ){
+        reset(); 
+      } 
       var data = this.classList[1];
       $(this).toggleClass('active');
       $(".more-info."+data).toggle();
       var txt = $(".more-info."+data).is(':visible') ? 'See less...' : 'See more...';
       $(this).text(txt); 
     });
+    
+    var reset = function(){
+       $('.more-info').css('display','none');
+      $('.see-more').removeClass('active');
+      $(".see-more").text('See more...'); 
+    }
   })
 </script>
