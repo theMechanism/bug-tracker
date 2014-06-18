@@ -4,16 +4,21 @@
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	font-weight: 300;
-	left: -425px;
+	left: -47%;
 	position: fixed;
-	width: 425px;
+	width: 47%;
+
 }
 #mech-bug-tracker,
 #mech-bug-tracker * {
 	box-sizing: border-box;
 }
+.branding{
+	width: 75%;
+}
 .branding img{
 	max-width:300px;
+	width:100%;
 }
 #mech-bug-tracker .mech-bug-wrap {
 	background: #59bae3; /* Old browsers */
@@ -51,11 +56,11 @@ transition: all 1s ease;
 	width: 100%;
 }
 #mech-bug-tracker.active .mech-bug-wrap {
-	transform: translate(425px, 0px);
-	-webkit-transform: translate(425px, 0px);
-	-moz-transform: translate(425px, 0px);
-	-o-transform: translate(425px, 0px);
-	-ms-transform: translate(425px, 0px);
+	transform: translate(100%, 0px);
+	-webkit-transform: translate(100%, 0px);
+	-moz-transform: translate(100%, 0px);
+	-o-transform: translate(100%, 0px);
+	-ms-transform: translate(100%, 0px);
 }
 #mech-bug-tracker .mech-bug-wrap .mech-bug-close {
 	background: #a6e7fe;
@@ -116,5 +121,17 @@ padding-top:2.5px;
 	font-size:14px;
 	cursor:pointer;
 	font-weight:600;
+}
+@media all and (max-width: 642px){
+	#mech-bug-tracker {
+		background-color: red;
+		bottom: 0;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		left: -100%%;
+		position: fixed;
+		width: 100%;
+	}
 }
 
