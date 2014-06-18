@@ -9,12 +9,19 @@
 		'Modernizr.csstransforms': 'http://arcane-coast-4951.herokuapp.com/js/modernizr.js'
 	};
 
-	var scriptCount = 0;	// count of scripts required
+	Object.size = function(obj) {
+		var size = 0, key;
+		for (key in obj) {
+			if (obj.hasOwnProperty(key)) size++;
+		}
+		return size;
+	}
+
+	var scriptCount = Object.size(depends);	// count of scripts required
 	var scriptLoads = 0;	// count of script loaded
 
 	for (var key in depends) {
 		if (depends.hasOwnProperty(key)) {
-			scriptCount++;
 			loadScript(key, depends[key], function() {
 				scriptLoads++;
 				if (scriptLoads === scriptCount) {
@@ -46,8 +53,13 @@
 		jQuery(document).ready(function($) {
 			var script_tag = getScriptTag(scriptName),
 				bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf('mech-bug-tracker.js')),
-				formURL = bugTrackURL + 'formPath' + '?callback=?',
-				cssURL = bugTrackURL + 'getformstyle' + '?callback=?';
+				formURL = bugTrackURL + formPath + "\?callback=\?",
+				cssURL = bugTrackURL + cssPath + "\?callback=\?"
+				projectID = getParams(script_tag).projectID;
+				if (!projectID) {
+					console.log('Please Provide a ProjectID (bugTracker.js?projectID={##})');
+					return;
+				}
 
 			$.when(
 				$.getJSON(cssURL),
@@ -75,11 +87,6 @@
 				});
 				$('#bugTrackForm button').click(function(e) {
 					e.preventDefault();
-					var projectID = getParams(script_tag).projectID;
-					if (!projectID) {
-						console.log('Please Provide a ProjectID (bugTracker.js?projectID={##})');
-						return;
-					}
 					var bugFrom = $("#bugTrackForm");
 					var inputArray = [];
 					var makeArray = {
@@ -96,14 +103,13 @@
 						inputArray.push(makeInput(key, value));
 					});
 					window.open('', 'formpopup', 'width=400,height=400,scrollbars=no,menubar=no,resizable=yes,toolbar=no,status=no');
-			        bugFrom.get(0).target = 'formpopup';
-				    bugFrom.append(inputArray).submit();
+			        bugFrom.prop("target", "formpopup").prop("action", bugTrackURL + "bugs").append(inputArray).submit();
 					if(!bugTrackerLeft) {
 						$('#mech-bug-tracker').removeClass('active');
 					} else {
 						$('#mech-bug-tracker').animate({'left': bugTrackerLeft});
 					}
-					$(bugFrom).trigger('reset');
+					bugFrom.trigger('reset');
 				});
 			});
 		});
