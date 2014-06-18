@@ -1,8 +1,8 @@
 (function() {
 
 	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
-		formURL 	= 'http://arcane-coast-4951.herokuapp.com/getform?callback=?',			// url of the bug form HTML content
-		cssURL		= 'http://arcane-coast-4951.herokuapp.com/getformstyle?callback=?';
+		formPath 	= 'getform',			// url of the bug form HTML content
+		cssPath		= 'getformstyle';
 	var depends = {
 		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
 		'bowser': 'http://arcane-coast-4951.herokuapp.com/js/bowser.min.js',
@@ -44,7 +44,11 @@
 	}
 	function main() {
 		jQuery(document).ready(function($) {
-			var script_tag = getScriptTag(scriptName);
+			var script_tag = getScriptTag(scriptName),
+				bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf('mech-bug-tracker.js')),
+				formURL = bugTrackURL + 'formPath' + '?callback=?',
+				cssURL = bugTrackURL + 'getformstyle' + '?callback=?';
+
 			$.when(
 				$.getJSON(cssURL),
 				$.getJSON(formURL)
