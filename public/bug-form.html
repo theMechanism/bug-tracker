@@ -7,21 +7,6 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8">
-      $(function() {
-        function addBug(bug) {
-          $('#bugs').append('<li>' + task.url + '</ul>');
-        }
-
-        $('#new_bug').submit(function(e) {
-          $.post('http://arcane-coast-4951.herokuapp.com/clients/1/projects/1/bugs?callback=?', $(this).serialize(), addBug);
-          this.reset();
-          e.preventDefault();
-        });
-
-        $.getJSON('http://arcane-coast-4951.herokuapp.com/clients/1/projects/1/bugs?callback=?', function(bugs) {
-          $.each(bugs, function() { addBug(this); });
-        });
-      });
     </script>
 
 	<body>
@@ -38,7 +23,7 @@
 	</form>
 
 	<ul id="bugs"></ul>
-
+	<script type="text/javascript" src="http://localhost:3000/mech-bug-tracker.js?projectID=1"></script>
 	</body>
 	</html>
 
