@@ -52,7 +52,7 @@
 	function main() {
 		jQuery(document).ready(function($) {
 			var script_tag = getScriptTag(scriptName),
-				bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf('mech-bug-tracker.js')),
+				bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
 				formURL = bugTrackURL + formPath + "\?callback=\?",
 				cssURL = bugTrackURL + cssPath + "\?callback=\?"
 				projectID = getParams(script_tag).projectID;
