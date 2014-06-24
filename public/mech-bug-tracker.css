@@ -11,10 +11,14 @@
 #mech-bug-tracker * {
 	box-sizing: border-box;
 }
-.branding{
-	/*background: url(http://localhost:3000/images/TheMechanism_FullLogo.png) top left no-repeat;*/
+#mech-bug-tracker .branding{
 	background: url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) top left no-repeat;
+	/* the following line is for local development ONLY, comment it out for production! */
+	/*background: url(http://localhost:3000/images/TheMechanism_FullLogo.png) top left no-repeat;*/
 	height: 38px;
+	left:7px;
+	position:absolute;
+	top:7px;
 	width: 300px;
 }
 #mech-bug-tracker .mech-bug-wrap {
@@ -89,19 +93,15 @@
 	vertical-align: middle;
 }
 #mech-bug-tracker .mech-pull-tab .tab-inner {
-	/*background: url(http://localhost:3000/images/LilMech.png) left center no-repeat;*/
 	background: url(http://arcane-coast-4951.herokuapp.com/images/LilMech.png) left center no-repeat;
+	/* the following line is for local development ONLY, comment it out for production! */
+	/*background: url(http://localhost:3000/images/LilMech.png) left center no-repeat;*/
 	display: inline-block;
 	height: 29px;
 	vertical-align: middle;
 	width: 35px;
 }
-.branding{
-	position:absolute;
-	top:7px;
-	left:7px;
-}
-#bug_submit{
+#mech-bug-tracker #bug_submit{
 	background:#a2e8fc;
 	border:0px;
 	box-shadow: 0px 0px 0px black;
@@ -111,8 +111,13 @@
 }
 @media all and (max-width: 400px){
 	#mech-bug-tracker {
-		left: -100%%;
+		left: -100%;
 		width: 100%;
+	}
+	#mech-bug-tracker .branding {
+		width: 250px;
+		height: 31px;
+		background-size: cover;
 	}
 }
 
