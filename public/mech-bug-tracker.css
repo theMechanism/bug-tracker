@@ -90,9 +90,6 @@
 	right: -185px;
 	width: 185px;
 }
-#mech-bug-tracker .mech-pull-tab span {
-	vertical-align: middle;
-}
 #mech-bug-tracker .mech-pull-tab .tab-inner {
 	background: url(http://arcane-coast-4951.herokuapp.com/images/LilMech.png) left center no-repeat;
 	/* the following line is for local development ONLY, comment it out for production! */
@@ -117,7 +114,7 @@
 	text-decoration: none;
 	vertical-align: middle;
 }
-@media all and (max-width: 400px){
+@media all and (max-width: 399px){
 	#mech-bug-tracker {
 		left: -100%;
 		width: 100%;
