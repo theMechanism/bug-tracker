@@ -3,25 +3,29 @@
 	jQuery(document).ready(function($) {
 		var mechBugTracker = $('#mech-bug-tracker'),
 			pullTab = $('#mech-pull-tab'),
-			trackerWidth = 400,
+			$frameElement = $(frameElement),
 			trackerHeight = mechBugTracker.outerHeight(),
 			pullTabWidth = pullTab.outerWidth(),
 			pullTabHeight = pullTab.outerHeight(),
-			projectID = 1;
+			projectID = $frameElement.data('projectid'),
+			trackerWidth = function() {
+				$frameElement.css('width', '100%');
+				return $('#mech-bug-tracker').width();
+			}();
+		if (!Modernizr.csstransforms || !Modernizr.csstransitions) {
+			var bugTrackerLeft = $('#mech-bug-tracker').css('left');
+		}
 
 		if (!projectID) {
 			console.log('Please Provide a ProjectID (bugTracker.js?projectID={##})');
 			return;
 		}
-		if (!Modernizr.csstransforms || !Modernizr.csstransitions) {
-			var bugTrackerLeft = $('#mech-bug-tracker').css('left');
-		}
-		$(frameElement).prop({
+		$frameElement.prop({
 			'frameborder': '0',
 			'scrolling': 'no',
 			'marginwidth': '0',
 			'marginheight': '0',
-			'allowTransparency': true
+			'allowTransparency': 'true'
 		}).css({
 			'position': 'absolute',
 			'bottom': 0,
@@ -31,7 +35,7 @@
 			'height': pullTabHeight
 		});
 		$('#mech-pull-tab').click(function(e) {
-			$(frameElement).css({
+			$frameElement.css({
 				'width': trackerWidth,
 				'height': trackerHeight
 			});
@@ -44,7 +48,7 @@
 		});
 		$('#mech-bug-close').click(function(e) {
 			var fA = function () {
-				$(frameElement).css({
+				$frameElement.css({
 					'width': pullTabWidth,
 					'height': pullTabHeight
 				});				
