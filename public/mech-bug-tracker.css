@@ -1,5 +1,6 @@
 #mech-bug-tracker {
 	bottom: 0;
+	color: black;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	font-weight: 300;
@@ -101,25 +102,20 @@
 	vertical-align: middle;
 	width: 35px;
 }
-#mech-bug-tracker #bug_submit{
+#mech-bug-tracker #bug_submit, #mech-bug-tracker #bug_list{
 	background:#a2e8fc;
 	border:0px;
 	box-shadow: 0px 0px 0px black;
-	font-size:14px;
+	color: black;
 	cursor:pointer;
-	font-weight:600;
-}
-a#bug-button {
-background: #a2e8fc;
-border: 0px;
-box-shadow: 0px 0px 0px black;
-font-size: 14px;
-cursor: pointer;
-font-weight: 600;
-padding: 1.5px 8px;
-text-decoration: none;
-color: black;
-font-weight: 600;
+	display: inline-block;
+	font-size:14px;
+	font-weight:700;
+	height: 23px;
+	margin: 2px;
+	padding: 2px 6px;
+	text-decoration: none;
+	vertical-align: middle;
 }
 @media all and (max-width: 400px){
 	#mech-bug-tracker {
@@ -127,9 +123,12 @@ font-weight: 600;
 		width: 100%;
 	}
 	#mech-bug-tracker .branding {
-		width: 250px;
-		height: 31px;
+		width: 200px;
+		height: 25px;
 		background-size: cover;
+	}
+	#mech-bug-tracker .mech-bug-wrap {
+		padding: 50px 20px;
 	}
 }
 
