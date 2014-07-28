@@ -19,10 +19,21 @@
 		<input type="submit" value="Add">
 	</form>
 
-	<ul id="bugs"></ul>
+	<div id="mech-bug-iframe"></div>
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 	<!-- <script type="text/javascript" src="http://localhost:3000/mech-bug-tracker.js?projectID=1"></script> -->
-	<iframe src="/iframe-mech-bug-tracker.html" data-projectID='1'></iframe>
+	<script type="text/javascript">
+		setTimeout(
+			function(){
+				var a = document.createElement("script");
+				var b = document.getElementsByTagName("script")[0];
+				a.src = "http://localhost:3000/mech-bug-tracker.js?projectID=1";
+				a.async = true;
+				a.type = "text/javascript";
+				b.parentNode.insertBefore(a,b)
+		}, 1);
+	</script>
 	</body>
 	</html>
 

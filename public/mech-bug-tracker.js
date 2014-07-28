@@ -1,13 +1,11 @@
 (function() {
 
-	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
-		formPath 	= 'getform',			// url of the bug form HTML content
-		cssPath		= 'getformstyle';
-	var depends = {
-		'jQuery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
-		'bowser': 'http://arcane-coast-4951.herokuapp.com/js/bowser.min.js',
-		'Modernizr.csstransforms': 'http://arcane-coast-4951.herokuapp.com/js/modernizr.js'
-	};
+	var serverURL	= 'http://localhost:3000/',
+		scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
+		iframeFile 	= 'iframe-mech-bug-tracker.html',
+		depends 	= {
+			'easyXDM': serverURL + 'js/easyXDM.min.js'
+		};
 
 	Object.size = function(obj) {
 		var size = 0, key;
@@ -30,7 +28,10 @@
 			});
 		}
 	}
+
 	function loadScript (dependency, src, callback) {
+		// this function checks if the dependency is present.
+		// it waits for load before executing the callback.
 		if (window[dependency] === undefined) {	// if dependency is not present
 			var scriptTag = document.createElement('script');
 			scriptTag.setAttribute('type', 'text/javascript');
@@ -49,79 +50,66 @@
 			callback();
 		}
 	}
+	
 	function main() {
-		jQuery(document).ready(function($) {
-			var script_tag = getScriptTag(scriptName),
-				bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
-				formURL = bugTrackURL + formPath + "\?callback=\?",
-				cssURL = bugTrackURL + cssPath + "\?callback=\?"
-				projectID = getParams(script_tag).projectID;
-				if (!projectID) {
-					console.log('Please Provide a ProjectID (bugTracker.js?projectID={##})');
-					return;
-				}
 
-			$.when(
-				$.getJSON(cssURL),
-				$.getJSON(formURL)
-			).done(function(css, form) {
-				
-				$('head').append("<style>" + css[0].css + "</style>");
-				$(script_tag).after(form[0].html);
-				if (!Modernizr.csstransforms) {
-					var bugTrackerLeft = $('#mech-bug-tracker').css('left');
+		var script_tag = getScriptTag(scriptName),
+			bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
+			projectID = getParams(script_tag).projectID,
+			iframeContainer = document.createElement('div');
+
+		iframeContainer.style.position = 'absolute';
+		iframeContainer.style.bottom = 0;
+		iframeContainer.style.left = 0;
+
+		document.getElementsByTagName('body')[0].appendChild(iframeContainer);
+
+
+		try {
+			if (!projectID) {
+				throw('Please Provide a ProjectID (bugTracker.js?projectID={##})');
+			}
+		} catch(e) {
+			console.log(e);
+		}
+
+		var rpc = new easyXDM.Rpc({
+			remote: serverURL + iframeFile,
+			container: iframeContainer,
+			props: {
+				frameborder: '0',
+				scrolling: 'no',
+				marginwidth: '0',
+				marginheight: '0',
+				allowTransparency: 'true',
+				style: {
+					height: '100%',
+					width: '100%',
+					display: 'block'
 				}
-				$('#mech-pull-tab').click(function(e) {
-					if(!bugTrackerLeft) {
-						$('#mech-bug-tracker').addClass('active');
-					} else {
-						$('#mech-bug-tracker').animate({'left': '0'});
-					}
-				});
-				$('#mech-bug-close').click(function(e) {
-					if(!bugTrackerLeft) {
-						$('#mech-bug-tracker').removeClass('active');
-					} else {
-						$('#mech-bug-tracker').animate({'left': bugTrackerLeft});
-					}
-				});
-				$('#bugTrackForm button').click(function(e) {
-					e.preventDefault();
-					var bugFrom = $("#bugTrackForm");
-					var inputArray = [];
-					var makeArray = {
-						'bug[project_id]': projectID,
-						'bug[url]': document.URL,
-						'bug[os]': navigator.platform,
-						'bug[ua]': navigator.userAgent,
-						'bug[browser]': bowser.name,
-						'bug[browser_version]': bowser.version,
-						'bug[width]': $(window).width(),
-						'bug[height]': $(window).height()
-					};
-					$.each(makeArray, function(key, value) {
-						inputArray.push(makeInput(key, value));
-					});
-					window.open('', 'formpopup', 'width=400,height=400,scrollbars=no,menubar=no,resizable=yes,toolbar=no,status=no');
-			        bugFrom.prop("target", "formpopup").prop("action", bugTrackURL + "bugs").append(inputArray).submit();
-					if(!bugTrackerLeft) {
-						$('#mech-bug-tracker').removeClass('active');
-					} else {
-						$('#mech-bug-tracker').animate({'left': bugTrackerLeft});
-					}
-					bugFrom.trigger('reset');
-				});
-			});
+			}
+		},
+		{
+			local: {
+	            resizeiFrame: function (width, height, callback) {
+					iframeContainer.style.width = width;
+					iframeContainer.style.height = height;
+	                callback();
+	            },
+	            parentInfo: function () {
+	            	return {
+	            		width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+	            		height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+	            		projectID: projectID,
+	            		url: window.location.href
+	            	};
+	            }
+	        }
 		});
 
+				
 
-		function makeInput (key, value) {
-			var input = document.createElement("input");
-			input.name = key;
-			input.type = 'hidden';
-			input.value = value;
-		    return input;
-		}
+
 		// Extract "GET" parameters from a JS include querystring
 		function getScriptTag(script_name) {
 			// Find all script tags
