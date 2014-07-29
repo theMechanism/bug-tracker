@@ -9,10 +9,13 @@ jQuery(document).ready(function($) {
     });
 
 	var mechBugTracker = $('#mech-bug-tracker'),
-		pullTab = $('#mech-pull-tab'),
+		mechPullTab = $('#mech-pull-tab'),
+		mechBugClose = $('#mech-bug-close'),
+		mechBugForm = $("#mech-bug-form"),
+		mechBugSubmit = $('#mech-bug-submit'),
 		trackerHeight = mechBugTracker.outerHeight(),
-		pullTabWidth = pullTab.outerWidth(),
-		pullTabHeight = pullTab.outerHeight(),
+		pullTabWidth = mechPullTab.outerWidth(),
+		pullTabHeight = mechPullTab.outerHeight(),
 		trackerWidth;
 
 
@@ -25,15 +28,14 @@ jQuery(document).ready(function($) {
 		var bugTrackerLeft = $('#mech-bug-tracker').css('left');
 	}
 
-	$('#mech-pull-tab').click(function(e) {
+	mechPullTab.click(function(e) {
 		expand();
 	});
-	$('#mech-bug-close').click(function(e) {
+	mechBugClose.click(function(e) {
 		minimize();
 	});
-	$('#mech-bug-submit').click(function(e) {
+	mechBugSubmit.click(function(e) {
 		e.preventDefault();
-		var mechBugForm = $("#mech-bug-form");
 		var inputArray = [];
 		rpc.parentInfo(function(parentInfo) {
 			var makeArray = {
@@ -49,10 +51,13 @@ jQuery(document).ready(function($) {
 			$.each(makeArray, function(key, value) {
 				inputArray.push(makeInput(key, value));
 			});
-			window.open('', 'mech-bug-window', 'scrollbars=no,menubar=no,height=200,width=600,resizable=yes,toolbar=no,status=no')
-	        mechBugForm.prop('target', 'mech-bug-window').append(inputArray).submit();
+			window.open('', 'mechBugWindow', 'scrollbars=no,menubar=no,height=200,width=600,resizable=yes,toolbar=no,status=no');
 			minimize();
-			mechBugForm.trigger('reset');
+	        mechBugForm.prop('target', 'mechBugWindow')
+				.append(inputArray)
+				.submit()
+				.trigger('reset')
+				.find('input').remove('.mech-hidden-input');
 		});
 	});
 
@@ -82,6 +87,7 @@ jQuery(document).ready(function($) {
 
 	function makeInput (key, value) {
 		var input = document.createElement("input");
+		input.className = "mech-hidden-input";
 		input.name = key;
 		input.type = 'hidden';
 		input.value = value;

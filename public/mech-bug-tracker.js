@@ -50,7 +50,7 @@
 			callback();
 		}
 	}
-	
+
 	function main() {
 
 		var script_tag = getScriptTag(scriptName),
