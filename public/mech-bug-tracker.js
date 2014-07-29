@@ -78,6 +78,7 @@
 			remote: serverURL + iframeFile,
 			container: iframeContainer,
 			props: {
+				id: 'mech-bug-iframe',
 				frameborder: '0',
 				scrolling: 'no',
 				marginwidth: '0',
@@ -92,9 +93,13 @@
 		},
 		{
 			local: {
-	            resizeiFrame: function (width, height, callback) {
+	            resizeiFrame: function (width, height, allowScroll, callback) {
 					iframeContainer.style.width = width;
 					iframeContainer.style.height = height;
+
+					var sc = (allowScroll) ? 'yes' : 'no';
+					document.getElementById('mech-bug-iframe').scrolling = sc;
+
 	                callback();
 	            },
 	            parentInfo: function () {

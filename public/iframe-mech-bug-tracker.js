@@ -20,13 +20,16 @@ jQuery(document).ready(function($) {
 		trackerHeight;
 
 
-	rpc.resizeiFrame('100%', '100%', function(response) {
+	rpc.resizeiFrame('100%', '100%', false, function(response) {
 		var w = mechBugTracker.outerWidth(),
 			h = mechBugTracker.outerHeight();
 
 		trackerWidth = w;
 		trackerHeight = h;
-		rpc.resizeiFrame(pullTabWidth + 'px', pullTabHeight + 'px');
+
+		$('.mech-bug-wrap', mechBugTracker).height(h);
+
+		rpc.resizeiFrame(pullTabWidth + 'px', pullTabHeight + 'px', false);
 	});
 
 	if (!Modernizr.csstransforms || !Modernizr.csstransitions) {
@@ -67,7 +70,7 @@ jQuery(document).ready(function($) {
 	});
 
 	function expand () {
-		rpc.resizeiFrame(trackerWidth + 'px', trackerHeight + 'px', function() {		
+		rpc.resizeiFrame(trackerWidth + 'px', trackerHeight + 'px', true, function() {
 			if(!bugTrackerLeft) {
 				// timeout to allow iFrame size to adjust before transition starts
 				setTimeout(function() { $('#mech-bug-tracker').addClass('active') }, 10);
@@ -78,7 +81,7 @@ jQuery(document).ready(function($) {
 	}
 	function minimize () {
 		var fA = function () {
-			rpc.resizeiFrame(pullTabWidth + 'px', pullTabHeight + 'px');				
+			rpc.resizeiFrame(pullTabWidth + 'px', pullTabHeight + 'px', false);
 		}
 		if(!bugTrackerLeft) {
 			$('#mech-bug-tracker').removeClass('active').bind('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {

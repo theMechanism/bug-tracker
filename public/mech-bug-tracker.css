@@ -22,6 +22,8 @@
 	background-image: -ms-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* IE10+ */
 	background-image: linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#59bae3", endColorstr="#59aae3",GradientType=1 ), progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png");
+	max-height: 100%;
+	overflow-y: auto;
 	-webkit-transition: -webkit-transform 1s ease;
 	-moz-transition: -moz-transform 1s ease;
 	-ms-transition: -ms-transform 1s ease;
@@ -31,6 +33,9 @@
 #mech-bug-tracker .mech-bug-inner {
 	background: #59bae3 url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) no-repeat 7px 7px;
 	padding: 50px 57px;
+}
+#mech-bug-tracker .mech-bug-wrap form {
+	margin: 0;
 }
 #mech-bug-tracker .mech-bug-wrap .form-group {
 	margin-bottom: 15px;
