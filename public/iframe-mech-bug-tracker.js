@@ -16,11 +16,16 @@ jQuery(document).ready(function($) {
 		trackerHeight = mechBugTracker.outerHeight(),
 		pullTabWidth = mechPullTab.outerWidth(),
 		pullTabHeight = mechPullTab.outerHeight(),
-		trackerWidth;
+		trackerWidth,
+		trackerHeight;
 
 
-	rpc.resizeiFrame('100%', 0, function(response) {
-		trackerWidth = mechBugTracker.outerWidth();
+	rpc.resizeiFrame('100%', '100%', function(response) {
+		var w = mechBugTracker.outerWidth(),
+			h = mechBugTracker.outerHeight();
+
+		trackerWidth = w;
+		trackerHeight = h;
 		rpc.resizeiFrame(pullTabWidth + 'px', pullTabHeight + 'px');
 	});
 

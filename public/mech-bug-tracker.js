@@ -61,6 +61,7 @@
 		iframeContainer.style.position = 'absolute';
 		iframeContainer.style.bottom = 0;
 		iframeContainer.style.left = 0;
+		iframeContainer.style['max-height'] = '100%';
 
 		document.getElementsByTagName('body')[0].appendChild(iframeContainer);
 
