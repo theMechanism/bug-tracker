@@ -1,10 +1,13 @@
+body {
+	margin: 0;
+}
 #mech-bug-tracker {
 	bottom: 0;
 	color: black;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	font-weight: 300;
-	left: -400px;
+	left: 0px;
 	max-height: 100%;
 	position: absolute;
 	width: 400px;
@@ -21,7 +24,7 @@
 	background-image: -o-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Opera 11.10+ */
 	background-image: -ms-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* IE10+ */
 	background-image: linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#59bae3", endColorstr="#59aae3",GradientType=1 ), progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png");
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#59bae3", endColorstr="#59aae3",GradientType=1 );
 	max-height: 100%;
 	overflow-y: auto;
 	-webkit-transition: -webkit-transform 1s ease;
@@ -29,10 +32,16 @@
 	-ms-transition: -ms-transform 1s ease;
 	-o-transition: -o-transform 1s ease;
 	transition: transform 1s ease;
+
+	position: relative;
+	bottom: 0;
+	left: 0;
 }
 #mech-bug-tracker .mech-bug-inner {
-	background: #59bae3 url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) no-repeat 7px 7px;
 	padding: 50px 57px;
+}
+#mech-bug-tracker #mech-bug-report .mech-bug-inner {
+	background: #59bae3 url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) no-repeat 7px 7px;
 }
 #mech-bug-tracker .mech-bug-wrap form {
 	margin: 0;
@@ -57,12 +66,33 @@
 	padding: 0;
 	border: none;
 }
+#mech-bug-tracker .mech-bug-wrap.left {
+	transform: translate(-100%, 0px);
+	-webkit-transform: translate(-100%, 0px);
+	-moz-transform: translate(-100%, 0px);
+	-o-transform: translate(-100%, 0px);
+	-ms-transform: translate(-100%, 0px);
+}
+#mech-bug-tracker .mech-bug-wrap.down {
+	transform: translate(0px, 100%);
+	-webkit-transform: translate(0px, 100%);
+	-moz-transform: translate(0px, 100%);
+	-o-transform: translate(0px, 100%);
+	-ms-transform: translate(0px, 100%);
+}
 #mech-bug-tracker.active .mech-bug-wrap {
-	transform: translate(100%, 0px);
-	-webkit-transform: translate(100%, 0px);
-	-moz-transform: translate(100%, 0px);
-	-o-transform: translate(100%, 0px);
-	-ms-transform: translate(100%, 0px);
+	transform: translate(0px, 0px);
+	-webkit-transform: translate(0px, 0px);
+	-moz-transform: translate(0px, 0px);
+	-o-transform: translate(0px, 0px);
+	-ms-transform: translate(0px, 0px);
+}
+#mech-bug-tracker.active .mech-pull-tab, #mech-bug-tracker.transition .mech-pull-tab {
+	transform: translate(-100%, 0px);
+	-webkit-transform: translate(-100%, 0px);
+	-moz-transform: translate(-100%, 0px);
+	-o-transform: translate(-100%, 0px);
+	-ms-transform: translate(-100%, 0px);
 }
 #mech-bug-tracker .mech-bug-wrap .mech-bug-close {
 	background: #a6e7fe;
@@ -89,8 +119,20 @@
 	font-weight: 700;
 	font-size: 17px;
 	position: absolute;
-	right: -185px;
+	left: 0;
 	width: 185px;
+
+	transform: translate(0px, 0px);
+	-webkit-transform: translate(0px, 0px);
+	-moz-transform: translate(0px, 0px);
+	-o-transform: translate(0px, 0px);
+	-ms-transform: translate(0px, 0px);
+
+	-webkit-transition: -webkit-transform 1s ease;
+	-moz-transition: -moz-transform 1s ease;
+	-ms-transition: -ms-transform 1s ease;
+	-o-transition: -o-transform 1s ease;
+	transition: transform 1s ease;
 }
 #mech-bug-tracker .mech-pull-tab div{
 	background: url(http://arcane-coast-4951.herokuapp.com/images/LilMech.png) 5px center no-repeat;
@@ -116,7 +158,6 @@
 }
 @media only screen and (max-width: 399px){
 	#mech-bug-tracker {
-		left: -100%;
 		width: 100%;
 	}
 	#mech-bug-tracker .branding {

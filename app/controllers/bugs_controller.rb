@@ -16,11 +16,11 @@ class BugsController < ApplicationController
 	def create
 		@bug = Bug.new(bug_params)
 		if @bug.save
-			redirect_to @bug, location: @bug, callback: params[:callback]
-
+			render json: @bug
+			# redirect_to @bug, location: @bug, callback: params[:callback]
 			 # BugMailer.submit_email(@bug).deliver
 		else
-			redirect_to bugs_path, notice: @bug.errors.full_messages
+			render json: @bug.errors.full_messages
 		end
 	end
 	def form

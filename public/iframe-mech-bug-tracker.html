@@ -11,21 +11,27 @@
       <div id="mech-pull-tab" class="mech-pull-tab">
         <div>Report A Bug!</div>
       </div>
-      <div class="mech-bug-wrap">
+      <div class="mech-bug-wrap left" id="mech-bug-report">
         <div class="mech-bug-inner">
-          <div id="mech-bug-close" class="mech-bug-close">x</div>
+          <div class="mech-bug-close">x</div>
           <form id="mech-bug-form" role="form" action="/bugs" method="post">
             <div class="form-group">
-              <input type="text" name="bug[name]" class="form-control" id="formName" placeholder="Your Name">
+              <input type="text" name="bug[name]" class="form-control" id="form-name" placeholder="Your Name">
             </div>
             <div class="form-group">
               <fieldset>
-                <textarea class="form-control" name="bug[description]" id="fromDescription" placeholder="Description of Bug"></textarea>
+                <textarea class="form-control" name="bug[description]" id="form-description" placeholder="Description of Bug"></textarea>
               </fieldset>
             </div>
             <a id='mech-bug-submit' class="btn btn-default">Submit</a>
             <a href='/' target='_blank' id='mech-bug-list' class="btn btn-default">View Bugs</a>
           </form>
+        </div>
+      </div>
+      <div class="mech-bug-wrap down" id="mech-bug-response">
+        <div class="mech-bug-inner">
+          <div class="mech-bug-close">x</div>
+          <h1>Thank you for your submission.</h1>
         </div>
       </div>
     </div>

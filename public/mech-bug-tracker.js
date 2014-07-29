@@ -1,6 +1,6 @@
 (function() {
 
-	var serverURL	= 'http://localhost:3000/',
+	var serverURL	= 'http://10.0.2.2:3000/',
 		scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
 		iframeFile 	= 'iframe-mech-bug-tracker.html',
 		depends 	= {
