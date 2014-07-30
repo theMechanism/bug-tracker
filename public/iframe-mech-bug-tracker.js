@@ -1,3 +1,5 @@
+"use strict";
+
 jQuery(document).ready(function($) {
 
 	var rpc = new easyXDM.Rpc({},
@@ -11,12 +13,15 @@ jQuery(document).ready(function($) {
 	var mechBugTracker = $('#mech-bug-tracker'),
 		mechBugReport = $('#mech-bug-report'),
 		mechBugResponse = $('#mech-bug-response'),
+		mechBugError = $('#mech-bug-error'),
 		mechPullTab = $('#mech-pull-tab'),
 		mechBugClose = $('.mech-bug-close', mechBugTracker),
-		mechBugMoreLess = $('#mech-bug-more'),
+		mechBugMoreLess = $('.mech-bug-more', mechBugTracker),
 		mechBugForm = $("#mech-bug-form"),
 		mechBugSubmit = $('#mech-bug-submit'),
-		mechBugInfo = $('#mech-bug-info'),
+		mechBugBugInfo = $('#mech-bug-info'),
+		mechBugWraps = $('.mech-bug-wrap', mechBugTracker),
+		mechBugErrorInfo = $('#mech-bug-error-info'),
 		mechBugID = $('#mech-bug-id'),
 		mechBugUserName = $('#mech-bug-user-name'),
 		mechBugDescription = $('#mech-bug-description'),
@@ -28,19 +33,33 @@ jQuery(document).ready(function($) {
 		mechBugCreated = $('#mech-bug-created'),
 		mechBugUA = $('#mech-bug-ua'),
 		mechBugOS = $('#mech-bug-os'),
-		transitions = (Modernizr.csstransforms && Modernizr.csstransitions);
+		transitions = (Modernizr.csstransforms && Modernizr.csstransitions),
+		views = [mechBugReport, mechBugResponse, mechBugError, mechPullTab];
 
-	initElems(function() {
+	var funcArray = [];
+	$.each(views, function (index, element) {
+		funcArray.push(function(callback) {
+			getDimensions(element, callback);
+		});
+	});
+	doThese(funcArray, function() {
+
+		mechBugTracker.append(mechPullTab);
+		expand(mechPullTab);
+
 		mechPullTab.click(function(e) {
-			mechBugTracker.append(mechBugReport);
-			expand(mechBugReport);
+			transitionTo(mechBugReport);
 		});
+
 		mechBugClose.click(function(e) {
-			mechBugMoreLess.unbind()
-			mechBugResponse.removeClass('expanded');
-			mechBugResponse.y = $('.mech-bug-padding', mechBugResponse).outerHeight() || mechBugResponse.y;
-			minimize();
+			minimize(function() {
+				expand(mechPullTab);
+				mechBugMoreLess.unbind()
+				mechBugWraps.removeClass('expanded');
+				mechBugErrorInfo.empty();
+			})
 		});
+
 		mechBugSubmit.click(function(e) {
 			e.preventDefault();
 			rpc.parentInfo(function(parentInfo) {
@@ -61,7 +80,7 @@ jQuery(document).ready(function($) {
 					.done(function(data) {
 						console.log(data);
 
-						mechBugInfo.detach();
+						mechBugBugInfo.detach();
 						mechBugResponse.height('auto');
 
 						if (data.id) {
@@ -76,48 +95,50 @@ jQuery(document).ready(function($) {
 							mechBugCreated.html(data.created_at);
 							mechBugUA.html(data.ua);
 							mechBugOS.html(data.os);
+
+							$('.mech-bug-padding', mechBugResponse).append(mechBugBugInfo);
+
+							mechBugForm.trigger('reset');
+
+							transitionTo(mechBugResponse);
 						} else {
-							$('h1', mechBugResponse).html('There was an error');
+							mechBugErrorInfo.detach();
+							$.each(data, function(index, error) {
+								mechBugErrorInfo.append('<div>' + error + '</div>');
+							});
+
+							$('.mech-bug-padding', mechBugError).append(mechBugErrorInfo);
+
+							transitionTo(mechBugError);
 						}
-						$('.mech-bug-padding', mechBugResponse).append(mechBugInfo);
 
 						mechBugSubmit.removeClass('loading');
-						mechBugForm.trigger('reset');
-						transitionTo(mechBugResponse);
 
 						mechBugMoreLess.click(function(e) {
-							mechBugResponse.toggleClass('expanded');
+							var parent = $(this).closest(mechBugWraps);
 
-							mechBugResponse.y = $('.mech-bug-padding', mechBugResponse).outerHeight();
-							mechBugResponse.height(mechBugResponse.y);
+							minimize(function() {
+								parent.toggleClass('expanded');
 
-							expand(mechBugResponse);
+								parent.y = $('.mech-bug-padding', parent).outerHeight();
+								parent.height(parent.y);
+
+								expand(parent);
+							});
 						});
 					});
 			});
 		});
 	});
 
-	function initElems(callback) {
+	function getDimensions (element, callback) {
 		rpc.resizeiFrame(1000, 1000, false, function() {
-			mechBugReport.detach();
-			mechBugResponse.detach();
-
-			getDimensions(mechPullTab);
-			getDimensions(mechBugReport);
-			getDimensions(mechBugResponse);
-
-			mechBugTracker.append(mechPullTab);
-			rpc.resizeiFrame(mechPullTab.x, mechPullTab.y, false);
-
-			if (!transitions) {
-				mechBugReport.css({'left': -mechBugReport.x});
-			}
-			callback();
-		});
-
-		function getDimensions (element) {
 			mechBugTracker.append(element);
+
+			$(element).css({
+				width: 'auto',
+				height: 'auto'
+			});
 
 			var w = element.outerWidth(),
 				h = element.outerHeight();
@@ -126,80 +147,62 @@ jQuery(document).ready(function($) {
 			element.y = h;
 
 			element.detach().height(h);
-		}
+			callback();
+		});
 	}
 	function expand (element) {
-		var width = element.x,
-			height = element.y;
-		rpc.resizeiFrame(width, height, true, function(response) {
-			element.width(response.x);
-			element.height(response.y);
-			if(transitions) {
-				// timeout to allow iFrame size to adjust before transition starts
-				setTimeout(function() { mechBugTracker.addClass('active') }, 10);
-			} else {
-				mechPullTab.animate({ 'left': -mechPullTab.x });
-				$(element).animate({ 'left': '0' });
-			}
+		getDimensions(element, function() {
+			rpc.resizeiFrame(element.x, element.y, true, function(response) {
+				element.width(response.x);
+				element.height(response.y);
+				mechBugTracker.append(element);
+				if(transitions) {
+					// timeout to allow iFrame size to adjust before transition starts
+					setTimeout(function() { mechBugTracker.addClass('active') }, 10);
+				} else {
+					$(element).animate({ 'left': '0' });
+				}
+			});			
 		});
 	}
 	function transitionTo (element) {
 		minimize(function() {
 			mechBugTracker.append(element);
 			expand(element);
-		})
+		});
 	}
 	function minimize (afterMinimize) {
-		if (afterMinimize) 
-			var cn = 'transition';
 		var fA = function () {
-			mechBugReport.detach();
-			mechBugResponse.detach();
-			if (afterMinimize) {
-				mechBugTracker.removeClass(cn);
-				afterMinimize();
-			} else {
-				rpc.resizeiFrame(mechPullTab.x, mechPullTab.y, false);
-			}
+			$.each(views, function (index, element) {
+				element.detach();
+			});
+			afterMinimize();
 		}
 		if(transitions) {
 			mechBugTracker
 				.removeClass('active')
-				.addClass(cn)
 				.bind('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
 					fA();
 					$(this).unbind();
 			});
 		} else {
-			doThese([
-					function(callback) {
-						mechBugReport.animate({'left': -mechBugReport.x}, 400, callback);
-					},
-					function(callback) {
-						mechBugResponse.animate({'left': -mechBugResponse.x}, 400, callback);
-					},
-					function(callback) {
-						if (afterMinimize) {
-							callback();
-						} else {
-							mechPullTab.animate({'left': '0'}, 400, callback);
-						}
-					}
-				],
-				fA
-			);
-			function doThese (funcs, callback) {
-				// this function takes an array of asynchronous functions and executes the callback when they are complete
-				var counter = 0;
-				$.each(funcs, function (index, func) {
-					func(check);
-				});
-				function check() {
-					counter++
-					if (counter === $(funcs).size()) {
-						callback();
-					}
-				}
+			var eF = [];
+			$.each(views, function (index, element) {
+				eF.push(function(callback) { element.animate({'left': -element.x}, 400, callback) });
+			});
+			doThese(eF, fA);
+		}
+	}
+	function doThese (funcs, callback) {
+		// this function takes an array of asynchronous functions and executes the callback when they are complete
+		var counter = 0;
+		$.each(funcs, function (index, func) {
+			func(check);
+		});
+		function check() {
+			counter++
+			if (counter === $(funcs).size()) {
+				callback();
 			}
 		}
 	}

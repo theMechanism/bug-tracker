@@ -1,5 +1,7 @@
 (function() {
 
+	"use strict";
+
 	var serverURL	= 'http://localhost:3000/',
 		scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
 		iframeFile 	= 'iframe-mech-bug-tracker.html',

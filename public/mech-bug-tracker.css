@@ -87,12 +87,12 @@ body {
 	-o-transform: translate(0px, 0px);
 	-ms-transform: translate(0px, 0px);
 }
-#mech-bug-tracker.active .mech-pull-tab, #mech-bug-tracker.transition .mech-pull-tab {
-	transform: translate(-100%, 0px);
-	-webkit-transform: translate(-100%, 0px);
-	-moz-transform: translate(-100%, 0px);
-	-o-transform: translate(-100%, 0px);
-	-ms-transform: translate(-100%, 0px);
+#mech-bug-tracker.active .mech-pull-tab {
+	transform: translate(0px, 0px);
+	-webkit-transform: translate(0px, 0px);
+	-moz-transform: translate(0px, 0px);
+	-o-transform: translate(0px, 0px);
+	-ms-transform: translate(0px, 0px);
 }
 #mech-bug-tracker .mech-bug-wrap .mech-bug-close {
 	background: #a6e7fe;
@@ -130,11 +130,11 @@ body {
 	left: 0;
 	width: 185px;
 
-	transform: translate(0px, 0px);
-	-webkit-transform: translate(0px, 0px);
-	-moz-transform: translate(0px, 0px);
-	-o-transform: translate(0px, 0px);
-	-ms-transform: translate(0px, 0px);
+	transform: translate(-100%, 0px);
+	-webkit-transform: translate(-100%, 0px);
+	-moz-transform: translate(-100%, 0px);
+	-o-transform: translate(-100%, 0px);
+	-ms-transform: translate(-100%, 0px);
 
 	-webkit-transition: -webkit-transform 1s ease;
 	-moz-transition: -moz-transform 1s ease;
@@ -167,19 +167,19 @@ body {
 #mech-bug-tracker #mech-bug-submit.loading {
 	opacity: 0.5;
 }
-#mech-bug-tracker .mech-bug-thanks {
+#mech-bug-tracker .mech-bug-message {
 	text-align: center;
 	/*text-align: right;*/
 	padding: 0 10px 10px;
 }
-#mech-bug-tracker .mech-bug-thanks h1{
+#mech-bug-tracker .mech-bug-message h1{
 	color: white;
 	font-weight: 300;
 	font-size: 30px;
 	margin: 0px;
 	text-align: center;
 }
-#mech-bug-tracker .mech-bug-thanks .mech-bug-more {
+#mech-bug-tracker .mech-bug-message .mech-bug-more {
 	background: #a6e7fe;
 	cursor: pointer;
 	/*display: inline-block;*/
@@ -197,13 +197,13 @@ body {
 #mech-bug-tracker .mech-bug-more .less {
 	display: none;
 }
-#mech-bug-tracker #mech-bug-response.expanded .mech-bug-info {
+#mech-bug-tracker .mech-bug-wrap.expanded .mech-bug-info {
 	display: block;
 }
-#mech-bug-tracker #mech-bug-response.expanded .mech-bug-more .more {
+#mech-bug-tracker .mech-bug-wrap.expanded .mech-bug-more .more {
 	display: none;
 }
-#mech-bug-tracker #mech-bug-response.expanded .mech-bug-more .less {
+#mech-bug-tracker .mech-bug-wrap.expanded .mech-bug-more .less {
 	display: block;
 }
 #mech-bug-tracker .mech-bug-info span {
