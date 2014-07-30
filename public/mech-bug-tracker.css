@@ -38,7 +38,6 @@ body {
 	left: 0;
 }
 #mech-bug-tracker .mech-bug-padding {
-	background: #59bae3 url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) no-repeat 7px 7px;
 	padding-top: 50px;
 }
 #mech-bug-tracker #mech-bug-report .mech-bug-padding {
@@ -104,6 +103,14 @@ body {
 	right: 0;
 	top: 0;
 }
+#mech-bug-tracker .mech-bug-logo {
+	background: url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) no-repeat top left;
+	height: 43px;
+	left: 7px;
+	position: absolute;
+	top: 7px;
+	width: 300px;
+}
 #mech-bug-tracker .mech-pull-tab {
 	background: #59bae3; /* Old browsers */
 	background: -moz-linear-gradient(45deg,  #59bae3 0%, #59aae3 100%); /* FF3.6+ */
@@ -141,7 +148,7 @@ body {
 	/*background: url(http://localhost:3000/images/LilMech.png) left center no-repeat;*/
 	padding: 6px 20px 6px 36px;
 }
-#mech-bug-tracker #mech-bug-submit, #mech-bug-tracker #mech-bug-list{
+#mech-bug-tracker #mech-bug-submit, #mech-bug-tracker #mech-bug-list {
 	background:#a2e8fc;
 	border:0px;
 	box-shadow: 0px 0px 0px black;
@@ -172,7 +179,7 @@ body {
 	margin: 0px;
 	text-align: center;
 }
-#mech-bug-tracker .mech-bug-thanks .mech-bug-more{
+#mech-bug-tracker .mech-bug-thanks .mech-bug-more {
 	background: #a6e7fe;
 	cursor: pointer;
 	/*display: inline-block;*/
@@ -187,6 +194,18 @@ body {
 	font-weight: bold;
 	padding: 10px;
 }
+#mech-bug-tracker .mech-bug-more .less {
+	display: none;
+}
+#mech-bug-tracker #mech-bug-response.expanded .mech-bug-info {
+	display: block;
+}
+#mech-bug-tracker #mech-bug-response.expanded .mech-bug-more .more {
+	display: none;
+}
+#mech-bug-tracker #mech-bug-response.expanded .mech-bug-more .less {
+	display: block;
+}
 #mech-bug-tracker .mech-bug-info span {
 	font-weight: normal;
 }
@@ -194,13 +213,10 @@ body {
 	#mech-bug-tracker {
 		width: 100%;
 	}
-	#mech-bug-tracker .branding {
-		max-width: 200px;
-		width: 100%;
-		height: 25px;
-		background-size: cover;
+	#mech-bug-tracker .mech-bug-logo {
+		width: 200px;
 	}
-	#mech-bug-tracker .mech-bug-wrap {
+	#mech-bug-tracker #mech-bug-report .mech-bug-padding {
 		padding: 50px 20px;
 	}
 }

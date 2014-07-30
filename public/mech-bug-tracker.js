@@ -93,14 +93,23 @@
 		},
 		{
 			local: {
-	            resizeiFrame: function (width, height, allowScroll, callback) {
-					iframeContainer.style.width = width;
-					iframeContainer.style.height = height;
+	            resizeiFrame: function (widthReq, heightReq, allowScroll) {
+					var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+						windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+					var width = (widthReq < windowWidth) ? widthReq : windowWidth;
+					var height = (heightReq < windowHeight) ? heightReq : windowHeight;
+
+					iframeContainer.style.width = width + 'px';
+					iframeContainer.style.height = height + 'px';
 
 					var sc = (allowScroll) ? 'yes' : 'no';
 					document.getElementById('mech-bug-iframe').scrolling = sc;
 
-	                callback();
+	                return {
+						x: width,
+						y: height
+	                };
 	            },
 	            parentInfo: function () {
 	            	return {

@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 		mechBugResponse = $('#mech-bug-response'),
 		mechPullTab = $('#mech-pull-tab'),
 		mechBugClose = $('.mech-bug-close', mechBugTracker),
-		mechBugMore = $('#mech-bug-more'),
+		mechBugMoreLess = $('#mech-bug-more'),
 		mechBugForm = $("#mech-bug-form"),
 		mechBugSubmit = $('#mech-bug-submit'),
 		mechBugInfo = $('#mech-bug-info'),
@@ -32,9 +32,13 @@ jQuery(document).ready(function($) {
 
 	initElems(function() {
 		mechPullTab.click(function(e) {
+			mechBugTracker.append(mechBugReport);
 			expand(mechBugReport);
 		});
 		mechBugClose.click(function(e) {
+			mechBugMoreLess.unbind()
+			mechBugResponse.removeClass('expanded');
+			mechBugResponse.y = $('.mech-bug-padding', mechBugResponse).outerHeight() || mechBugResponse.y;
 			minimize();
 		});
 		mechBugSubmit.click(function(e) {
@@ -60,31 +64,34 @@ jQuery(document).ready(function($) {
 						mechBugInfo.detach();
 						mechBugResponse.height('auto');
 
-						mechBugID.html(data.id);
-						mechBugUserName.html(data.name);
-						mechBugDescription.html(data.description);
-						mechBugURL.html(data.url);
-						mechBugBrowser.html(data.browser);
-						mechBugBrowserVersion.html(data.browser_version);
-						mechBugWidth.html(data.width);
-						mechBugHeight.html(data.height);
-						mechBugCreated.html(data.created_at);
-						mechBugUA.html(data.ua);
-						mechBugOS.html(data.os);
-
+						if (data.id) {
+							mechBugID.html(data.id);
+							mechBugUserName.html(data.name);
+							mechBugDescription.html(data.description);
+							mechBugURL.html(data.url);
+							mechBugBrowser.html(data.browser);
+							mechBugBrowserVersion.html(data.browser_version);
+							mechBugWidth.html(data.width);
+							mechBugHeight.html(data.height);
+							mechBugCreated.html(data.created_at);
+							mechBugUA.html(data.ua);
+							mechBugOS.html(data.os);
+						} else {
+							$('h1', mechBugResponse).html('There was an error');
+						}
 						$('.mech-bug-padding', mechBugResponse).append(mechBugInfo);
 
 						mechBugSubmit.removeClass('loading');
 						mechBugForm.trigger('reset');
 						transitionTo(mechBugResponse);
 
-						mechBugMore.click(function(e) {
-							mechBugInfo.css('display', 'block');
+						mechBugMoreLess.click(function(e) {
+							mechBugResponse.toggleClass('expanded');
 
 							mechBugResponse.y = $('.mech-bug-padding', mechBugResponse).outerHeight();
 							mechBugResponse.height(mechBugResponse.y);
 
-							rpc.resizeiFrame(mechBugResponse.x + 'px', mechBugResponse.y + 'px', true);
+							expand(mechBugResponse);
 						});
 					});
 			});
@@ -92,7 +99,7 @@ jQuery(document).ready(function($) {
 	});
 
 	function initElems(callback) {
-		rpc.resizeiFrame('100%', '100%', false, function(response) {
+		rpc.resizeiFrame(1000, 1000, false, function() {
 			mechBugReport.detach();
 			mechBugResponse.detach();
 
@@ -101,7 +108,7 @@ jQuery(document).ready(function($) {
 			getDimensions(mechBugResponse);
 
 			mechBugTracker.append(mechPullTab);
-			rpc.resizeiFrame(mechPullTab.x + 'px', mechPullTab.y + 'px', false);
+			rpc.resizeiFrame(mechPullTab.x, mechPullTab.y, false);
 
 			if (!transitions) {
 				mechBugReport.css({'left': -mechBugReport.x});
@@ -122,8 +129,11 @@ jQuery(document).ready(function($) {
 		}
 	}
 	function expand (element) {
-		mechBugTracker.append(element);
-		rpc.resizeiFrame(element.x + 'px', element.y + 'px', true, function() {
+		var width = element.x,
+			height = element.y;
+		rpc.resizeiFrame(width, height, true, function(response) {
+			element.width(response.x);
+			element.height(response.y);
 			if(transitions) {
 				// timeout to allow iFrame size to adjust before transition starts
 				setTimeout(function() { mechBugTracker.addClass('active') }, 10);
@@ -135,6 +145,7 @@ jQuery(document).ready(function($) {
 	}
 	function transitionTo (element) {
 		minimize(function() {
+			mechBugTracker.append(element);
 			expand(element);
 		})
 	}
@@ -144,12 +155,11 @@ jQuery(document).ready(function($) {
 		var fA = function () {
 			mechBugReport.detach();
 			mechBugResponse.detach();
-			mechBugInfo.hide();
 			if (afterMinimize) {
 				mechBugTracker.removeClass(cn);
 				afterMinimize();
 			} else {
-				rpc.resizeiFrame(mechPullTab.x + 'px', mechPullTab.y + 'px', false);
+				rpc.resizeiFrame(mechPullTab.x, mechPullTab.y, false);
 			}
 		}
 		if(transitions) {
