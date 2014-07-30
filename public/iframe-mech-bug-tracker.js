@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	var rpc = new easyXDM.Rpc({},
     {
         remote: {
-            resizeiFrame:{},
+            resizeiFrame: {},
             parentInfo: {}
         }
     });
@@ -13,8 +13,21 @@ jQuery(document).ready(function($) {
 		mechBugResponse = $('#mech-bug-response'),
 		mechPullTab = $('#mech-pull-tab'),
 		mechBugClose = $('.mech-bug-close', mechBugTracker),
+		mechBugMore = $('#mech-bug-more'),
 		mechBugForm = $("#mech-bug-form"),
 		mechBugSubmit = $('#mech-bug-submit'),
+		mechBugInfo = $('#mech-bug-info'),
+		mechBugID = $('#mech-bug-id'),
+		mechBugUserName = $('#mech-bug-user-name'),
+		mechBugDescription = $('#mech-bug-description'),
+		mechBugURL = $('#mech-bug-url'),
+		mechBugBrowser = $('#mech-bug-browser'),
+		mechBugBrowserVersion = $('#mech-bug-browser-version'),
+		mechBugWidth = $('#mech-bug-width'),
+		mechBugHeight = $('#mech-bug-height'),
+		mechBugCreated = $('#mech-bug-created'),
+		mechBugUA = $('#mech-bug-ua'),
+		mechBugOS = $('#mech-bug-os'),
 		transitions = (Modernizr.csstransforms && Modernizr.csstransitions);
 
 	initElems(function() {
@@ -39,12 +52,41 @@ jQuery(document).ready(function($) {
 					'bug[width]': parentInfo.width,
 					'bug[height]': parentInfo.height
 				};
+				mechBugSubmit.addClass('loading');
 				$.post('/bugs', makeArray)
 					.done(function(data) {
 						console.log(data);
-						minimize(mechBugResponse);
+
+						mechBugInfo.detach();
+						mechBugResponse.height('auto');
+
+						mechBugID.html(data.id);
+						mechBugUserName.html(data.name);
+						mechBugDescription.html(data.description);
+						mechBugURL.html(data.url);
+						mechBugBrowser.html(data.browser);
+						mechBugBrowserVersion.html(data.browser_version);
+						mechBugWidth.html(data.width);
+						mechBugHeight.html(data.height);
+						mechBugCreated.html(data.created_at);
+						mechBugUA.html(data.ua);
+						mechBugOS.html(data.os);
+
+						$('.mech-bug-padding', mechBugResponse).append(mechBugInfo);
+
+						mechBugSubmit.removeClass('loading');
+						mechBugForm.trigger('reset');
+						transitionTo(mechBugResponse);
+
+						mechBugMore.click(function(e) {
+							mechBugInfo.css('display', 'block');
+
+							mechBugResponse.y = $('.mech-bug-padding', mechBugResponse).outerHeight();
+							mechBugResponse.height(mechBugResponse.y);
+
+							rpc.resizeiFrame(mechBugResponse.x + 'px', mechBugResponse.y + 'px', true);
+						});
 					});
-		        mechBugForm.trigger('reset');
 			});
 		});
 	});
@@ -86,20 +128,26 @@ jQuery(document).ready(function($) {
 				// timeout to allow iFrame size to adjust before transition starts
 				setTimeout(function() { mechBugTracker.addClass('active') }, 10);
 			} else {
-				mechPullTab.animate({'left': -mechPullTab.x});
-				$(element).animate({'left': '0'});
+				mechPullTab.animate({ 'left': -mechPullTab.x });
+				$(element).animate({ 'left': '0' });
 			}
 		});
 	}
-	function minimize (element) {
-		if (element) 
+	function transitionTo (element) {
+		minimize(function() {
+			expand(element);
+		})
+	}
+	function minimize (afterMinimize) {
+		if (afterMinimize) 
 			var cn = 'transition';
 		var fA = function () {
 			mechBugReport.detach();
 			mechBugResponse.detach();
-			if (element) {
+			mechBugInfo.hide();
+			if (afterMinimize) {
 				mechBugTracker.removeClass(cn);
-				expand(element);
+				afterMinimize();
 			} else {
 				rpc.resizeiFrame(mechPullTab.x + 'px', mechPullTab.y + 'px', false);
 			}
@@ -121,7 +169,7 @@ jQuery(document).ready(function($) {
 						mechBugResponse.animate({'left': -mechBugResponse.x}, 400, callback);
 					},
 					function(callback) {
-						if (element) {
+						if (afterMinimize) {
 							callback();
 						} else {
 							mechPullTab.animate({'left': '0'}, 400, callback);
@@ -131,6 +179,7 @@ jQuery(document).ready(function($) {
 				fA
 			);
 			function doThese (funcs, callback) {
+				// this function takes an array of asynchronous functions and executes the callback when they are complete
 				var counter = 0;
 				$.each(funcs, function (index, func) {
 					func(check);

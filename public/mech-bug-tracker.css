@@ -37,11 +37,12 @@ body {
 	bottom: 0;
 	left: 0;
 }
-#mech-bug-tracker .mech-bug-inner {
-	padding: 50px 57px;
-}
-#mech-bug-tracker #mech-bug-report .mech-bug-inner {
+#mech-bug-tracker .mech-bug-padding {
 	background: #59bae3 url(http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png) no-repeat 7px 7px;
+	padding-top: 50px;
+}
+#mech-bug-tracker #mech-bug-report .mech-bug-padding {
+	padding: 50px 57px;
 }
 #mech-bug-tracker .mech-bug-wrap form {
 	margin: 0;
@@ -155,6 +156,39 @@ body {
 	text-decoration: none;
 	vertical-align: middle;
 	width: auto;
+}
+#mech-bug-tracker #mech-bug-submit.loading {
+	opacity: 0.5;
+}
+#mech-bug-tracker .mech-bug-thanks {
+	text-align: center;
+	/*text-align: right;*/
+	padding: 0 10px 10px;
+}
+#mech-bug-tracker .mech-bug-thanks h1{
+	color: white;
+	font-weight: 300;
+	font-size: 30px;
+	margin: 0px;
+	text-align: center;
+}
+#mech-bug-tracker .mech-bug-thanks .mech-bug-more{
+	background: #a6e7fe;
+	cursor: pointer;
+	/*display: inline-block;*/
+	padding: 0px 15px;
+}
+#mech-bug-tracker .mech-bug-info {
+	background: #a2e8fc;
+	-webkit-box-shadow: inset 0px 5px 5px 0px rgb(100, 100, 100);
+	-moz-box-shadow: inset 0px 5px 5px 0px rgb(100, 100, 100);
+	box-shadow: inset 0px 5px 5px 0px rgb(100, 100, 100);
+	display: none;
+	font-weight: bold;
+	padding: 10px;
+}
+#mech-bug-tracker .mech-bug-info span {
+	font-weight: normal;
 }
 @media only screen and (max-width: 399px){
 	#mech-bug-tracker {

@@ -12,7 +12,7 @@
         <div>Report A Bug!</div>
       </div>
       <div class="mech-bug-wrap left" id="mech-bug-report">
-        <div class="mech-bug-inner">
+        <div class="mech-bug-padding">
           <div class="mech-bug-close">x</div>
           <form id="mech-bug-form" role="form" action="/bugs" method="post">
             <div class="form-group">
@@ -29,9 +29,25 @@
         </div>
       </div>
       <div class="mech-bug-wrap down" id="mech-bug-response">
-        <div class="mech-bug-inner">
+        <div class="mech-bug-padding">
           <div class="mech-bug-close">x</div>
-          <h1>Thank you for your submission.</h1>
+          <div class='mech-bug-thanks'>
+            <h1>Thank you for your submission.</h1>
+            <div id="mech-bug-more" class="mech-bug-more">See more...</div>
+          </div>
+          <div class="mech-bug-info" id="mech-bug-info">
+            <div>Bug ID #: <span id='mech-bug-id'></span></div>
+            <div>User Name: <span id='mech-bug-user-name'></span></div>
+            <div>Description: <span id='mech-bug-description'></span></div>
+            <div>URL: <span id='mech-bug-url'></span></div>
+            <div>Browser: <span id='mech-bug-browser'></span></div>
+            <div>Browser Version: <span id='mech-bug-browser-version'></span></div>
+            <div>Browser Width: <span id='mech-bug-width'></span></div>
+            <div>Browser Height: <span id='mech-bug-height'></span></div>
+            <div>Created At: <span id='mech-bug-created'></span></div>
+            <div>User Agent: <span id='mech-bug-ua'></span></div>
+            <div>Operating System: <span id='mech-bug-os'></span></div>
+          </div>
         </div>
       </div>
     </div>
