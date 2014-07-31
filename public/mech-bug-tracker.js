@@ -2,7 +2,7 @@
 
 	"use strict";
 
-	var serverURL	= 'http://localhost:3000/',
+	var serverURL	= 'http://arcane-coast-4951.herokuapp.com/',
 		scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
 		iframeFile 	= 'iframe-mech-bug-tracker.html',
 		depends 	= {

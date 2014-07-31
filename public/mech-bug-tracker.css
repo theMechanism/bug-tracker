@@ -27,15 +27,17 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#59bae3", endColorstr="#59aae3",GradientType=1 );
 	max-height: 100%;
 	overflow-y: auto;
+
+	position: relative;
+	bottom: 0;
+	left: 0;
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap {
 	-webkit-transition: -webkit-transform 1s ease;
 	-moz-transition: -moz-transform 1s ease;
 	-ms-transition: -ms-transform 1s ease;
 	-o-transition: -o-transform 1s ease;
 	transition: transform 1s ease;
-
-	position: relative;
-	bottom: 0;
-	left: 0;
 }
 #mech-bug-tracker .mech-bug-padding {
 	padding-top: 50px;
@@ -66,28 +68,22 @@ body {
 	padding: 0;
 	border: none;
 }
-#mech-bug-tracker .mech-bug-wrap.left {
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap.left {
 	transform: translate(-100%, 0px);
 	-webkit-transform: translate(-100%, 0px);
 	-moz-transform: translate(-100%, 0px);
 	-o-transform: translate(-100%, 0px);
 	-ms-transform: translate(-100%, 0px);
 }
-#mech-bug-tracker .mech-bug-wrap.down {
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap.down {
 	transform: translate(0px, 100%);
 	-webkit-transform: translate(0px, 100%);
 	-moz-transform: translate(0px, 100%);
 	-o-transform: translate(0px, 100%);
 	-ms-transform: translate(0px, 100%);
 }
-#mech-bug-tracker.active .mech-bug-wrap {
-	transform: translate(0px, 0px);
-	-webkit-transform: translate(0px, 0px);
-	-moz-transform: translate(0px, 0px);
-	-o-transform: translate(0px, 0px);
-	-ms-transform: translate(0px, 0px);
-}
-#mech-bug-tracker.active .mech-pull-tab {
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap.active,
+.csstransforms.csstransitions #mech-bug-tracker .mech-pull-tab.active {
 	transform: translate(0px, 0px);
 	-webkit-transform: translate(0px, 0px);
 	-moz-transform: translate(0px, 0px);
@@ -129,7 +125,8 @@ body {
 	position: absolute;
 	left: 0;
 	width: 185px;
-
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-pull-tab {
 	transform: translate(-100%, 0px);
 	-webkit-transform: translate(-100%, 0px);
 	-moz-transform: translate(-100%, 0px);
