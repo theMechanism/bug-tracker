@@ -64,7 +64,10 @@
 		iframeContainer.style.zIndex = 999;
 		iframeContainer.style.bottom = 0;
 		iframeContainer.style.left = 0;
+		iframeContainer.style.top = "auto";
+		iframeContainer.style.right = "auto";
 		iframeContainer.style['max-height'] = '100%';
+		iframeContainer.style['max-width'] = '100%';
 
 		document.getElementsByTagName('body')[0].appendChild(iframeContainer);
 
