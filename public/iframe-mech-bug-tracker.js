@@ -37,6 +37,8 @@ function mechBugInit() {
 			transitions = (Modernizr.csstransforms && Modernizr.csstransitions),
 			views = [mechBugReport, mechBugResponse, mechBugError, mechPullTab];
 
+		mechPullTab.x = 180;
+
 		var funcArray = [];
 		$.each(views, function (index, element) {
 				mechBugTracker.css({'visibility': 'hidden'}).append(element);
@@ -151,7 +153,6 @@ function mechBugInit() {
 						width: element.x || 'auto',
 						height: element.y || 'auto'
 					});
-
 					var w = element.outerWidth(),
 						h = element.outerHeight();
 
