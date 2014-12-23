@@ -1,5 +1,8 @@
+/* global jQuery, easyXDM, Modernizr, bowser, console */
+
+
 function mechBugInit() {
-	"use strict";
+	'use strict';
 
 	jQuery(document).ready(function($) {
 
@@ -18,7 +21,7 @@ function mechBugInit() {
 			mechPullTab = $('#mech-pull-tab'),
 			mechBugClose = $('.mech-bug-close', mechBugTracker),
 			mechBugMoreLess = $('.mech-bug-more', mechBugTracker),
-			mechBugForm = $("#mech-bug-form"),
+			mechBugForm = $('#mech-bug-form'),
 			mechBugSubmit = $('#mech-bug-submit'),
 			mechBugInfo = $('#mech-bug-info'),
 			mechBugWraps = $('.mech-bug-wrap', mechBugTracker),
@@ -39,7 +42,6 @@ function mechBugInit() {
 
 		mechPullTab.x = 180;
 
-		var funcArray = [];
 		$.each(views, function (index, element) {
 				mechBugTracker.css({'visibility': 'hidden'}).append(element);
 		});
@@ -53,98 +55,102 @@ function mechBugInit() {
 				rpc.resizeiFrame(mechPullTab.x, mechPullTab.y, false, function() {
 					expand(mechPullTab);
 
-					mechPullTab.click(function(e) {
+					mechPullTab.click(function() {
 						fromTo(mechPullTab, mechBugReport);
 					});
 
-					mechBugClose.click(function(e) {
-						var parent = $(this).closest('.mech-bug-wrap');
-						fromTo(parent, mechPullTab, function() {
-							mechBugMoreLess.unbind()
-							mechBugWraps.removeClass('expanded');
-							mechBugErrorInfo.empty();
-						});
-					});
+					mechBugClose.click(handleClose);
 
-					mechBugSubmit.click(function(e) {
-						e.preventDefault();
-						if ($(this).hasClass('loading')) return;
-						rpc.parentInfo(function(parentInfo) {
-							var makeArray = {
-								'bug[name]': $('#form-name').val(),
-								'bug[description]': $('#form-description').val(),
-								'bug[project_id]': parentInfo.projectID,
-								'bug[url]': parentInfo.url,
-								'bug[os]': navigator.platform,
-								'bug[ua]': navigator.userAgent,
-								'bug[browser]': bowser.name,
-								'bug[browser_version]': bowser.version,
-								'bug[width]': parentInfo.width,
-								'bug[height]': parentInfo.height
-							};
-							mechBugSubmit.addClass('loading');
-							$.post('/bugs', makeArray)
-								.done(function(data) {
-									console.log(data);
-
-									if (data.id) {
-										mechBugInfo.detach();
-										mechBugResponse.height('auto');
-
-										mechBugID.html(data.id);
-										mechBugUserName.html(data.name);
-										mechBugDescription.html(data.description);
-										mechBugURL.html(data.url);
-										mechBugBrowser.html(data.browser);
-										mechBugBrowserVersion.html(data.browser_version);
-										mechBugWidth.html(data.width);
-										mechBugHeight.html(data.height);
-										mechBugCreated.html(data.created_at);
-										mechBugUA.html(data.ua);
-										mechBugOS.html(data.os);
-
-										$('.mech-bug-padding', mechBugResponse).append(mechBugInfo);
-
-										mechBugForm.trigger('reset');
-
-										fromTo(mechBugReport, mechBugResponse);
-									} else {
-										mechBugErrorInfo.detach();
-										mechBugError.height('auto');
-										$.each(data, function(index, error) {
-											mechBugErrorInfo.append('<div>' + error + '</div>');
-										});
-
-										$('.mech-bug-padding', mechBugError).append(mechBugErrorInfo);
-
-										mechBugForm.trigger('reset');
-
-										fromTo(mechBugReport, mechBugError);
-									}
-
-									mechBugSubmit.removeClass('loading');
-
-									mechBugMoreLess.click(function(e) {
-										var parent = $(this).closest(mechBugWraps);
-
-										parent.toggleClass('expanded');
-
-										parent.y = $('.mech-bug-padding', parent).outerHeight();
-
-										rpc.resizeiFrame(parent.x, parent.y, true, function(response) {
-											parent.x = response.x;
-											parent.y = response.y;
-											parent.width(response.x);
-											parent.height(response.y);
-											expand(parent);
-										});
-									});
-								});
-						});
-					});
+					mechBugSubmit.click(handleSubmit);
 				});
 			});
 		});
+
+		function handleClose(e) {
+			var parent = $(e.target).closest('.mech-bug-wrap');
+			fromTo(parent, mechPullTab, function() {
+				mechBugMoreLess.unbind();
+				mechBugWraps.removeClass('expanded');
+				mechBugErrorInfo.empty();
+			});
+		}
+
+		function handleSubmit(e) {
+			e.preventDefault();
+			if ($(e.target).hasClass('loading')) return;
+			rpc.parentInfo(function(parentInfo) {
+				var makeArray = {
+					'bug[name]': $('#form-name').val(),
+					'bug[description]': $('#form-description').val(),
+					'bug[project_id]': parentInfo.projectID,
+					'bug[url]': parentInfo.url,
+					'bug[os]': navigator.platform,
+					'bug[ua]': navigator.userAgent,
+					'bug[browser]': bowser.name,
+					'bug[browser_version]': bowser.version,
+					'bug[width]': parentInfo.width,
+					'bug[height]': parentInfo.height
+				};
+				mechBugSubmit.addClass('loading');
+				$.post('/bugs', makeArray)
+					.done(function(data) {
+						console.log(data);
+
+						if (data.id) {
+							mechBugInfo.detach();
+							mechBugResponse.height('auto');
+
+							mechBugID.html(data.id);
+							mechBugUserName.html(data.name);
+							mechBugDescription.html(data.description);
+							mechBugURL.html(data.url);
+							mechBugBrowser.html(data.browser);
+							mechBugBrowserVersion.html(data.browser_version);
+							mechBugWidth.html(data.width);
+							mechBugHeight.html(data.height);
+							mechBugCreated.html(data.created_at);
+							mechBugUA.html(data.ua);
+							mechBugOS.html(data.os);
+
+							$('.mech-bug-padding', mechBugResponse).append(mechBugInfo);
+
+							mechBugForm.trigger('reset');
+
+							fromTo(mechBugReport, mechBugResponse);
+						} else {
+							mechBugErrorInfo.detach();
+							mechBugError.height('auto');
+							$.each(data, function(index, error) {
+								mechBugErrorInfo.append('<div>' + error + '</div>');
+							});
+
+							$('.mech-bug-padding', mechBugError).append(mechBugErrorInfo);
+
+							mechBugForm.trigger('reset');
+
+							fromTo(mechBugReport, mechBugError);
+						}
+
+						mechBugSubmit.removeClass('loading');
+
+						mechBugMoreLess.click(function() {
+							var parent = $(this).closest(mechBugWraps);
+
+							parent.toggleClass('expanded');
+
+							parent.y = $('.mech-bug-padding', parent).outerHeight();
+
+							rpc.resizeiFrame(parent.x, parent.y, true, function(response) {
+								parent.x = response.x;
+								parent.y = response.y;
+								parent.width(response.x);
+								parent.height(response.y);
+								expand(parent);
+							});
+						});
+					});
+			});
+		}
 
 		function getDimensions (elements, callback) {
 			rpc.parentInfo(function(data) {
@@ -184,7 +190,7 @@ function mechBugInit() {
 			getDimensions([from, to], function() {
 				var tWidth = (from.x < to.x) ? to.x : from.x,
 					tHeight = (from.y < to.y) ? to.y : from.y;
-				rpc.resizeiFrame(tWidth, tHeight, true, function(response) {
+				rpc.resizeiFrame(tWidth, tHeight, true, function() {
 					var toDo = [
 						function(callback) {
 							minimize(from, function() {
@@ -208,7 +214,7 @@ function mechBugInit() {
 		function minimize (element, afterMinimize) {
 			var aM = function () {
 				if (afterMinimize) afterMinimize();
-			}
+			};
 			if(transitions) {
 				element
 					.removeClass('active')
@@ -227,7 +233,7 @@ function mechBugInit() {
 				func(check);
 			});
 			function check() {
-				counter++
+				counter++;
 				if (counter === $(funcs).size()) {
 					callback();
 				}

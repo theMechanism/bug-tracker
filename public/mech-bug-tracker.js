@@ -1,9 +1,12 @@
+/* global console, easyXDM */
+
 (function() {
 
-	"use strict";
+	'use strict';
 
-	var serverURL	= 'http://arcane-coast-4951.herokuapp.com/',
-		scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
+	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
+		script_tag = getScriptTag(scriptName),
+		serverURL = script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
 		iframeFile 	= 'iframe-mech-bug-tracker.html',
 		depends 	= {
 			'easyXDM': serverURL + 'js/easyXDM.min.js'
@@ -15,19 +18,21 @@
 			if (obj.hasOwnProperty(key)) size++;
 		}
 		return size;
-	}
+	};
 
 	var scriptCount = Object.size(depends);	// count of scripts required
 	var scriptLoads = 0;	// count of script loaded
 
 	for (var key in depends) {
 		if (depends.hasOwnProperty(key)) {
-			loadScript(key, depends[key], function() {
-				scriptLoads++;
-				if (scriptLoads === scriptCount) {
-					main();
-				}
-			});
+			loadScript(key, depends[key], checkFinish);
+		}
+	}
+
+	function checkFinish () {
+		scriptLoads++;
+		if (scriptLoads === scriptCount) {
+			main();
 		}
 	}
 
@@ -47,7 +52,7 @@
 			} else { // Other browsers
 				scriptTag.onload = callback;
 			}
-			(document.getElementsByTagName("head")[0] || document.documentElement).appendChild(scriptTag);
+			(document.getElementsByTagName('head')[0] || document.documentElement).appendChild(scriptTag);
 		} else {
 			callback();
 		}
@@ -55,17 +60,15 @@
 
 	function main() {
 
-		var script_tag = getScriptTag(scriptName),
-			bugTrackURL = script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
-			projectID = getParams(script_tag).projectID,
+		var projectID = getParams(script_tag).projectID,
 			iframeContainer = document.createElement('div');
 
 		iframeContainer.style.position = 'fixed';
 		iframeContainer.style.zIndex = 999;
 		iframeContainer.style.bottom = 0;
 		iframeContainer.style.left = 0;
-		iframeContainer.style.top = "auto";
-		iframeContainer.style.right = "auto";
+		iframeContainer.style.top = 'auto';
+		iframeContainer.style.right = 'auto';
 		iframeContainer.style['max-height'] = '100%';
 		iframeContainer.style['max-width'] = '100%';
 
@@ -127,35 +130,33 @@
 	            }
 	        }
 		});
-
-				
-
-
-		// Extract "GET" parameters from a JS include querystring
-		function getScriptTag(script_name) {
-			// Find all script tags
-			var scripts = document.getElementsByTagName("script");
-			// Look through them trying to find ourselves
-			for(var i=0; i<scripts.length; i++) {
-				if(scripts[i].src.indexOf("/" + script_name) > -1) {
-					return scripts[i]
-				}
-			}
-			// No scripts match
-			return {};
-		}
-		function getParams(script_tag) {
-			// Get an array of key=value strings of params
-			var pa = script_tag.src.split("?").pop().split("&");
-
-			// Split each key=value into array, the construct js object
-			var p = {};
-			for(var j=0; j<pa.length; j++) {
-				var kv = pa[j].split("=");
-				p[kv[0]] = kv[1];
-			}
-			return p;
-		}
 	}
+
+	// Extract "GET" parameters from a JS include querystring
+	function getScriptTag(script_name) {
+		// Find all script tags
+		var scripts = document.getElementsByTagName('script');
+		// Look through them trying to find ourselves
+		for(var i=0; i<scripts.length; i++) {
+			if(scripts[i].src.indexOf('/' + script_name) > -1) {
+				return scripts[i];
+			}
+		}
+		// No scripts match
+		return {};
+	}
+	function getParams(script_tag) {
+		// Get an array of key=value strings of params
+		var pa = script_tag.src.split('?').pop().split('&');
+
+		// Split each key=value into array, the construct js object
+		var p = {};
+		for(var j=0; j<pa.length; j++) {
+			var kv = pa[j].split('=');
+			p[kv[0]] = kv[1];
+		}
+		return p;
+	}
+
 })();
 
