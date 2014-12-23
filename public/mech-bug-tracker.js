@@ -5,8 +5,8 @@
 	'use strict';
 
 	var scriptName 	= 'mech-bug-tracker.js',			// should match the name of this script
-		script_tag = getScriptTag(scriptName),
-		serverURL = script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
+		script_tag 	= getScriptTag(scriptName),
+		serverURL 	= script_tag.src.substr(0, script_tag.src.indexOf(scriptName)),
 		iframeFile 	= 'iframe-mech-bug-tracker.html',
 		depends 	= {
 			'easyXDM': serverURL + 'js/easyXDM.min.js'

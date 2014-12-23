@@ -22,6 +22,7 @@ function mechBugInit() {
 			mechBugClose = $('.mech-bug-close', mechBugTracker),
 			mechBugMoreLess = $('.mech-bug-more', mechBugTracker),
 			mechBugForm = $('#mech-bug-form'),
+			mechBugFormName = $('#form-name'),
 			mechBugSubmit = $('#mech-bug-submit'),
 			mechBugInfo = $('#mech-bug-info'),
 			mechBugWraps = $('.mech-bug-wrap', mechBugTracker),
@@ -40,11 +41,24 @@ function mechBugInit() {
 			transitions = (Modernizr.csstransforms && Modernizr.csstransitions),
 			views = [mechBugReport, mechBugResponse, mechBugError, mechPullTab];
 
+
+		var cookieMonster = {
+			setName: function(name) {
+				$.cookie('mechBugTracker', name);
+			},
+			retrieveName: function() {
+				return $.cookie('mechBugTracker');
+			}
+		};
+
+		mechBugFormName.val(cookieMonster.retrieveName());
+
 		mechPullTab.x = 180;
 
 		$.each(views, function (index, element) {
 				mechBugTracker.css({'visibility': 'hidden'}).append(element);
 		});
+
 		rpc.resizeiFrame(1000, 1000, false, function() {
 			getDimensions(views, function() {
 				$.each(views, function (index, element) {
@@ -100,21 +114,22 @@ function mechBugInit() {
 							mechBugInfo.detach();
 							mechBugResponse.height('auto');
 
-							mechBugID.html(data.id);
-							mechBugUserName.html(data.name);
-							mechBugDescription.html(data.description);
-							mechBugURL.html(data.url);
-							mechBugBrowser.html(data.browser);
-							mechBugBrowserVersion.html(data.browser_version);
-							mechBugWidth.html(data.width);
-							mechBugHeight.html(data.height);
-							mechBugCreated.html(data.created_at);
-							mechBugUA.html(data.ua);
-							mechBugOS.html(data.os);
+							mechBugID.text(data.id);
+							mechBugUserName.text(data.name);
+							mechBugDescription.text(data.description);
+							mechBugURL.text(data.url);
+							mechBugBrowser.text(data.browser);
+							mechBugBrowserVersion.text(data.browser_version);
+							mechBugWidth.text(data.width);
+							mechBugHeight.text(data.height);
+							mechBugCreated.text(data.created_at);
+							mechBugUA.text(data.ua);
+							mechBugOS.text(data.os);
 
 							$('.mech-bug-padding', mechBugResponse).append(mechBugInfo);
 
 							mechBugForm.trigger('reset');
+							mechBugFormName.val(makeArray['bug[name]']);
 
 							fromTo(mechBugReport, mechBugResponse);
 						} else {
@@ -127,6 +142,7 @@ function mechBugInit() {
 							$('.mech-bug-padding', mechBugError).append(mechBugErrorInfo);
 
 							mechBugForm.trigger('reset');
+							mechBugFormName.val(makeArray['bug[name]']);
 
 							fromTo(mechBugReport, mechBugError);
 						}
@@ -149,6 +165,7 @@ function mechBugInit() {
 							});
 						});
 					});
+				cookieMonster.setName(makeArray['bug[name]']);
 			});
 		}
 
