@@ -1,8 +1,17 @@
-/* global jQuery, easyXDM, Modernizr, bowser, console */
+/* global jQuery, easyXDM, Modernizr, bowser, console, WebFont */
+
+WebFont.load({
+	google: {
+		families: ['Open Sans:400,700']
+	},
+	active: mechBugInit
+});
 
 
 function mechBugInit() {
 	'use strict';
+
+	var console = window.console || { log: function() {} };
 
 	jQuery(document).ready(function($) {
 
@@ -38,7 +47,7 @@ function mechBugInit() {
 			mechBugCreated = $('#mech-bug-created'),
 			mechBugUA = $('#mech-bug-ua'),
 			mechBugOS = $('#mech-bug-os'),
-			transitions = (Modernizr.csstransforms && Modernizr.csstransitions),
+			hasTransitions = (Modernizr.csstransforms && Modernizr.csstransitions),
 			views = [mechBugReport, mechBugResponse, mechBugError, mechPullTab];
 
 
@@ -56,7 +65,7 @@ function mechBugInit() {
 		mechPullTab.x = 180;
 
 		$.each(views, function (index, element) {
-				mechBugTracker.css({'visibility': 'hidden'}).append(element);
+			mechBugTracker.css({'visibility': 'hidden'}).append(element);
 		});
 
 		rpc.resizeiFrame(1000, 1000, false, function() {
@@ -189,7 +198,7 @@ function mechBugInit() {
 			});
 		}
 		function expand (element, afterExpand) {
-			if(transitions) {
+			if(hasTransitions) {
 				// timeout to allow iFrame size to adjust before transition starts
 				setTimeout(function() {
 					element
@@ -233,7 +242,7 @@ function mechBugInit() {
 			var aM = function () {
 				if (afterMinimize) afterMinimize();
 			};
-			if(transitions) {
+			if(hasTransitions) {
 				element
 					.removeClass('active')
 					.bind('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
