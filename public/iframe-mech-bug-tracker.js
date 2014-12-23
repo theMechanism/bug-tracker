@@ -75,6 +75,7 @@ function mechBugInit() {
 
 					mechBugClose.click(handleClose);
 
+					mechBugForm.submit(handleSubmit);
 					mechBugSubmit.click(handleSubmit);
 				});
 			});
@@ -91,7 +92,7 @@ function mechBugInit() {
 
 		function handleSubmit(e) {
 			e.preventDefault();
-			if ($(e.target).hasClass('loading')) return;
+			if (mechBugSubmit.hasClass('loading')) return;
 			rpc.parentInfo(function(parentInfo) {
 				var makeArray = {
 					'bug[name]': $('#form-name').val(),
