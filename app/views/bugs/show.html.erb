@@ -1,7 +1,7 @@
 <div class='header'>
-	<div class="branding"><img style='max-width: 350px;' src="http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png" alt=""></div>
+	<div class="branding"><img style='max-width: 350px;' src="http://venus.themechanism.com/images/TheMechanism_FullLogo.png" alt=""></div>
 	<h1>Thank you for your submission.</h1>
-	<div class="more">See more...</div>	
+	<div class="more">See more...</div>
 </div>
 <div class="info">
 	<div class="row"><span class="bold">Bug ID #: </span><%=@bug.id%></div>
@@ -27,7 +27,7 @@ $(document).ready(function(){
       show = !show;
       $(".info").toggle();
       var txt = $(".info").is(':visible') ? 'See less...' : 'See more...';
-      $(".more").text(txt); 
+      $(".more").text(txt);
       if (show){
       	window.resizeTo(600,454);
 		window.focus();

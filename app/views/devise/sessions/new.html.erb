@@ -12,7 +12,7 @@
 		width:60%;
 		max-width:400px;
 		margin: 200px auto;
-	
+
 	}
 	.sign-in-logo{
 		text-align:left;
@@ -50,7 +50,7 @@ input.switch:empty ~ label{
 	color:white;
 	font-weight:100;
 }
-input.switch:empty ~ label:before, 
+input.switch:empty ~ label:before,
 input.switch:empty ~ label:after
 {
 	position: absolute;
@@ -62,7 +62,7 @@ input.switch:empty ~ label:after
 	width: 3.6em;
 	background-color: #e0e0e0;
 	border-radius:17px;
-	
+
 	-webkit-transition: all 100ms ease-in;
 	transition: all 100ms ease-in;
 }
@@ -75,7 +75,7 @@ input.switch:empty ~ label:after
 	margin-left: 0.1em;
 	background-color: #fff;
 	border-radius: 30px;
-	
+
 }
 input.switch:checked ~ label:before
 {
@@ -103,7 +103,7 @@ input.sign-in-submit{
 </style>
 
 <div class='form-wrap'>
-	<div class="sign-in-logo"><img src="http://arcane-coast-4951.herokuapp.com/images/TheMechanism_FullLogo.png" alt=""></div>
+	<div class="sign-in-logo"><img src="http://venus.themechanism.com/images/TheMechanism_FullLogo.png" alt=""></div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class='margin-top'>
   <%= f.email_field :email, autofocus: true, placeholder:'Email' %></div>
