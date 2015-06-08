@@ -1,6 +1,4 @@
 BugTracker::Application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   devise_for :clients, :controllers => { :registrations => 'clients' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,7 +8,7 @@ BugTracker::Application.routes.draw do
   end
   resources :bugs
   resource :clients
-   match "/getform" => "bugs#form", via: [:get] 
+   match "/getform" => "bugs#form", via: [:get]
    match "/getformstyle" => "bugs#style", via: [:get]
   # You can have the root of your site routed with "root"
 
