@@ -6,10 +6,18 @@ BugTracker::Application.routes.draw do
     root to: "devise/sessions#new"
     get 'clients/:id' => 'clients#show'
   end
+  get "/dashboard" => 'dashboard/projects#index', as:"dashboard"
+  namespace :dashboard do
+    resources :clients, only: [:index, :show, :create, :update, :destroy]
+    resources :bugs, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+    resources :projects, only: [:index, :show, :new, :create, :update, :destroy]
+    # resources :admins, only: [:index,:new, :create, :update, :destroy]
+  end
+
   resources :bugs
   resource :clients
-   match "/getform" => "bugs#form", via: [:get]
-   match "/getformstyle" => "bugs#style", via: [:get]
+  match "/getform" => "bugs#form", via: [:get]
+  match "/getformstyle" => "bugs#style", via: [:get]
   # You can have the root of your site routed with "root"
 
 
