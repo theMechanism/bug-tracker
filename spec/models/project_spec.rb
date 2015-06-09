@@ -3,10 +3,9 @@ require 'spec_helper'
 RSpec.describe Project, :type => :model do
   context 'valid factory' do
     it 'builds factory' do
-      # project = 
-      build(:project)
+      project = build(:project)
 
-      p "#{project.inspect}"
+      p "#{project.errors.inspect}"
       expect(project).to be_a(Project)
     end
     # it { should have_many :bugs }

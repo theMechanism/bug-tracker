@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :client do
-    name_of_co 'Big Client'
-    email 'client@client.com'
+    name_of_co Faker::Company.name
+    email Faker::Internet.email
     name_of_primary_contact 'Foo Barber'
+    password 'reallygoodpassword'
   end
 end

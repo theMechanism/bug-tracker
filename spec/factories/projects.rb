@@ -3,8 +3,9 @@
 FactoryGirl.define do
   factory :project do
   	name 'My Buggy Project'
-    client build(:client)
-    git_repo_url 'repo@github.com'
-    dev_server_url 'devserver.com'
+    git_repo_url 'www.repo@github.com'
+    dev_server_url 'www.evserver.com'
+
+    association :client, factory: :client
   end
 end

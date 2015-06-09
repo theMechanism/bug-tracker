@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :bug do
   	description 'Everything is broken'
+    name 'not blank'
   end
 end

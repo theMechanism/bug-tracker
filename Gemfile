@@ -40,6 +40,7 @@ group :development, :test do
   gem 'capybara'
   gem 'quiet_assets'
   gem 'database_cleaner'
+  gem 'faker'
 end
 
 gem 'rails_12factor', group: :production
