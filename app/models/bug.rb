@@ -1,5 +1,5 @@
 class Bug < ActiveRecord::Base
-	VALID_STATUS = ['Open', "Closed", "Verify"]
+	VALID_STATUS = ['Open', 'Closed', 'Verify']
 	validates_presence_of :description, :name
 	belongs_to :project,
  	  inverse_of: :bugs
