@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
     def dashboard_mode
         self.class.parent == Dashboard
     end
-
+    def after_sign_in_path_for(resource)
+        "/clients/#{resource.id}"
+    end
 
 end
