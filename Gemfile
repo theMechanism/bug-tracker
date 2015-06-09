@@ -33,7 +33,7 @@ end
 group :development, :test do
   gem 'valid_attribute'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', "~> 4.0"
   gem 'shoulda'
   gem 'launchy'
   gem 'pry-rails'

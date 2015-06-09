@@ -6,4 +6,7 @@ class Client < ActiveRecord::Base
 
   has_many :projects,
     	dependent: :destroy
+
+  validates_uniqueness_of :name_of_co, :email
+
 end

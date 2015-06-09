@@ -1,5 +1,12 @@
 require 'spec_helper'
 
-describe Client do
- it { should have_many :projects }
+RSpec.describe Client, :type => :model do
+  context 'valid factory' do
+    it 'builds factory' do
+      client = build(:client)
+      expect(client).to be_a(Client)
+    end
+  end
 end
+
+
