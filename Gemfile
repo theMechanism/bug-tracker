@@ -39,6 +39,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'capybara'
   gem 'quiet_assets'
+  gem 'database_cleaner'
 end
 
 gem 'rails_12factor', group: :production

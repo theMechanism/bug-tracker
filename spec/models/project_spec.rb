@@ -1,8 +1,16 @@
 require 'spec_helper'
 
-describe Project do
-  it { should have_many :bugs }
-  it { should validate_presence_of :name }  
-  it { should belong_to :client }  
+RSpec.describe Project, :type => :model do
+  context 'valid factory' do
+    it 'builds factory' do
+      # project = 
+      build(:project)
 
+      p "#{project.inspect}"
+      expect(project).to be_a(Project)
+    end
+    # it { should have_many :bugs }
+    # it { should validate_presence_of :name }  
+    # it { should belong_to :client }  
+  end
 end
