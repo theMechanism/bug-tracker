@@ -1,0 +1,16 @@
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bourbon";
+
+.dashboard{
+
+
+}
+
+.public {
+    @import 'pages/bugs';
+    @import 'pages/clients';
+
+}
+

@@ -1,7 +1,6 @@
 class ClientsController < Devise::RegistrationsController
 	 before_filter :authenticate!
 	def show
-		
 		@client = Client.find(params[:id])
 	end
 	def authenticate!

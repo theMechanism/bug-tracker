@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "BugTracker" %></title>
+    <title><%= "Venus Dashboard" %></title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
 
@@ -37,7 +37,8 @@
 
     <%= javascript_include_tag "application" %>
   </head>
-  <body class='public'>
+  <body class='dashboard'>
+    <%= render 'layouts/menus/dashboard_menu' %>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="col-md-12">
@@ -45,10 +46,6 @@
           <%= yield %>
         </div>
       </div><!--/row-->
-
-
-
     </div> <!-- /container -->
-
   </body>
 </html>

@@ -1,0 +1,12 @@
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <%= link_to dashboard_path, class: "navbar-brand" do |link|
+            # image_tag "/assets/venus-logo.png"
+        end%>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class='dashboard-jobs'><%= link_to "Clients", dashboard_clients_path %></li>
+        <li class='dashboard-posts'><%= link_to "Projects", dashboard_projects_path %></li>
+        <li class='dashboard-series'><%= link_to "Bugs", dashboard_bugs_path %></li>
+    </ul>
+</nav>

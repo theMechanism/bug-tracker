@@ -4,7 +4,7 @@
   <div class="absolute-content-wrp extra-padding">
     <h1 class='col-md-12'>Oops!</h1>
     <div class="expiration">It looks like this isn't your project, try signing in as a different user.</div>
-    
+
   </div>
 
 </div>
@@ -15,7 +15,7 @@
   <div class="bar"></div>
   <div class="absolute-content-wrp extra-padding">
     <h1 class='col-md-12'><%=@client.project.name.upcase%></h1>
-    <div class="expiration"><span style='font-weight:500'>Bug tracking ends on: </span><%=@client.project.expiration.to_date.strftime('%a %b %d %Y')%></div>
+
   </div>
 
 </div>
@@ -40,14 +40,14 @@
             <td class='hide-on-medium'> <%= bug.created_at.to_date %> </td>
             <td class='hide-on-small'> <%= bug.name %> </td>
             <td class='align-left'> <a href="<%= bug.url %>"><%= bug.url %></a></td>
-            <td class='align-left'> 
+            <td class='align-left'>
               <div class="bug-desc"><%= bug.description.to_s[0..40].gsub(/\s\w+$/,'...') %></div>
               <div class="see-more <%=bug.id%>">See more...</div>
             </td>
           </tr>
           <tr class='more-info <%=bug.id%>'>
             <td colspan='0' class='data-cont'>
-            <div class="full-text">> <%=bug.description.to_s%></div> 
+            <div class="full-text">> <%=bug.description.to_s%></div>
               <div class="contact-wrap"><div class="contact"> <a href="mailto:dev@themechanism.com?Subject=Issue%20with%20Bug%20Number%20<%=bug.id%>">Contact The Mechanism about this issue...</a></div></div>
             </td>
           </tr>
@@ -59,22 +59,22 @@
 <%end%>
 <script type="text/javascript">
   $(document).ready(function(){
-       $(".tablesorter").tablesorter(); 
+       $(".tablesorter").tablesorter();
     $(".see-more").click(function() {
       if ( !$(this).hasClass('active') ){
-        reset(); 
-      } 
+        reset();
+      }
       var data = this.classList[1];
       $(this).toggleClass('active');
       $(".more-info."+data).toggle();
       var txt = $(".more-info."+data).is(':visible') ? 'See less...' : 'See more...';
-      $(this).text(txt); 
+      $(this).text(txt);
     });
-    
+
     var reset = function(){
        $('.more-info').css('display','none');
       $('.see-more').removeClass('active');
-      $(".see-more").text('See more...'); 
+      $(".see-more").text('See more...');
     }
   })
 </script>
