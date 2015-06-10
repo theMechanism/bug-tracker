@@ -7,5 +7,6 @@ FactoryGirl.define do
     dev_server_url Faker::Internet.url
 
     association :client, factory: :client
+    association :admin, factory: :project_manager
   end
 end
