@@ -5,3 +5,63 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+case Rails.env
+when "development"
+
+  clients = []
+  admins = []
+  
+  10.times do 
+    clients << Client.create(email: Faker::Internet.email,
+      name_of_co: Faker::Company.name,
+      name_of_primary_contact: Faker::Name.name,
+      misc_info: Faker::Hacker.say_something_smart,
+      phone: Faker::PhoneNumber.phone_number,
+      password: Faker::Internet.password
+    )
+
+    admins << Admin.create(
+      name: Faker::Name.name,
+      email: Faker::Internet.email
+    )
+
+  end
+
+  pm = admins.pop
+  pm.update_attributes(is_project_manager: true)
+
+  30.times do 
+    clients.sample.projects.create(
+      name: Faker::Commerce.product_name,
+      blurb: Faker::Hacker.say_something_smart,
+      admin: pm, 
+      git_repo_url: Faker::Internet.url,
+      dev_server_url: Faker::Internet.url
+    )
+  end
+
+  projects = Project.all
+
+  projects.each do |proj|
+    5.times do 
+      proj.bugs.create(
+        description: Faker::Lorem.sentence, 
+        admin: admins.sample,
+        name: Faker::Lorem.word
+      )
+    end
+  end
+
+  bugs = Bug.all
+
+  30.times do 
+    bugs.sample.comments.create(
+      content: Faker::Hacker.say_something_smart,
+      admin: admins.sample
+    )
+  end
+
+when "production"
+   
+end

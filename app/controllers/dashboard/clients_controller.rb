@@ -3,6 +3,7 @@ module Dashboard
     include ApplicationHelper
     before_filter :deny_access, :unless => :is_admin?
     def index
+        
     end
 
     def create
