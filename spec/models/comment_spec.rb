@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe Comment, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  context "has valid factory" do
+    it 'builds with valid associations' do
+      comment = create(:comment)
+      expect(comment).to be_a(Comment)
+    end
+  end
 end

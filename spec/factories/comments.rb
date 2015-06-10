@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :comment do
-    bug nil
-admin nil
-content "MyText"
-  end
+    
+    content Faker::Hacker.say_something_smart
 
+    association :bug, factory: :bug
+    association :admin, factory: :admin
+  end
 end
