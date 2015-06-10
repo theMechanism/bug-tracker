@@ -21,9 +21,5 @@ RSpec.describe Bug, :type => :model do
       expect(bug.valid?).to be(true)
     end
 
-    it 'requires associated project' do
-      bug.project = nil
-      expect(bug.valid?).to be(false)
-    end
   end
 end

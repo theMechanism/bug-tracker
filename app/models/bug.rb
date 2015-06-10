@@ -2,9 +2,7 @@ class Bug < ActiveRecord::Base
 
   belongs_to :admin
   belongs_to :project
-  #,
-    #inverse_of: :bugs,
-    #dependent: :destroy
+  has_many :comments, dependent: :destroy
 
 	VALID_STATUS = ['Open', 'Closed', 'Verify']
 
