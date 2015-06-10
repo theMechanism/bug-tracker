@@ -28,6 +28,5 @@ RSpec.describe Project, :type => :model do
       project.git_repo_url = invalid_url
       expect(project.valid?).to be(false)
     end
-
   end
 end
