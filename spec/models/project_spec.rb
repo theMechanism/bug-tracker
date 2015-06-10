@@ -2,18 +2,18 @@ require 'spec_helper'
 
 RSpec.describe Project, :type => :model do
   let(:project) { FactoryGirl.create :project }
-  
+
   context 'valid factory' do
     it 'builds factory' do
       expect(project).to be_a(Project)
     end
-    
+
   end
 
   context "validations" do
     it { should have_many :bugs }
-    it { should validate_presence_of :name }  
-    it { should belong_to :client }  
+    it { should validate_presence_of :name }
+    it { should belong_to :client }
 
     it "ensure admin is project manager" do
       valid_pm = project.admin.is_project_manager
@@ -23,10 +23,17 @@ RSpec.describe Project, :type => :model do
       expect(project.valid?).to be(false)
     end
 
-    it "ensure valid urls" do 
+    it "ensure valid urls" do
       invalid_url = 'not a url. derp'
       project.git_repo_url = invalid_url
       expect(project.valid?).to be(false)
+    end
+
+    it "destroys dependent projects" do
+      project = FactoryGirl.create(:project)
+      bug = FactoryGirl.create(:bug, project_id:project.id)
+      project.bugs << bug
+      expect { project.destroy}.to change {Bug.count}.by(-1)
     end
   end
 end
