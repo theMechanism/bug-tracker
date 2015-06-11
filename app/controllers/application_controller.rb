@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
         self.class.parent == Dashboard
     end
     def after_sign_in_path_for(resource)
-        "/clients/#{resource.id}"
+        resource.class == Admin ? '/dashboard' : "/clients/#{resource.id}"
     end
 
 end

@@ -29,7 +29,7 @@ RSpec.describe Project, :type => :model do
       expect(project.valid?).to be(false)
     end
 
-    it "destroys dependent projects" do
+    it "destroys dependent bugs" do
       project = FactoryGirl.create(:project)
       bug = FactoryGirl.create(:bug, project_id:project.id)
       project.bugs << bug
