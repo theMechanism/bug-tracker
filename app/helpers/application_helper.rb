@@ -1,8 +1,8 @@
 module ApplicationHelper
     def is_admin?
-        # current_user.is_admin?
+       current_admin.present?
     end
     def deny_access
-        # redirect_to login
+        redirect_to '/admin'
     end
 end

@@ -1,11 +1,13 @@
 BugTracker::Application.routes.draw do
   devise_for :clients, :controllers => { :registrations => 'clients' }
+  devise_for :admins, path:'',:path_names => {:sign_in => 'admin', :sign_out => 'logout'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   devise_scope :client do
     root to: "devise/sessions#new"
     get 'clients/:id' => 'clients#show'
   end
+
   get "/dashboard" => 'dashboard/projects#index', as:"dashboard"
   namespace :dashboard do
     resources :clients, only: [:index, :show, :create, :update, :destroy]
