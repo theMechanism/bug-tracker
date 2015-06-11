@@ -1,0 +1,9 @@
+<div class="list-group-item">
+  <h4 class="list-group-item-heading"><%= comment.admin.name %></h4>
+  <p class="list-group-item-text">
+    <%= comment.content %>
+    <br>
+    <small><%= comment.created_at.to_formatted_s(:rfc822) %></small>
+  </p>
+
+</div>

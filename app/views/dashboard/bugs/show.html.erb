@@ -16,4 +16,8 @@
 <%= render 'dashboard/bugs/detail', bug: @bug %>
 
 <h4>Comments</h4>
-<%= render 'dashboard/comment' %>
+<%= render 'dashboard/comments/thread', comments: @comments %>
+<%= simple_form_for @comment, url: dashboard_bug_comments_path(@bug), remote: true do |f| %>
+  <%= f.input :content %>
+  <%= f.button :submit %>
+<% end %>

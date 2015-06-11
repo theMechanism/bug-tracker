@@ -13,7 +13,8 @@ module Dashboard
         @bug = Bug.find(params[:id])
         @project = @bug.project
         @admin = @bug.admin
-        @comments = @bug.comments
+        @comments = @bug.comments.order(:created_at)
+        @comment = @bug.comments.new
     end
     
     def update
