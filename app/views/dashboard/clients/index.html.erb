@@ -29,12 +29,12 @@
       </tr>
       <% client.projects.each do |proj| %>
         <tr>
-          <td><%= link_to proj.name, dashboard_project_path(proj) %></td>
+          <td><%= link_to truncate(proj.name), dashboard_project_path(proj) %></td>
           <td><%= proj.blurb %></td>
           <td><%= proj.active %></td>
           <td><%= proj.expiration %></td>
-          <td><%= link_to proj.git_repo_url, proj.git_repo_url %></td>
-          <td><%= link_to proj.dev_server_url, proj.dev_server_url %></td>
+          <td><%= link_to truncate(proj.git_repo_url), proj.git_repo_url %></td>
+          <td><%= link_to truncate(proj.dev_server_url), proj.dev_server_url %></td>
         </tr>
       <% end %>
       
