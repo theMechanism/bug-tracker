@@ -18,27 +18,9 @@
     </table>
 
     <h4>Projects <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></h4>
-    <table class="table table-bordered">
-      <tr>
-        <th>Name</th>
-        <th>Blurb</th>
-        <th>Active?</th>
-        <th>Tracker Exp Date</th>
-        <th>Git Repo</th>
-        <th>Dev Server</th>
-      </tr>
-      <% client.projects.each do |proj| %>
-        <tr>
-          <td><%= link_to truncate(proj.name), dashboard_project_path(proj) %></td>
-          <td><%= proj.blurb %></td>
-          <td><%= proj.active %></td>
-          <td><%= proj.expiration %></td>
-          <td><%= link_to truncate(proj.git_repo_url), proj.git_repo_url %></td>
-          <td><%= link_to truncate(proj.dev_server_url), proj.dev_server_url %></td>
-        </tr>
-      <% end %>
-      
-    </table>
+    
+    <%= render 'dashboard/projects/table', projects: client.projects  %>
+    
   </div>
   
 <% end %>

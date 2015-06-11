@@ -1,0 +1,30 @@
+<tr>
+  <th><%= link_to bug.name, dashboard_bug_path(bug) %></th>
+  <td><%= bug.description %></td>
+  
+  <% if bug.status == 'Open' %>
+    <td><%= link_to 'Submit' %></td>
+  <% elsif bug.status == 'Verify' %>
+    <!-- 
+      if current_admin == project_manager
+        then admin should have option to review the bug, and verify
+
+        link_to bug_verify_path ## a view only pm's can access
+
+      else
+        admin (dev or designer) sees 'In Review'
+    
+     -->
+    <td><%= link_to 'Verify' %></td>
+  <% else # bug is closed %>
+    <td>Closed</td>
+  <% end %>
+  
+  <td>
+    <%= simple_form_for bug, url: dashboard_bug_path, remote: true do |f| %>
+      
+      <%= f.association :admin %>
+      <%= f.button :submit, bug.admin ? "Reassign" : "Assign" %>
+    <% end %>
+  </td>
+</tr> 

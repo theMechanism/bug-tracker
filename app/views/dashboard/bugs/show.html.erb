@@ -1,1 +1,16 @@
-<%= @bug.inspect %>
+
+<!-- 
+    @bug = Bug.find(params[:id])
+    @project = @bug.project
+    @admin = @bug.admin
+    @comments = @bug.comments 
+-->
+
+<h2><%= @bug.name %></h2>
+<h4>Project Details</h4>
+<%= render 'dashboard/projects/table', projects: [@project]  %>
+
+<h4>Bug Specifics</h4>
+<%= render 'dashboard/bugs/table', bugs: [@bug] %>
+
+<%= render 'dashboard/bugs/detail', bug: @bug %>
