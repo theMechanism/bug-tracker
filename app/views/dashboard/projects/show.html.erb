@@ -1,6 +1,38 @@
 <h3><%= @project.name %></h3>
 
+<div class="row">
+  <div class="col-lg-8 col-md-8">
+
+    <h4>Bugs Overview</h4>
+    <%= render 'dashboard/bugs/table', bugs: @bugs %>
+    <h4>Project Details</h4>
+    <%= render 'dashboard/projects/table', projects: [@project]  %>
+  </div>
+  <div class="col-lg-4 col-md-4">
+    <h4>Team Workload</h4>
+    <table class="table">
+      <tr>
+        <th>Member</th>
+        <th># of Bugs Assigned</th>
+      </tr>
+      <% @admins.each do |admin| %>
+        <tr>
+          <td><%= mail_to(admin.email, admin.name) %></td>
+          <td><%= admin.bugs.count %></td>
+        </tr>
 
 
-<h4>Bug Overview</h4>
-<%= render 'dashboard/bugs/table', bugs: @bugs %>
+      <% end %>
+    </table>
+
+  </div>
+</div>
+
+<script> 
+
+  // TODO -- make some decisions about JS data management
+  $('form').on('ajax:success', function(e, data, status, xhr) {
+    console.log(xhr.responseText);
+  });
+</script>
+
