@@ -9,6 +9,12 @@ module Dashboard
     end
 
     def show
+        p '#'*80
+        p "#{params[:id]}"
+        p '#'*80
+        @project = Project.find(params[:id])
+        @bugs = @project.bugs
+        @admins = Admin.all
     end
     def update
     end

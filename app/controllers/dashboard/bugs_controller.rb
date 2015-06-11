@@ -11,6 +11,7 @@ module Dashboard
     def show
     end
     def update
+        p params
     end
     def destroy
     end
