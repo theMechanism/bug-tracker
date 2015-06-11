@@ -3,6 +3,6 @@ module ApplicationHelper
        current_admin.present?
     end
     def deny_access
-        redirect_to '/admin/sign_in'
+        redirect_to '/admin'
     end
 end
