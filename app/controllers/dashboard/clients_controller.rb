@@ -2,8 +2,9 @@ module Dashboard
   class ClientsController < ApplicationController
     include ApplicationHelper
     before_filter :deny_access, :unless => :is_admin?
-    def index
-        
+    def index  
+        @clients = Client.all
+        p "#{@clients.inspect}"
     end
 
     def create

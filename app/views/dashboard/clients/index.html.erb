@@ -1,0 +1,25 @@
+<% @clients.each do |client| %>
+  <div class="well">
+    <table class="table table-condensed">
+      <tr>
+        <th><%= client.name_of_co %></th>
+      </tr>
+      <tr>
+        <td>Primary Contact</td>
+        <td><%= client.name_of_primary_contact %></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <h4>Projects</h4>
+    <ul>
+
+      <% client.projects.each do |proj| %>
+        <li><%= proj.name %></li>
+      <% end %>
+      
+    </ul>
+    
+  </div>
+  
+<% end %>
