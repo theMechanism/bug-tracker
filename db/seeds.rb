@@ -9,6 +9,17 @@
 case Rails.env
 when "development"
 
+  Admin.create(
+    name: 'Avi FR',
+    password: 'password',
+    email: 'avi.fox-rosen@themechanism.com'
+  )
+
+  Admin.create(
+    name: 'Dhruv M',
+    password: 'password',
+    email: 'dhruv.mehrotra@themechanism.com'
+  )
   clients = []
   admins = []
   
@@ -23,13 +34,14 @@ when "development"
 
     admins << Admin.create(
       name: Faker::Name.name,
-      email: Faker::Internet.email
+      email: Faker::Internet.email,
+      password: Faker::Internet.password
     )
 
   end
 
   pm = admins.pop
-  pm.update_attributes(is_project_manager: true)
+  pm.update_attributes(is_project_manager: true, name: 'Joe Constantino')
 
   30.times do 
     clients.sample.projects.create(
