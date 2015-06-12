@@ -1,15 +1,8 @@
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 var ClientNode = React.createClass({
 
   render: function() {
-
-    var projectNodes = this.props.projects.map(function(project){
-      console.log(project);
-      return (
-        <ProjectNode project={project} key={project}/>
-      );
-
-    });
-
     return (
       <div className="well">
         <h3>{ this.props.client.name_of_co }</h3>
@@ -30,25 +23,13 @@ var ClientNode = React.createClass({
         </table>
 
         <h4>Projects <a onClick={this.toggleProjectsShow}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></a></h4>
-        <ReactCSSTransitionGroup transitionName="example">  
-          <table className="table table-bordered">
-            <tr>
-              <th>Name</th>
-              <th>Blurb</th>
-              <th>Active?</th>
-              <th>Tracker Exp Date</th>
-              <th>Git Repo</th>
-              <th>Dev Server</th>
-              <th>Project Manager</th>
-            </tr>
-            { projectNodes }
-          </table>
-        </ReactCSSTransitionGroup>
+        <ProjectsTable projects={this.props.projects} />
       </div>
 
     );
   },
   getInitialState: function(){
+    // console.l
     return {
       showProjects: false
     }
@@ -57,6 +38,8 @@ var ClientNode = React.createClass({
     this.setState({
       showProjects: !this.state.showProjects
     });
-    console.log(this.state.showProjects);
-  }
+    // console.log(this.state.showProjects);
+  },
+
+
 });

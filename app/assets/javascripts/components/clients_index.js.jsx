@@ -1,7 +1,7 @@
 var ClientsIndex = React.createClass({
 
   render: function() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         <h2>Welcome to ClientsIndex component</h2>

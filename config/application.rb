@@ -22,6 +22,9 @@ module BugTracker
 
     # generators produce js instead of js.coffee
     config.generators.javascript_engine = :js
+
+    # for animations and other non-standard libaries... but why delay? 
+
     config.react.addons = true
   end
 end
