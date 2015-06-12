@@ -1,6 +1,9 @@
-<% @clients.each do |client| %>
+
+<%= react_component('ClientsIndex', clients: @clients) %>
+<!--  
+< % @clients.each do |client| %>
   <div class="well">
-    <h3><%= client.name_of_co %></h3>
+    <h3>< %= client.name_of_co %></h3>
     
     <table class="table table-condensed">
       <tr>
@@ -10,17 +13,19 @@
         <th>Misc Company Info</th>
       </tr>
       <tr>
-        <td><%= client.name_of_primary_contact %></td>
-        <td><%= mail_to client.email  %></td>
-        <td><%= client.phone %></td>
-        <td><%= client.misc_info %></td>
+        <td>< %= client.name_of_primary_contact %></td>
+        <td>< %= mail_to client.email  %></td>
+        <td>< %= client.phone %></td>
+        <td>< %= client.misc_info %></td>
       </tr>
     </table>
 
     <h4>Projects <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></h4>
     
-    <%= render 'dashboard/projects/table', projects: client.projects  %>
+    < %= render 'dashboard/projects/table', projects: client.projects  %>
     
   </div>
   
-<% end %>
+< % end %>
+
+-->

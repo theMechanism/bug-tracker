@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+
   validates_presence_of :name
 	has_many :bugs,
     dependent: :destroy
@@ -13,6 +15,17 @@ class Project < ActiveRecord::Base
 
   validate :admin_is_project_manager
 
+  def project_manager_email
+    admin = self.admin
+    {
+      project_manager_name: admin.name,
+      project_manager_email: admin.email
+    }
+  end
+
+  def dashboard_uri
+    dashboard_project_path(self)
+  end
   private 
 
   def admin_is_project_manager

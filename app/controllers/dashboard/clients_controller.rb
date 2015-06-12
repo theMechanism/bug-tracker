@@ -3,8 +3,9 @@ module Dashboard
     include ApplicationHelper
     before_filter :deny_access, :unless => :is_admin?
     def index  
-        @clients = Client.all
-        p "#{@clients.inspect}"
+        
+        @clients = Client.browser_facing_attrs
+        
     end
 
     def create
