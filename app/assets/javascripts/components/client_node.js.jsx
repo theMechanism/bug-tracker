@@ -1,8 +1,8 @@
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var ClientNode = React.createClass({
 
   render: function() {
+    var projectsTable = this.state.showProjects ? <ProjectsTable projects={this.props.projects} /> : '';
     return (
       <div className="well">
         <h3>{ this.props.client.name_of_co }</h3>
@@ -21,9 +21,9 @@ var ClientNode = React.createClass({
             <td>{ this.props.client.misc_info }</td>
           </tr>
         </table>
-
         <h4>Projects <a onClick={this.toggleProjectsShow}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></a></h4>
-        <ProjectsTable projects={this.props.projects} />
+        { projectsTable }
+        
       </div>
 
     );
@@ -38,8 +38,9 @@ var ClientNode = React.createClass({
     this.setState({
       showProjects: !this.state.showProjects
     });
-    // console.log(this.state.showProjects);
+    console.log(this.state.showProjects);
   },
-
-
+  componentDidMount: function(){
+    this.getInitialState();
+  }
 });
