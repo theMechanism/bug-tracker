@@ -8,7 +8,7 @@ var Bug = React.createClass({
     });
 
     return (
-      <div className="bug">
+      <div className="bug" >
         <h4 className="bugName">
           {this.props.name}
         </h4>

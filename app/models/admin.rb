@@ -7,4 +7,8 @@ class Admin < ActiveRecord::Base
 
   validates_presence_of :name, :email
 
+  def bugs_count
+    self.bugs.count
+  end
+
 end

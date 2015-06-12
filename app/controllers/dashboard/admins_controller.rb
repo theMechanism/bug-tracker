@@ -9,7 +9,8 @@ module Dashboard
     end
 
     def show
-        @admins = Admin.all
+        @admins = Admin.find(:all, :select => 'id, name').map{|a| a.attributes.merge({bugs_count: a.bugs_count})}
+        # @admins = Admin.all.to_json(:methods => [:bugs_count])
         @bugs = Project.first.bugs
     end
     

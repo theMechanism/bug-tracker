@@ -4,10 +4,27 @@ var AdminBugLeaderBoard = React.createClass({
   },
 
   render: function() {
+    var adminRows = this.state.admins.map(function(admin){
+      return (
+        <tr key={admin.id}>
+          <td>{admin.name}</td>
+          <td>{ admin.bugs_count }</td>
+        </tr>
+      );
+    });
     return (
-      <div>
-        <div>Admins: {this.props.admins}</div>
-      </div>
+      <table className="table">
+        <tr>
+          <th>Member</th>
+          <th># of Bugs Assigned</th>
+        </tr>
+        { adminRows }
+      </table>
     );
+  },
+  getInitialState: function(){
+    return {
+      admins: this.props.admins
+    }
   }
 });
