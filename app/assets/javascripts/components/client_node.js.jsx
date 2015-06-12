@@ -3,6 +3,9 @@ var ClientNode = React.createClass({
 
   render: function() {
     var projectsTable = this.state.showProjects ? <ProjectsTable projects={this.props.projects} /> : '';
+
+    var arrowIcon = this.state.showProjects ? "glyphicon glyphicon-arrow-up" : "glyphicon glyphicon-arrow-down";
+
     return (
       <div className="well">
         <h3>{ this.props.client.name_of_co }</h3>
@@ -21,7 +24,11 @@ var ClientNode = React.createClass({
             <td>{ this.props.client.misc_info }</td>
           </tr>
         </table>
-        <h4>Projects <a onClick={this.toggleProjectsShow}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></a></h4>
+        <h4>
+          Projects 
+          <a onClick={this.toggleProjectsShow}><span className={arrowIcon} aria-hidden="true"></span></a>
+          <a onClick={this.showModal}><span className={arrowIcon} aria-hidden="true"></span></a>
+        </h4>
         { projectsTable }
         
       </div>
