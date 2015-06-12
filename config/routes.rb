@@ -15,7 +15,7 @@ BugTracker::Application.routes.draw do
       resources :comments, only: :create
     end
     resources :projects, only: [:index, :show, :new, :create, :update, :destroy]
-    # resources :admins, only: [:index,:new, :create, :update, :destroy]
+    resources :admins, only: :show #[:index,:new, :create, :update, :destroy]
   end
 
   resources :bugs

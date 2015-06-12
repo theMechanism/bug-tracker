@@ -9,7 +9,10 @@ module Dashboard
     end
 
     def show
+        @admins = Admin.all
+        @bugs = Project.first.bugs
     end
+    
     def update
     end
     def destroy
