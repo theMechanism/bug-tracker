@@ -9,7 +9,7 @@ var AdminBugTracker = React.createClass({
     var admins = this.props.admins;
     var bugNodes = this.props.bugs.map(function(bug){
       return (
-        <Bug name={bug.name} admins={admins} />
+        <Bug name={bug.name} assignedAdmin={bug.admin_id} admins={admins} reactKey={bug.id} />
       );
     });
 
