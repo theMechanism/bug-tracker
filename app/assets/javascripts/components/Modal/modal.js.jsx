@@ -1,3 +1,5 @@
+Modal
+
 var Modal = React.createClass({
 
   render: function() {
