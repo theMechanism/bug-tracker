@@ -1,4 +1,11 @@
-Modal
+function getModalState(){
+  return {
+    showing: ModalStore.getShowing(),
+    current_key: '',
+    content_blocks: {}
+  }
+}
+
 
 var Modal = React.createClass({
 
@@ -30,27 +37,11 @@ var Modal = React.createClass({
     );
   },
   getInitialState: function(){
-    return {
-      showing: false,
-      current_key: '',
-      content_blocks: {}
-    }
+    return getModalState();
   },
   componentDidMount: function(){
-    var self = this;
-    var content_keys = _.keys(self.props.content_urls);
-    var returnObj = {content_blocks: {}};
-    var i = content_keys.length;
-    var j = 0;
-    _.each(content_keys, function(key){ 
-      $.get(self.props.content_urls[key], function(block){
-        returnObj.content_blocks[key] = block;
-        j++;
-        if (j === i){
-          self.setState(returnObj);
-        };
-      });
-    });  
+    ModalStore.getContentBlocks( this.props.content_urls);
+    this.setState( getModalState() ); 
   },
   toggleShow: function(){
     var first_key = _.keys(this.props.content_urls)[0];

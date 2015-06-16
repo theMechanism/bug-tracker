@@ -10,7 +10,6 @@ var ClientsIndexActions = {
       actionType: 'TOGGLE_MODAL',
       data: data
     });
-
   }
 
 };
