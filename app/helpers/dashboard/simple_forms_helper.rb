@@ -1,0 +1,2 @@
+module Dashboard::SimpleFormsHelper
+end

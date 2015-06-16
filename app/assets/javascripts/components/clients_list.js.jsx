@@ -11,6 +11,7 @@ var ClientsList = React.createClass({
     return (
       <div>
         {clientNodes}
+        <Modal content_urls=/>
       </div>
     );
   }

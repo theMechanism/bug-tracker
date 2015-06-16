@@ -16,6 +16,14 @@ BugTracker::Application.routes.draw do
     end
     resources :projects, only: [:index, :show, :new, :create, :update, :destroy]
     resources :admins, only: :show #[:index,:new, :create, :update, :destroy]
+  
+    resources :simple_forms
+
+    # namespace :simple_forms do
+
+    # end
+
+
   end
 
   resources :bugs

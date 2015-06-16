@@ -27,7 +27,7 @@ var ClientNode = React.createClass({
         <h4>
           Projects 
           <a onClick={this.toggleProjectsShow}><span className={arrowIcon} aria-hidden="true"></span></a>
-          <a onClick={this.showModal}><span className={arrowIcon} aria-hidden="true"></span></a>
+          <a onClick={this.showModal}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
         </h4>
         { projectsTable }
         
@@ -45,9 +45,12 @@ var ClientNode = React.createClass({
     this.setState({
       showProjects: !this.state.showProjects
     });
-    console.log(this.state.showProjects);
+    // console.log(this.state.showProjects);
   },
   componentDidMount: function(){
     this.getInitialState();
+  },
+  showModal: function(){
+    alert('this should be a modal that will let project manager add project to client');
   }
 });
