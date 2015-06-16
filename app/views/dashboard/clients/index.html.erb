@@ -1,5 +1,12 @@
 
-<%= react_component('ClientsIndex', clients: @clients) %>
+<%= react_component(
+  'ClientsIndex', 
+  {
+    clients: @clients,
+    modal_content_urls: @modal_content_urls
+  }
+  ) 
+%>
 <!--  
 < % @clients.each do |client| %>
   <div class="well">
