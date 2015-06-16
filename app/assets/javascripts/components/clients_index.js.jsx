@@ -11,7 +11,7 @@ var ClientsIndex = React.createClass({
     return (
       <div>
         {clientNodes}
-        <Modal content_urls={this.props.modal_content_urls}/>
+        <Modal content_urls={this.props.modal_content_urls} />
       </div>
     );
   }

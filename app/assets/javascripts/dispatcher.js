@@ -1,4 +1,6 @@
 var Dispatcher = require('flux').Dispatcher;
+var _ = require('lodash');
+
 
 // if (Dispatcher){
 //   console.log('dis is de dispathcer');
@@ -7,3 +9,4 @@ var Dispatcher = require('flux').Dispatcher;
 
 
 // console.log('hi from the dispatcher');
+// console.log(_);
