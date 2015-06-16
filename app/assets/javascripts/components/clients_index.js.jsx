@@ -11,8 +11,13 @@ var ClientsIndex = React.createClass({
     return (
       <div>
         {clientNodes}
-        <Modal content_urls={this.props.modal_content_urls} />
+        <Modal showing={this.state.modal_showing} content_urls={this.props.modal_content_urls} />
       </div>
     );
+  },
+  getInitialState: function(){
+    return {
+      modal_showing: false
+    }
   }
 });

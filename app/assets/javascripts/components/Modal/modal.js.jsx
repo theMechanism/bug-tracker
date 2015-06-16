@@ -3,12 +3,10 @@ var Modal = React.createClass({
   render: function() {
     var showing = this.state.showing ? 'showing' : 'no show';
 
-    var danger = this.current_content();
+    var content = this.current_content();
     return (
       <div>
-        <div dangerouslySetInnerHTML={danger} />
         <button onClick={this.toggleShow} className="btn btn-default">Modal butttttton</button>
-        <div dangerouslySetInnerHTML={danger} />
         <div className="modal fade">
           <div className="modal-dialog">
             <div className="modal-content">
@@ -16,7 +14,7 @@ var Modal = React.createClass({
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 className="modal-title">Modal title</h4>
               </div>
-              <div className="modal-body" dangerouslySetInnerHTML={danger} />
+              <div className="modal-body" dangerouslySetInnerHTML={content} />
                 
              
               <div className="modal-footer">
@@ -55,18 +53,10 @@ var Modal = React.createClass({
   toggleShow: function(){
     var first_key = _.keys(this.props.content_urls)[0];
     this.setState({current_key: first_key});
-    
-    // this.setState({current_content: current_content});
-    // console.log(this.state);
     $('.modal').modal();
   },
   current_content: function(){
-    // console.log('inside current_content function'); 
-    // console.log(this.state.current_content);
     var content = this.state.content_blocks[this.state.current_key];
-    console.log(content);
-    console.log('setting sate?')
-    console.log(this.state);
     return {__html: content};
   }
 });

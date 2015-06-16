@@ -1,5 +1,7 @@
 <%= simple_form_for @project, url: dashboard_projects_path(@project) do |f| %>
 
   <%= f.input :name %>
+  <%= f.association :client %>
+  <%= f.button :submit %>
 
 <% end %>
