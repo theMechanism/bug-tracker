@@ -78,4 +78,5 @@ BugTracker::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   config.react.addons = true
+  config.react.variant = :production
 end

@@ -26,5 +26,6 @@ module BugTracker
     # for animations and other non-standard libaries... but why delay? 
 
     config.react.addons = true
+    config.browserify_rails.commandline_options = "-t reactify --extension=\".js.jsx\""
   end
 end

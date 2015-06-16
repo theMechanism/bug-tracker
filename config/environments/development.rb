@@ -36,4 +36,5 @@ BugTracker::Application.configure do
   config.assets.debug = true
 
   config.react.addons = true
+  config.react.variant = :development
 end

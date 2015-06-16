@@ -37,6 +37,8 @@ GEM
     bourbon (3.2.4)
       sass (~> 3.2)
       thor
+    browserify-rails (0.9.3)
+      sprockets (~> 2.2)
     builder (3.1.4)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -222,6 +224,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.4)
   bourbon
+  browserify-rails (~> 0.9.1)
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner

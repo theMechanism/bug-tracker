@@ -1,0 +1,32 @@
+{
+  "name": "bug-tracker",
+  "version": "1.0.0",
+  "description": "internal bug tracker for the mechanism",
+  "main": "nil",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theMechanism/bug-tracker.git"
+  },
+  "keywords": [
+    "react",
+    "browserify",
+    "rails"
+  ],
+  "author": "Dhruv + Avi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theMechanism/bug-tracker/issues"
+  },
+  "homepage": "https://github.com/theMechanism/bug-tracker",
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "browserify-incremental": "^3.0.1",
+    "reactify": "^1.1.1"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
