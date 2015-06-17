@@ -1,3 +1,9 @@
+<%= button_tag(class: 'btn btn-default newClient') do
+  content_tag :span, class: 'glyphicon glyphicon-plus' do
+    'New Client'
+  end
+end %>
+
 <% @clients.each do |client| %>
   <div class="well">
     <h3><%= client.name_of_co %></h3>
@@ -17,10 +23,41 @@
       </tr>
     </table>
 
-    <h4>Projects <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></h4>
+    <h4>Projects <a href="#"><span class="glyphicon glyphicon-plus newClientProject" aria-hidden="true"></span></a></h4>
     
     <%= render 'dashboard/projects/table', projects: client.projects  %>
     
   </div>
   
 <% end %>
+
+<%= render 'shared/modal' %>
+
+<script>
+  // $( document ).ready( function(){
+    var modalFormUrls = {
+      new_client: "<%= new_dashboard_client_path %>",
+      new_project: "<%= new_dashboard_project_path %>"
+    }
+    var modalForms = {};
+    _.each(modalFormUrls, function(url, key){
+      $.get(url, function(partial){
+        modalForms[key] = partial;
+      });  
+    });
+
+    $('.newClientProject').click(function(){
+      $('.modal-title').html( 'New Project');
+      $('.modal-body').html( modalForms['new_project'] );
+      $('.modal').modal();  
+    });
+    $('.newClient').click(function(){
+      $('.modal-title').html( 'New Client');
+      $('.modal-body').html( modalForms['new_client'] );
+      $('.modal').modal();  
+    });
+
+  // });
+  
+  
+</script>

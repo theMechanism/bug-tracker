@@ -20,5 +20,10 @@ module Dashboard
     
     def destroy
     end
+
+    def new
+        @project = Project.new
+        render layout: false
+    end
   end
 end

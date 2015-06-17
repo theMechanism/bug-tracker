@@ -1,0 +1,13 @@
+
+<%= simple_form_for @project, url: url do |f| %>
+  <%= f.input :name %>
+  <%= f.input :blurb %>
+  <%= f.input :client_id %>
+  <%= f.input :expiration %>
+  <%= f.input :active %>
+  <%= f.association :admin %>
+  <%= f.input :git_repo_url %>
+  <%= f.input :dev_server_url %>
+
+  <%= f.button :submit %>
+<% end %>

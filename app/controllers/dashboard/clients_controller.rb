@@ -16,5 +16,10 @@ module Dashboard
     end
     def destroy
     end
+
+    def new
+        @client = Client.new
+        render layout: false
+    end
   end
 end

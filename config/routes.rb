@@ -10,7 +10,7 @@ BugTracker::Application.routes.draw do
 
   get "/dashboard" => 'dashboard/projects#index', as:"dashboard"
   namespace :dashboard do
-    resources :clients, only: [:index, :show, :create, :update, :destroy]
+    resources :clients#, only: [:index, :show, :create, :update, :destroy]
     resources :bugs, only: [:index, :new, :show, :edit, :create, :update, :destroy] do
       resources :comments, only: :create
     end
