@@ -3,6 +3,7 @@
     'New Client'
   end
 end %>
+<i class="fa fa-spinner fa-spin"></i>
 
 <% @clients.each do |client| %>
   <div class="well">
@@ -51,11 +52,25 @@ end %>
       $('.modal-body').html( modalForms['new_project'] );
       $('.modal').modal();  
     });
+
     $('.newClient').click(function(){
       $('.modal-title').html( 'New Client');
       $('.modal-body').html( modalForms['new_client'] );
       $('.modal').modal();  
     });
+
+
+    $('.modal')
+        .bind('ajax:success', function(e, data, status, xhr) {
+          if (data.redirect_url){
+            window.location.replace(data.redirect_url);
+          } else {
+            $('.modal-body').html( data);
+          }
+        })
+        .bind('ajax:error', function(e, xhr, status, error) {
+            console.log("error json: " + xhr.responseText);
+        });
 
   // });
   
