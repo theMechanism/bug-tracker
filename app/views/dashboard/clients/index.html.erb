@@ -1,33 +1,9 @@
 <%= button_tag(class: 'btn btn-default newClient') do
-
   content_tag(:span, 'New Client', class: 'glyphicon glyphicon-plus')
 end %>
 
 <% @clients.each do |client| %>
-  <div class="well">
-    <h3><%= client.name_of_co %></h3>
-    
-    <table class="table table-condensed">
-      <tr>
-        <th>Primary Contact</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Misc Company Info</th>
-      </tr>
-      <tr>
-        <td><%= client.name_of_primary_contact %></td>
-        <td><%= mail_to client.email  %></td>
-        <td><%= client.phone %></td>
-        <td><%= client.misc_info %></td>
-      </tr>
-    </table>
-
-    <h4>Projects <a href="#"><span class="glyphicon glyphicon-plus newClientProject" aria-hidden="true"></span></a></h4>
-    
-    <%= render 'dashboard/projects/table', projects: client.projects  %>
-    
-  </div>
-  
+  <%= render 'well', client: client %>
 <% end %>
 
 <%= render 'shared/modal' %>

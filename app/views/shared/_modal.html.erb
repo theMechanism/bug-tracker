@@ -51,6 +51,7 @@
     $('.modal')
         .bind('ajax:success', function(e, data, status, xhr) {
           if (data.redirect_url){
+            console.log(data)
             window.location.replace(data.redirect_url);
           } else {
             console.log(data);

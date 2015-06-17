@@ -7,6 +7,14 @@ module Dashboard
     end
 
     def create
+        @project = Project.new(project_params) 
+        if @project.save
+            render json: { 
+                redirect_url: dashboard_project_path(@project)
+            }
+        else
+            render :new, layout: false
+        end
     end
 
     def show
@@ -25,5 +33,35 @@ module Dashboard
         @project = Project.new
         render layout: false
     end
+
+    private
+    def project_params
+        params.require(:project).permit(:name, :blurb, :client_id, :expiration, :active, :admin_id, :git_repo_url, :dev_server_url)
+    end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
