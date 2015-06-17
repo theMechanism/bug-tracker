@@ -1,9 +1,7 @@
 <%= button_tag(class: 'btn btn-default newClient') do
-  content_tag :span, class: 'glyphicon glyphicon-plus' do
-    'New Client'
-  end
+
+  content_tag(:span, 'New Client', class: 'glyphicon glyphicon-plus')
 end %>
-<i class="fa fa-spinner fa-spin"></i>
 
 <% @clients.each do |client| %>
   <div class="well">
@@ -34,45 +32,3 @@ end %>
 
 <%= render 'shared/modal' %>
 
-<script>
-  // $( document ).ready( function(){
-    var modalFormUrls = {
-      new_client: "<%= new_dashboard_client_path %>",
-      new_project: "<%= new_dashboard_project_path %>"
-    }
-    var modalForms = {};
-    _.each(modalFormUrls, function(url, key){
-      $.get(url, function(partial){
-        modalForms[key] = partial;
-      });  
-    });
-
-    $('.newClientProject').click(function(){
-      $('.modal-title').html( 'New Project');
-      $('.modal-body').html( modalForms['new_project'] );
-      $('.modal').modal();  
-    });
-
-    $('.newClient').click(function(){
-      $('.modal-title').html( 'New Client');
-      $('.modal-body').html( modalForms['new_client'] );
-      $('.modal').modal();  
-    });
-
-
-    $('.modal')
-        .bind('ajax:success', function(e, data, status, xhr) {
-          if (data.redirect_url){
-            window.location.replace(data.redirect_url);
-          } else {
-            $('.modal-body').html( data);
-          }
-        })
-        .bind('ajax:error', function(e, xhr, status, error) {
-            console.log("error json: " + xhr.responseText);
-        });
-
-  // });
-  
-  
-</script>

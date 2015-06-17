@@ -15,3 +15,53 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script>
+  $( document ).ready( function(){
+    var modalFormUrls = {
+      new_client: "<%= new_dashboard_client_path %>",
+      new_project: "<%= new_dashboard_project_path %>"
+    }
+    var modalForms = {};
+    _.each(modalFormUrls, function(url, key){
+      $.get(url, function(partial){
+        modalForms[key] = partial;
+      });  
+    });
+
+    $('.modal').submit(function(event){
+      $('form').hide()
+      $('.modal-body').append( '<%= fa_icon 'spinner spin' %>' );
+      return true;
+    }); 
+
+    $('.newClientProject').click(function(){
+      $('.modal-title').html( 'New Project');
+      $('.modal-body').html( modalForms['new_project'] );
+      $('.modal').modal(); 
+    });
+
+    $('.newClient').click(function(){
+      $('.modal-title').html( 'New Client');
+      $('.modal-body').html( modalForms['new_client'] );
+      $('.modal').modal();  
+    });
+
+
+    $('.modal')
+        .bind('ajax:success', function(e, data, status, xhr) {
+          if (data.redirect_url){
+            window.location.replace(data.redirect_url);
+          } else {
+            console.log(data);
+            $('.modal-body').html( data);
+          }
+        })
+        .bind('ajax:error', function(e, xhr, status, error) {
+            console.log("error json: " + xhr.responseText);
+        });
+
+  });
+  
+  
+</script>

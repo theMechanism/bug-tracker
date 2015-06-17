@@ -4,14 +4,10 @@ module Dashboard
     before_filter :deny_access, :unless => :is_admin?
     def index  
         @clients = Client.all
-        p "#{@clients.inspect}"
     end
 
     def create
         @client = Client.new(client_params) 
-        p '#'*80
-        p 'params'
-        p "#{params.inspect}"
         if @client.save
             render json: { 
                 redirect_url: dashboard_client_path(@client)
@@ -22,6 +18,7 @@ module Dashboard
     end
 
     def show
+        @client = Client.find(params[:id]) 
     end
     def update
     end
