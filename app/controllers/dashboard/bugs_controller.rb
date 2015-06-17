@@ -6,6 +6,11 @@ module Dashboard
     def index
     end
 
+    def new 
+        @bug = Bug.new
+        render layout: false
+    end
+
     def create
     end
 

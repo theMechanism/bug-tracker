@@ -4,6 +4,10 @@ module Dashboard
     before_filter :deny_access, :unless => :is_admin?
     def index  
         @clients = Client.all
+        @modal_urls = {
+            new_client_project: new_dashboard_project_path,
+            new_client: new_dashboard_client_path
+        }.to_json.html_safe
     end
 
     def create

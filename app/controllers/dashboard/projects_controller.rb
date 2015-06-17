@@ -26,7 +26,6 @@ module Dashboard
             edit_project: edit_dashboard_project_path(@project),
             new_bug: new_dashboard_bug_path
         }.to_json.html_safe 
-
     end
     
     def update
