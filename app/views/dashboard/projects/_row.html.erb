@@ -5,5 +5,12 @@
   <td><%= project.expiration %></td>
   <td><%= link_to truncate(project.git_repo_url), project.git_repo_url %></td>
   <td><%= link_to truncate(project.dev_server_url), project.dev_server_url %></td>
-  <td><%= mail_to project.admin.email, project.admin.name %></td>
+  <td><%= 
+    if project.admin
+      mail_to project.admin.email, project.admin.name 
+    else
+      'i have no admin - what should i do ?'
+    end
+    %>
+  </td>
 </tr>

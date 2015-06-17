@@ -4,6 +4,7 @@ module Dashboard
     before_filter :deny_access, :unless => :is_admin?
     
     def index
+        @projects = Project.all
     end
 
     def create
@@ -21,6 +22,11 @@ module Dashboard
         @project = Project.find(params[:id])
         @bugs = @project.bugs
         @admins = Admin.all
+        @modal_urls = {
+            edit_project: edit_dashboard_project_path(@project),
+            new_bug: new_dashboard_bug_path
+        }.to_json.html_safe 
+
     end
     
     def update
@@ -31,6 +37,11 @@ module Dashboard
 
     def new
         @project = Project.new
+        render layout: false
+    end
+
+    def edit
+        @project = Project.find(params[:id])
         render layout: false
     end
 

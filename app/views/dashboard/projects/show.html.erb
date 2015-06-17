@@ -1,9 +1,12 @@
 <h3><%= @project.name %></h3>
-
+<!-- < %= @modal_urls.inspect  %> -->
 <div class="row">
   <div class="col-lg-8 col-md-8">
 
     <h4>Bugs Overview</h4>
+    <div>
+      <%= content_tag(:a, fa_icon('plus', text: "New Bug"), class: 'btn  btn-default' )%>
+    </div>
     <%= render 'dashboard/bugs/table', bugs: @bugs %>
     <h4>Project Details</h4>
     <%= render 'dashboard/projects/table', projects: [@project]  %>
@@ -28,4 +31,5 @@
   </div>
 </div>
 
+<%= render 'shared/modal', modal_urls: @modal_urls %>
 
