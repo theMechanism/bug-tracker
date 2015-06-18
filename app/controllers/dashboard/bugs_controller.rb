@@ -12,11 +12,18 @@ module Dashboard
     end
 
     def create
+        p '@'*80
+        p 'spraarararararaaammmmsss'
+        p "#{params.inspect}"
         @project = Project.find(params[:project_id])
         @bug = @project.bugs.build(bug_params)
-        p '#'*80
-        p 'bug in flight'
-        p "#{@bug.inspect}"
+        if @bug.save
+            p '@'*80
+            p 'saved a bug whoop'
+            p "#{@bug.inspect}"
+        else
+            render :new, layout: false
+        end
     end
 
     def show
@@ -46,7 +53,7 @@ module Dashboard
     private
 
     def bug_params
-      params.require(:bug).permit(:admin_id)
+      params.require(:bug).permit(:admin_id, :name, :status, :description, :time_spent)
     end
   end
 end

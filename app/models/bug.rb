@@ -4,7 +4,7 @@ class Bug < ActiveRecord::Base
   belongs_to :project
   has_many :comments, dependent: :destroy
 
-	VALID_STATUS = ['Open', 'Closed', 'Verify']
+	VALID_STATUS = ['Open', 'Verify', 'Closed']
 
   validates_presence_of :description, :name
  	validates_inclusion_of :status, in: VALID_STATUS
