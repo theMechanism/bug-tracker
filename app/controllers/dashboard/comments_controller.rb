@@ -7,6 +7,21 @@ module Dashboard
     end
 
     def create
+        @bug = Bug.find(params[:bug_id])
+        @comment = @bug.comments.build(comment_params.merge(admin: current_admin))
+        if @comment.save
+            @comments = @bug.comments
+            render json: {
+                callback: :add_comment,
+                html: render_to_string(partial: 'list_item.html.erb', locals: { comment: @comment })
+            }
+
+             # @comments.to_json
+        else  
+            render json: {
+                errors: @comment.errors
+            }
+        end
     end
 
     def show
@@ -15,5 +30,11 @@ module Dashboard
     end
     def destroy
     end
+
+    private
+
+    def comment_params
+        params.require(:comment).permit(:content)
+    end 
   end
 end

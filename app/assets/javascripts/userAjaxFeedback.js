@@ -19,6 +19,7 @@ UserAjaxFeedback.prototype = {
     });
   },
   handleSuccess: function(rsp){
+    console.log(rsp);
     var self = this;
     var colorType, headingText, contentText;
     if (rsp.errors){
