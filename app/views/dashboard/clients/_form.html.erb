@@ -4,7 +4,10 @@
   <%= f.input :name_of_primary_contact %>
   <%= f.input :email %>
   <%= f.input :phone %>
-  <%= f.input :password, label: 'Placeholder password for client' %>
+  
+  <% unless client.encrypted_password %>
+    <%= f.input :password, label: 'Placeholder password for client' %>
+  <% end %>
   
   <%= f.input :misc_info %>
 

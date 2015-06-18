@@ -24,7 +24,7 @@ module Dashboard
         @admins = Admin.all
         @modal_urls = {
             edit_project: edit_dashboard_project_path(@project),
-            new_bug: new_dashboard_bug_path
+            new_bug: new_dashboard_project_bug_path(@project)
         }.to_json.html_safe 
     end
     

@@ -8,5 +8,6 @@ class Client < ActiveRecord::Base
     	dependent: :destroy
 
   validates_uniqueness_of :name_of_co, :email
+  validates_presence_of :name_of_co
 
 end

@@ -1,3 +1,23 @@
-<%= simple_form_for @bug, url: url do |f| %>
+<%= simple_form_for @bug, url: url, remote: true do |f| %>
   <%= f.input :name %>
+  
+  <%= f.button :submit %>
+
 <% end %>
+
+<!-- project_id: nil
+url: nil
+browser: nil
+status: "Open"
+params: nil
+width: nil
+height: nil
+created_at: nil
+ updated_at: nil
+ browser_version: nil
+ os: nil
+ ua: nil
+ name: nil
+ description: nil
+ admin_id: nil
+ time_spent: ni -->

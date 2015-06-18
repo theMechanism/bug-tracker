@@ -1,3 +1,7 @@
+<%= button_tag(class: 'btn btn-default edit_client') do
+  content_tag(:span, 'Edit Client', class: 'glyphicon glyphicon-plus')
+end %>
+
 <%= render 'well', client: @client %>
 
-<%= render 'shared/modal' %>
+<%= render 'shared/modal', modal_urls: @modal_urls %>

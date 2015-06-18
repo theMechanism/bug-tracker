@@ -22,17 +22,41 @@ module Dashboard
     end
 
     def show
-        @client = Client.find(params[:id]) 
+        @client = Client.find(params[:id])
+        @modal_urls = {
+            new_client_project: new_dashboard_project_path,
+            edit_client: edit_dashboard_client_path(@client)
+        }.to_json.html_safe
     end
+
     def update
+        @client = Client.find(params[:id])
+        if @client.update_attributes(client_params)
+            # render json: @client
+            render json: { 
+                redirect_url: dashboard_client_path(@client)
+            }
+        else
+            render :edit, layout: false
+        end
     end
+
     def destroy
     end
+
+    # serving partials via ajax, for modal forms
+    # render layout: false ==> bc we pop into modal
 
     def new
         @client = Client.new
         render layout: false
     end
+
+    def edit 
+        @client = Client.find(params[:id])
+        render layout: false
+    end
+
 
     private
 

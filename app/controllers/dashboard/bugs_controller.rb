@@ -12,6 +12,11 @@ module Dashboard
     end
 
     def create
+        @project = Project.find(params[:project_id])
+        @bug = @project.bugs.build(bug_params)
+        p '#'*80
+        p 'bug in flight'
+        p "#{@bug.inspect}"
     end
 
     def show
