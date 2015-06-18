@@ -1,4 +1,6 @@
-<table class="table table-bordered">
+<%= button_tag '', class: 'bug_detail_toggle btn btn-default' %>
+
+<table class="table table-bordered bugDetailTable">
   <tr>
     <td>
       url
@@ -96,3 +98,33 @@
     </td>
   </tr>
 </table>
+
+<script>
+
+  $(document).ready(function(){
+    var bug_detail_showing = true;
+    
+    toggleBugDetail();
+    $('.bug_detail_toggle').click(function(e) {
+      console.log(e);
+      toggleBugDetail();
+    });
+
+
+    function toggleBugDetail(){
+      bug_detail_showing = !bug_detail_showing;
+      if (bug_detail_showing){
+        $('.bugDetailTable').show();
+                $('.bug_detail_toggle').text('Hide Bug Details');
+
+      } else {
+        $('.bugDetailTable').hide();
+        $('.bug_detail_toggle').text('Show Bug Details');
+
+      }
+    }
+
+  });
+  
+
+</script>

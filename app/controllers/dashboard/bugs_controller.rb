@@ -12,15 +12,12 @@ module Dashboard
     end
 
     def create
-        p '@'*80
-        p 'spraarararararaaammmmsss'
-        p "#{params.inspect}"
         @project = Project.find(params[:project_id])
         @bug = @project.bugs.build(bug_params)
         if @bug.save
-            p '@'*80
-            p 'saved a bug whoop'
-            p "#{@bug.inspect}"
+            render json: { 
+                redirect_url: dashboard_project_path(@project)
+            }
         else
             render :new, layout: false
         end
@@ -37,12 +34,16 @@ module Dashboard
     def update
         @bug = Bug.find(params[:id])
         respond_to do |format|
-          if @bug.update_attributes(admin: Admin.find(bug_params[:admin_id]))
+          if @bug.update_attributes(bug_params) #
             # format.html { redirect_to @task, notice: 'Task was successfully created.' }
             format.json { render json: @bug }
           else
             # format.html { render :new }
-            format.json { render json: @bug.errors }
+            format.json { render json: 
+                { 
+                    errors: @bug.errors.full_messages 
+                }
+            }
           end
         end
     end

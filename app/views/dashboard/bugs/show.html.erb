@@ -1,22 +1,19 @@
-
-<!-- 
-    @bug = Bug.find(params[:id])
-    @project = @bug.project
-    @admin = @bug.admin
-    @comments = @bug.comments 
--->
-
 <h2><%= @bug.name %></h2>
+
 <h4>Project Details</h4>
+
 <%= render 'dashboard/projects/table', projects: [@project]  %>
 
 <h4>Bug Specifics</h4>
+
 <%= render 'dashboard/bugs/table', bugs: [@bug] %>
 
 <%= render 'dashboard/bugs/detail', bug: @bug %>
 
 <h4>Comments</h4>
+
 <%= render 'dashboard/comments/thread', comments: @comments %>
+
 <%= simple_form_for @comment, url: dashboard_bug_comments_path(@bug), remote: true do |f| %>
   <%= f.input :content %>
   <%= f.button :submit %>

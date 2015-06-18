@@ -20,7 +20,7 @@ module Dashboard
 
     def show
         @project = Project.find(params[:id])
-        @bugs = @project.bugs
+        @bugs = @project.bugs.order(:created_at)
         @admins = Admin.all
         @modal_urls = {
             edit_project: edit_dashboard_project_path(@project),
