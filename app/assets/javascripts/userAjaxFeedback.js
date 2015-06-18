@@ -1,4 +1,7 @@
-var UserAjaxFeedback = function(){
+var UserAjaxFeedback = function(callbacks_key){
+  if (callbacks_key) {
+    this.callbacks = userAjaxCallbacks[callbacks_key] || null;
+  }
   this.feedbackShowing = true;
   this.colorTypes = {
     'success': 'alert-success',

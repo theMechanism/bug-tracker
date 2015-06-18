@@ -6,8 +6,8 @@
 </div>
 
 <script>
-  $(document).ready(function(){
-    var uaf = new UserAjaxFeedback();
+  // $(document).ready(function(){
+    var uaf = new UserAjaxFeedback( '<%= @callbacks_key if @callbacks_key %>' );
     uaf.init();  
-  })
+  // })
 </script>

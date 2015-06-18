@@ -29,6 +29,7 @@ module Dashboard
         @admin = @bug.admin
         @comments = @bug.comments.order(:created_at)
         @comment = @bug.comments.new
+        @callbacks_key = 'bugShowCallBacks'
     end
     
     def update

@@ -15,8 +15,6 @@ module Dashboard
                 callback: :add_comment,
                 html: render_to_string(partial: 'list_item.html.erb', locals: { comment: @comment })
             }
-
-             # @comments.to_json
         else  
             render json: {
                 errors: @comment.errors
