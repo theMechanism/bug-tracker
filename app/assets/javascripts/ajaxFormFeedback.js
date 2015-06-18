@@ -21,7 +21,6 @@ UserAjaxFeedback.prototype = {
   handleSuccess: function(rsp){
     var self = this;
     var colorType, headingText, contentText;
-    console.log(rsp.errors);
     if (rsp.errors){
       self.currentColorType = self.colorTypes['failure'];
       headingText = 'Oops! ';
