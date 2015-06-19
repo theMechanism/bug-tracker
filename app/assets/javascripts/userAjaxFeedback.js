@@ -1,8 +1,10 @@
-var UserAjaxFeedback = function(callbacks_key){
-  if (callbacks_key) {
-    this.callbacks = userAjaxCallbacks[callbacks_key] || null;
-  }
+var UserAjaxFeedback = function(){
+  // page loads with alert element loaded, thus feedback showing is true -- in init() -- we toggleShow and remove and flip the boolean
   this.feedbackShowing = true;
+
+  // callbacks defined in dashboard/userAjaxCallbacksRegistry.js
+  this.callbacks = userAjaxCallbacks;
+  
   this.colorTypes = {
     'success': 'alert-success',
     'failure': 'alert-danger'
@@ -24,6 +26,10 @@ UserAjaxFeedback.prototype = {
   handleSuccess: function(rsp){
     console.log(rsp);
     var self = this;
+
+    if (rsp.callback){
+      self.handleCallback(rsp);
+    }
     var colorType, headingText, contentText;
     if (rsp.errors){
       self.currentColorType = self.colorTypes['failure'];
@@ -61,5 +67,10 @@ UserAjaxFeedback.prototype = {
     this.$el.removeClass(self.currentColorType);
     this.$heading.text('');
     this.$content.text('');
+  },
+  handleCallback: function(rsp){
+    var parseMe = rsp.callback.split('.');
+    var page = parseMe[0], callback = parseMe[1];
+    this.callbacks[page][callback]( rsp.html ? rsp.html : '');
   }
 }

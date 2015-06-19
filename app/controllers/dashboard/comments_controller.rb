@@ -10,9 +10,9 @@ module Dashboard
         @bug = Bug.find(params[:bug_id])
         @comment = @bug.comments.build(comment_params.merge(admin: current_admin))
         if @comment.save
-            @comments = @bug.comments
+            # @comments = @bug.comments
             render json: {
-                callback: :add_comment,
+                callback: 'bugShow.addComment',
                 html: render_to_string(partial: 'list_item.html.erb', locals: { comment: @comment })
             }
         else  
