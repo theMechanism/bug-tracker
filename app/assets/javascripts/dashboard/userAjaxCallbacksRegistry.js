@@ -9,3 +9,9 @@ userAjaxCallbacks.bugShow = {
     $('.list-group').append(html);
   }
 }
+
+userAjaxCallbacks.projectShow = {
+  updateTeamLeaderboard: function(html){
+    $('.leaderboard-container').html(html);
+  }
+}

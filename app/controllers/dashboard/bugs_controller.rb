@@ -29,7 +29,6 @@ module Dashboard
         @admin = @bug.admin
         @comments = @bug.comments.order(:created_at)
         @comment = @bug.comments.new
-        @callbacks_key = 'bugShowCallBacks'
     end
     
     def update
@@ -37,7 +36,14 @@ module Dashboard
         respond_to do |format|
           if @bug.update_attributes(bug_params) #
             # format.html { redirect_to @task, notice: 'Task was successfully created.' }
-            format.json { render json: @bug }
+            @admins = Admin.all
+            format.json { render json: 
+                {
+                    bug: @bug, 
+                    callback: 'projectShow.updateTeamLeaderboard',
+                    html: render_to_string(partial: '/dashboard/admins/leaderboard.html.erb', :formats => [:html], locals: {admins: @admins})
+                } 
+            }
           else
             # format.html { render :new }
             format.json { render json: 

@@ -24,7 +24,7 @@ UserAjaxFeedback.prototype = {
     });
   },
   handleSuccess: function(rsp){
-    console.log(rsp);
+    // console.log(rsp);
     var self = this;
 
     if (rsp.callback){

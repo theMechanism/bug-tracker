@@ -1,35 +1,22 @@
 <%= render 'shared/user_alert' %>
 
 <h3><%= @project.name %></h3>
-<!-- < %= @modal_urls.inspect  %> -->
 <div class="row">
   <div class="col-lg-8 col-md-8">
+    <h4>Project Details</h4>
+    <%= render 'dashboard/projects/table', projects: [@project]  %>
 
     <h4>Bugs Overview</h4>
     <div>
       <%= content_tag(:a, fa_icon('plus', text: "New Bug"), class: 'btn  btn-default new_bug' )%>
     </div>
     <%= render 'dashboard/bugs/table', bugs: @bugs %>
-    <h4>Project Details</h4>
-    <%= render 'dashboard/projects/table', projects: [@project]  %>
+    
+    
   </div>
-  <div class="col-lg-4 col-md-4">
-    <h4>Team Workload</h4>
-    <table class="table">
-      <tr>
-        <th>Member</th>
-        <th># of Bugs Assigned</th>
-      </tr>
-      <% @admins.each do |admin| %>
-        <tr>
-          <td><%= mail_to(admin.email, admin.name) %></td>
-          <td><%= admin.bugs.count %></td>
-        </tr>
-
-
-      <% end %>
-    </table>
-
+  <div class="col-lg-4 col-md-4 leaderboard-container">
+    <%= render 'dashboard/admins/leaderboard', admins: @admins %>
+    
   </div>
 </div>
 
