@@ -2,10 +2,6 @@ require 'spec_helper'
 
 RSpec.describe Dashboard::CommentsController, :type => :controller do
 
-  before do
-    self.routes = Provider::Engine.routes
-  end
-
   # routes { Dashboard::Engine.routes }
 
   describe "GET index" do
@@ -14,7 +10,7 @@ RSpec.describe Dashboard::CommentsController, :type => :controller do
       p 'check self'
       p '#'*80
       # p "#{self::Engine.inspect}"
-      get :index#, use_route: :dashboard
+      get :index, use_route: :dashboard
       # expect(assigns(:clients)).to eq([client])
     end
 
