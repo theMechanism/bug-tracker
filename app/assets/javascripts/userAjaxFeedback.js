@@ -19,13 +19,11 @@ UserAjaxFeedback.prototype = {
   init: function(){
     var self = this;
     if (this.feedbackShowing){
-      self.toggleShow();
+      self.assignEls();
+      self.toggleShow();     
     }
-    console.log('checking for elements');
-    console.log(self.$el);
-    
+
     if (userAjaxCallbacks.instanceCounter > 0 ){
-      // console.log(uaf);
       return;
     }
     userAjaxCallbacks.instanceCounter++;
@@ -34,6 +32,12 @@ UserAjaxFeedback.prototype = {
       self.handleSuccess(JSON.parse(xhr.responseText));
     });
     return true;
+  },
+  assignEls: function(){
+    console.log('reassigning elements');
+    this.$el = $('.alert');
+    this.$heading = $('.alertContent strong');
+    this.$content = $('.alertContent span');
   },
   handleSuccess: function(rsp){
     // console.log(rsp);
@@ -54,7 +58,7 @@ UserAjaxFeedback.prototype = {
     }
 
     this.$heading.text(headingText);
-    this.$heading.after(contentText);
+    this.$content.text(contentText);
 
     this.$el.addClass(self.currentColorType);
     this.toggleShow();
