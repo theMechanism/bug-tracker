@@ -5,7 +5,7 @@
   <%= f.input :email %>
   <%= f.input :phone %>
   
-  <% unless client.encrypted_password %>
+  <% if client.encrypted_password == '' %>
     <%= f.input :password, label: 'Placeholder password for client' %>
   <% end %>
   

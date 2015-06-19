@@ -55,9 +55,11 @@
     $('.modal')
         .bind('ajax:success', function(e, data, status, xhr) {
           if (data.redirect_url){
-            console.log(data)
+            console.log('success');
+            console.log(data);
             window.location.replace(data.redirect_url);
           } else {
+            console.log('fail');
             console.log(data);
             $('.modal-body').html( data);
           }

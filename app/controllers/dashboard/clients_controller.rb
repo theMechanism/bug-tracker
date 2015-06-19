@@ -17,7 +17,8 @@ module Dashboard
                 redirect_url: dashboard_client_path(@client)
             }
         else
-            render :new, layout: false
+            render json: @client.errors
+            # render :new, layout: false
         end
     end
 
