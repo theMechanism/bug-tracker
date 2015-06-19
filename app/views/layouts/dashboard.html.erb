@@ -39,15 +39,16 @@
   </head>
   <body class='dashboard'>
     <%= render 'layouts/menus/dashboard_menu' %>
-    <%= render 'shared/user_alert' %>
 
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="col-md-12">
+
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
       </div><!--/row-->
     </div> <!-- /container -->
+    <%= render 'shared/user_alert' %>
   </body>
 </html>

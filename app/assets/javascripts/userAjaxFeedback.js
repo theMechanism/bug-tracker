@@ -18,10 +18,22 @@ var UserAjaxFeedback = function(){
 UserAjaxFeedback.prototype = {
   init: function(){
     var self = this;
-    self.toggleShow();
+    if (this.feedbackShowing){
+      self.toggleShow();
+    }
+    console.log('checking for elements');
+    console.log(self.$el);
+    
+    if (userAjaxCallbacks.instanceCounter > 0 ){
+      // console.log(uaf);
+      return;
+    }
+    userAjaxCallbacks.instanceCounter++;
+
     $(document).on('ajax:success', function(e, data, status, xhr) {
       self.handleSuccess(JSON.parse(xhr.responseText));
     });
+    return true;
   },
   handleSuccess: function(rsp){
     // console.log(rsp);
@@ -32,6 +44,7 @@ UserAjaxFeedback.prototype = {
     }
     var colorType, headingText, contentText;
     if (rsp.errors){
+      console.log(rsp.errors);
       self.currentColorType = self.colorTypes['failure'];
       headingText = 'Oops! ';
       contentText = rsp.errors.join(', ');
@@ -47,8 +60,13 @@ UserAjaxFeedback.prototype = {
     this.toggleShow();
   },
   toggleShow: function(){
+    console.log('in toggleShow - isshowing? ');
+    var show = this.feedbackShowing;
+    console.log(show);
+    
     this.feedbackShowing = !this.feedbackShowing;
     if (this.feedbackShowing){
+      console.log('toggled -- should see something');
       this.$el.show();
       this.setFadeTimer();
       this.feedbackShowing = false;
@@ -58,7 +76,6 @@ UserAjaxFeedback.prototype = {
   },
   setFadeTimer: function(){
     var self = this;
-    console.log(self.currentColorType);
     this.$el.fadeOut(2500, function(){
       self.clearOldAlert();
     });

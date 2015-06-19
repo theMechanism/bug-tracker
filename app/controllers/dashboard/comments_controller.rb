@@ -17,7 +17,7 @@ module Dashboard
             }
         else  
             render json: {
-                errors: @comment.errors
+                errors: @comment.errors.full_messages
             }
         end
     end
