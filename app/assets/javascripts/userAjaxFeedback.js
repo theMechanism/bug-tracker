@@ -69,6 +69,7 @@ UserAjaxFeedback.prototype = {
     this.$content.text('');
   },
   handleCallback: function(rsp){
+    console.log(rsp);
     var parseMe = rsp.callback.split('.');
     var page = parseMe[0], callback = parseMe[1];
     this.callbacks[page][callback]( rsp.html ? rsp.html : '');

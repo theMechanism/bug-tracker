@@ -6,8 +6,10 @@
 </div>
 
 <script>
-  // $(document).ready(function(){
+  $(document).ready(function(){
+    // TODO -- necessary to clear the namespace to not multiassign document listeners. WIERD.
+    var uaf = undefined;
     var uaf = new UserAjaxFeedback();
     uaf.init();  
-  // })
+  })
 </script>
