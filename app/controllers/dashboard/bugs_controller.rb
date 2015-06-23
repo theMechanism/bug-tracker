@@ -32,9 +32,6 @@ module Dashboard
     end
     
     def update 
-        p '#'*80
-        p "params ah"
-        p "#{params.inspect}"
         @bug = Bug.find(params[:id])
         respond_to do |format|
           if @bug.update_attributes(bug_params) #

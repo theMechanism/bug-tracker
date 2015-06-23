@@ -90,20 +90,50 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
   end
 
   describe 'PUT update', :associated_bug do
-    before(:each) do 
+    before(:each) do |example|
       @update_params = {
         admin_id: Admin.last.id
       }
-    end
-    it 'valid params, updates bug' do 
-      patch :update, {
+      if example.metadata[:valid]
+        patch :update, {
         id: @bug.id, 
         bug: @update_params,
         format: :json
       }
+      end
+    end
+    it 'valid params, updates bug', :valid do 
       updated_admin = Bug.find(@bug.id).admin.id
       expect(updated_admin).to eq(@update_params[:admin_id])
     end
+    it 'valid params, returns json w updated @bug', :valid do 
+      rsp_bug_hash = JSON.parse(response.body)["bug"]
+      dbl_check_db = Bug.find(@bug.id).attributes
+      expect(rsp_bug_hash['id']).to eq(dbl_check_db['id'])
+    end
+    it 'valid params, assigns admins', :valid do 
+      expect(assigns(:admins)).to eq(Admin.all)
+    end
+    it 'valid params, returns json w js callback string', :valid do 
+      callback = JSON.parse(response.body)["callback"]
+      expect(callback).to eq('projectShow.updateTeamLeaderboard')
+    end
+    it 'valid params, returns leaderboard partial', :valid  do
+      expect(response).to render_template(:partial => '_leaderboard.html.erb')
+    end
+
+    it 'invalid params, renders form w errors displayed, no change to Client.count' do 
+      initial_admin = @bug.admin
+      patch :update, {
+        id: @bug.id, 
+        bug: {admin_id: Admin.last.id + 1},
+        format: :json
+      }
+      unchanged_admin = Bug.find(@bug.id).admin
+      errors = JSON.parse(response.body)
+      expect(errors).not_to be_empty
+      expect(initial_admin).to eq(unchanged_admin)
+    end 
   end
 
 end
