@@ -96,10 +96,12 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
       }
     end
     it 'valid params, updates bug' do 
-      patch :update, {id: 1, bug: {admin_id: 1}}
-        # bug: @update_params
-      #, format: :js
-      updated_admin = Bug.find(@bug.id).admin
+      patch :update, {
+        id: @bug.id, 
+        bug: @update_params,
+        format: :json
+      }
+      updated_admin = Bug.find(@bug.id).admin.id
       expect(updated_admin).to eq(@update_params[:admin_id])
     end
   end
