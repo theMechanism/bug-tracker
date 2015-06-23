@@ -6,7 +6,7 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
     unless example.metadata[:skip_login]
       sign_in create(:admin)
     end
-    if example.metadata[:create]
+    if example.metadata[:associated_bug]
       @bug = create(:bug)
     end
   end
@@ -30,7 +30,7 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
     end
   end
 
-  describe 'GET show', :create do 
+  describe 'GET show', :associated_bug do 
     before(:each) do 
       get :show, id: @bug.id
     end
@@ -57,8 +57,35 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
   end
 
   describe 'POST create' do 
-    it '' do 
-
+    before(:each) do
+      @project = create(:project)
+      @bug_count = @project.bugs.count
+      @bug_params = attributes_for(:bug)
+    end
+    
+    it 'valid params, creates and adds to db' do 
+      post :create, {
+        project_id: @project.id,
+        bug: @bug_params
+      }
+      expect(Bug.count).to eq(@bug_count + 1)
+    end
+    it 'valid params, responds with redirect_url to show page' do 
+      post :create, {
+        project_id: @project.id,
+        bug: @bug_params
+      }
+      expected_json = {
+        redirect_url: dashboard_project_path(@project)
+      }.to_json
+      expect(response.body).to eq(expected_json)
+    end
+    it 'invalid params, renders :new partial' do 
+      post :create, {
+        project_id: @project.id,
+        bug: @bug_params.except(:description)
+      }
+      expect(response).to render_template('new')
     end
   end
 
@@ -69,11 +96,3 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
   end
 
 end
-
-
-
-@bug
-@project 
-@admin
-@comments
-@comment
