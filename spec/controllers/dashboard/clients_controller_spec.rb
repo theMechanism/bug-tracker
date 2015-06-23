@@ -110,6 +110,43 @@ RSpec.describe Dashboard::ClientsController, :type => :controller do
     end
   end
 
+  describe 'PUT update' do 
+    before(:each) do 
+      @update_params = {
+        name_of_co: 'different name, so update'
+      }
+    end
+    it 'valid params, updates client' do 
+      put :update, {
+        id: @client.id,
+        client: @update_params
+      }
+      updated_name = Client.find(@client.id).name_of_co
+      expect(updated_name).to eq(@update_params[:name_of_co])
+    end
+    it 'valid client params, returns json w redirect url for show page' do 
+      put :update, {
+        id: @client.id,
+        client: @update_params
+      }
+      expected_json = {
+        redirect_url: dashboard_client_path(@client)
+      }.to_json
+      expect(response.body).to eq(expected_json)
+    end
+
+    it 'invalid params, renders form w errors displayed, no change to Client.count' do 
+      put :update, {
+        id: @client.id,
+        client: {name_of_co: ''}
+      }
+      unchanged_name = Client.find(@client.id).name_of_co
+      expect(response).to render_template('edit')
+      expect(response).to render_template(layout: nil)
+      expect(unchanged_name).not_to be_empty
+    end
+  end
+
 end
 
 
