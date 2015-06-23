@@ -89,9 +89,18 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
     end
   end
 
-  describe 'PUT update' do 
-    it '' do 
-
+  describe 'PUT update', :associated_bug do
+    before(:each) do 
+      @update_params = {
+        admin_id: Admin.last.id
+      }
+    end
+    it 'valid params, updates bug' do 
+      patch :update, {id: 1, bug: {admin_id: 1}}
+        # bug: @update_params
+      #, format: :js
+      updated_admin = Bug.find(@bug.id).admin
+      expect(updated_admin).to eq(@update_params[:admin_id])
     end
   end
 
