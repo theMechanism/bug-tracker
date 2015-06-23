@@ -84,6 +84,31 @@ RSpec.describe Dashboard::ClientsController, :type => :controller do
     end
   end
 
+  describe "POST create", :no_create do
+    before(:each) do
+      @valid_attrs = attributes_for(:client)
+      @client_count = Client.all.count
+    end
+
+    it 'valid client params, insantiates + adds to DB' do 
+      post :create, client: @valid_attrs
+      expect(Client.all.count).to eq(@client_count + 1)
+    end
+    it 'valid client params, returns json w redirect url for show page' do 
+      post :create, client: @valid_attrs
+      expected_json = {
+        redirect_url: dashboard_client_path(Client.last)
+      }.to_json
+      expect(response.body).to eq(expected_json)
+    end
+    it 'invalid params, renders form w errors displayed, no change to Client.count' do 
+      post :create, client: @valid_attrs.except(:name_of_co)
+
+      expect(Client.all.count).to eq(@client_count)
+      expect(response).to render_template('new')
+      expect(response).to render_template(layout: nil)
+    end
+  end
 
 end
 
