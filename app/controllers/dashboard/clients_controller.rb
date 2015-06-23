@@ -32,7 +32,6 @@ module Dashboard
     def update
         @client = Client.find(params[:id])
         if @client.update_attributes(client_params)
-            # render json: @client
             render json: { 
                 redirect_url: dashboard_client_path(@client)
             }
