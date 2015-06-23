@@ -81,17 +81,31 @@ RSpec.describe Dashboard::ProjectsController, :type => :controller do
       }.to_json
       expect(assigns(:modal_urls)).to eq(expected_json)
     end
+  end
+
+  describe 'POST create', :no_create do 
+    before(:each) do
+      @project_params = attributes_for(:project)
+      @p_count = Project.count
+    end
+    it 'valid params, creates and adds to db' do 
+      post :create, project: @project_params
+      expect(Project.count).to eq(@p_count + 1)
+    end
+    it 'valid params, responds with redirect_url to show page' do 
+      post :create, project: @project_params
+      expected_json = {
+        redirect_url: dashboard_project_path(Project.last)
+      }.to_json
+      expect(response.body).to eq(expected_json)
+    end
+    it 'invalid params, renders :new partial' do 
+      post :create, project: @project_params.except(:name)
+      expect(response).to render_template(:new)
+    end
 
   end
 end
-
-# @project
-# @bugs
-# @admins
-# @modal_urls 
-
-
-
 
 
 

@@ -7,4 +7,4 @@ hunt down JS oddness, with alerts + comment posting
 
 dashboard/projects_controller
   actions => [update, destroy]
-  tests => [create]
+  tests => [all not yet existing actions]
