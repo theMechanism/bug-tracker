@@ -1,0 +1,42 @@
+<% if bug.status == 'Open' %>
+
+  <%= simple_form_for bug, url: dashboard_bug_path(bug), remote: true do |f| %>
+      
+    <%= f.input :status, as: :hidden, :input_html => { :value => "Verify" } %>
+    
+    <%= f.button :submit, "Submit for review" %>
+  <% end %>
+
+<% elsif bug.status == 'Verify' %>
+
+  <% if current_admin_is_project_manager(bug)  %>
+
+    <%= simple_form_for bug, url: dashboard_bug_path(bug), remote: true do |f| %>
+      
+      <%= f.input :status, collection: ['Open', 'Closed'], include_blank: false, label_method: lambda { |value| value == 'Open' ? 'Reopen' : 'Close' } %>
+      
+      <%= f.button :submit %>
+    <% end %>
+
+  <% else %>
+    Awaiting review by Project Manager
+  <% end %>
+
+<% else %>
+
+<% end %>
+    
+     <!--  if current_admin == project_manager
+        then admin should have option to review the bug, and verify
+
+        link_to bug_verify_path ## a view only pm's can access
+
+      else
+        admin (dev or designer) sees 'In Review' -->
+    
+    
+    <!-- <td>< %= link_to 'Verify' %></td> -->
+<!-- < % else # bug is closed %> -->
+  <!-- <td>Closed</td> -->
+<!-- < % end %> -->
+

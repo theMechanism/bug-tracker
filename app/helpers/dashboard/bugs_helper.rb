@@ -1,4 +1,5 @@
 module Dashboard::BugsHelper
+  
   def map_status_to_css_class(bug)
     case bug.status
     when 'Open'
@@ -10,5 +11,9 @@ module Dashboard::BugsHelper
     else
       ''
     end
+  end
+
+  def current_admin_is_project_manager(bug)
+    current_admin == bug.project_manager
   end
 end

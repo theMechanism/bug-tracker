@@ -2,7 +2,7 @@
   <th><%= link_to bug.name, dashboard_bug_path(bug) %></th>
   <td><%= bug.description %></td>
   
-  <td class="bg-<%= map_status_to_css_class(bug) %>"><%= bug.status %></td>
+  <td class="bg-<%= map_status_to_css_class(bug) %>"><%= bug.status %> <br><%= render 'dashboard/bugs/status_remote_form', bug: bug %> </td>
   
   <td>
     <%= simple_form_for bug, url: dashboard_bug_path(bug), remote: true do |f| %>
