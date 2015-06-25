@@ -23,6 +23,18 @@
   <% end %>
 
 <% else %>
+  <% if current_admin_is_project_manager(bug)  %>
+
+    <%= simple_form_for bug, url: dashboard_bug_path(bug), remote: true do |f| %>
+      
+      <%= f.input :status, as: :hidden, :input_html => { :value => "Open" } %>
+    
+      <%= f.button :submit, "Reopen Bug" %>
+    <% end %>
+
+  <% else %>
+    Closed
+  <% end %>
 
 <% end %>
     
