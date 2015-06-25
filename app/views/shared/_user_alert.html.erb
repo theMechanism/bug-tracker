@@ -8,10 +8,18 @@
 <script>
   $(document).ready(function(){
     // TODO -- necessary to clear the namespace to not multiassign document listeners. WIERD.
-    if (!uaf){
-      var uaf = new UserAjaxFeedback();
+
+
+
+    if (!window.uaf){
+      console.log('instantiting uaf');
+      window.uaf = new UserAjaxFeedback();
+      // var uaf = new UserAjaxFeedback();
+    } else {
+      console.log('uaf exists, and document ready is running again');
+      uaf.pageReload();
     }
-    uaf.init(); 
+    // uaf.init(); 
      
     // console.log(uaf);
   })

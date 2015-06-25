@@ -13,25 +13,24 @@ var UserAjaxFeedback = function(){
   this.$el = $('.alert');
   this.$heading = $('.alertContent strong');
   this.$content = $('.alertContent span');
+  this.init();
 }
 
 UserAjaxFeedback.prototype = {
   init: function(){
     var self = this;
-    if (this.feedbackShowing){
-      self.assignEls();
-      self.toggleShow();     
+    if (self.feedbackShowing){
+      self.pageReload();     
     }
-
-    if (userAjaxCallbacks.instanceCounter > 0 ){
-      return;
-    }
-    userAjaxCallbacks.instanceCounter++;
 
     $(document).on('ajax:success', function(e, data, status, xhr) {
       self.handleSuccess(JSON.parse(xhr.responseText));
     });
     return true;
+  },
+  pageReload: function(){
+    this.assignEls();
+    this.toggleShow(); 
   },
   assignEls: function(){
     console.log('reassigning elements');
@@ -75,6 +74,8 @@ UserAjaxFeedback.prototype = {
       this.setFadeTimer();
       this.feedbackShowing = false;
     } else {
+      console.log('hiding, and reporting status of feedbackShowing');
+      console.log(this.feedbackShowing);
       this.$el.hide();
     }
   },
