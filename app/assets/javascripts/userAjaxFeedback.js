@@ -33,7 +33,7 @@ UserAjaxFeedback.prototype = {
     this.toggleShow(); 
   },
   assignEls: function(){
-    console.log('reassigning elements');
+    // console.log('reassigning elements');
     this.$el = $('.alert');
     this.$heading = $('.alertContent strong');
     this.$content = $('.alertContent span');
@@ -47,7 +47,7 @@ UserAjaxFeedback.prototype = {
     }
     var colorType, headingText, contentText;
     if (rsp.errors){
-      console.log(rsp.errors);
+      // console.log(rsp.errors);
       self.currentColorType = self.colorTypes['failure'];
       headingText = 'Oops! ';
       contentText = rsp.errors.join(', ');
@@ -63,18 +63,18 @@ UserAjaxFeedback.prototype = {
     this.toggleShow();
   },
   toggleShow: function(){
-    console.log('in toggleShow - is showing? ');
+    // console.log('in toggleShow - is showing? ');
     var show = this.feedbackShowing;
-    console.log(show);
+    // console.log(show);
     
     this.feedbackShowing = !this.feedbackShowing;
     if (this.feedbackShowing){
-      console.log('toggled -- should see something');
+      // console.log('toggled -- should see something');
       this.$el.show();
       this.setFadeTimer();
       this.feedbackShowing = false;
     } else {
-      console.log('hiding, and reporting status of feedbackShowing');
+      // console.log('hiding, and reporting status of feedbackShowing');
       console.log(this.feedbackShowing);
       this.$el.hide();
     }
@@ -92,9 +92,9 @@ UserAjaxFeedback.prototype = {
     this.$content.text('');
   },
   handleCallback: function(rsp){
-    console.log(rsp);
+    // console.log(rsp);
     var parseMe = rsp.callback.split('.');
     var page = parseMe[0], callback = parseMe[1];
-    this.callbacks[page][callback]( rsp.html ? rsp.html : '');
+    this.callbacks[page][callback]( rsp.html ? rsp : '');
   }
 }

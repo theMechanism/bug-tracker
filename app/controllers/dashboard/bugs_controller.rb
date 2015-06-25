@@ -44,7 +44,7 @@ module Dashboard
                 return_obj['html'] = render_to_string(partial: '/dashboard/admins/leaderboard.html.erb', :formats => [:html], locals: {admins: @admins})
             when 'status'
                 return_obj['callback'] = 'bugTable.updateStatus'
-                return_obj['html'] = render_to_string(partial: '/dashboard/bugs/status_remote_form.html.erb', :formats => [:html], locals: {bug: @bug})
+                return_obj['html'] = render_to_string(partial: '/dashboard/bugs/status_table_cell.html.erb', :formats => [:html], locals: {bug: @bug})
             end
                 
 
