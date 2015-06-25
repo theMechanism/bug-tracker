@@ -35,15 +35,21 @@ module Dashboard
         @bug = Bug.find(params[:id])
         respond_to do |format|
           if @bug.update_attributes(bug_params) #
-            # format.html { redirect_to @task, notice: 'Task was successfully created.' }
-            @admins = Admin.all
-            format.json { render json: 
-                {
-                    bug: @bug, 
-                    callback: 'projectShow.updateTeamLeaderboard',
-                    html: render_to_string(partial: '/dashboard/admins/leaderboard.html.erb', :formats => [:html], locals: {admins: @admins})
-                } 
-            }
+            return_obj = {}
+            return_obj['bug'] = @bug
+            case bug_params.keys[0]
+            when 'admin_id'
+                @admins = Admin.all
+                return_obj['callback'] = 'projectShow.updateTeamLeaderboard'
+                return_obj['html'] = render_to_string(partial: '/dashboard/admins/leaderboard.html.erb', :formats => [:html], locals: {admins: @admins})
+            when 'status'
+                return_obj['callback'] = 'bugTable.updateStatus'
+                return_obj['html'] = render_to_string(partial: '/dashboard/bugs/status_remote_form.html.erb', :formats => [:html], locals: {bug: @bug})
+            end
+                
+
+            
+            format.json { render json: return_obj }
           else
             # format.html { render :new }
             format.json { render json: 

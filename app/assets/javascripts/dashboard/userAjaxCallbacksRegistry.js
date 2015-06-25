@@ -11,6 +11,12 @@ userAjaxCallbacks.bugShow = {
   }
 }
 
+userAjaxCallbacks.bugTable = {
+  updateStatus: function(html){
+    console.log(html);
+  }
+}
+
 userAjaxCallbacks.projectShow = {
   updateTeamLeaderboard: function(html){
     $('.leaderboard-container').html(html);
