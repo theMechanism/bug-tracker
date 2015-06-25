@@ -13,6 +13,9 @@ class Bug < ActiveRecord::Base
 
   validate :ensure_valid_admin_id
 
+  def project_manager
+    self.project.admin
+  end
 
   private 
 

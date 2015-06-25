@@ -63,7 +63,7 @@ UserAjaxFeedback.prototype = {
     this.toggleShow();
   },
   toggleShow: function(){
-    console.log('in toggleShow - isshowing? ');
+    console.log('in toggleShow - is showing? ');
     var show = this.feedbackShowing;
     console.log(show);
     
