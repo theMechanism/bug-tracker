@@ -11,6 +11,7 @@ userAjaxObjects = [];
 userAjaxCallbacks.bugShow = {
   addComment: function(html){
     $('.list-group').append(html);
+    $('#comment_content').val('');
   }
 }
 

@@ -20,7 +20,7 @@ UserAjaxFeedback.prototype = {
   init: function(){
     var self = this;
     if (self.feedbackShowing){
-      self.pageReload();     
+      self.toggleShow();     
     }
 
     $(document).on('ajax:success', function(e, data, status, xhr) {
@@ -86,6 +86,7 @@ UserAjaxFeedback.prototype = {
     });
   },
   clearOldAlert: function(){
+    var self = this;
     this.$el.removeClass(self.currentColorType);
     this.$heading.text('');
     this.$content.text('');
