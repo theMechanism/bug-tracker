@@ -13,8 +13,6 @@ userAjaxCallbacks.bugShow = {
 
 userAjaxCallbacks.bugTable = {
   updateStatus: function(rsp){
-    console.log('made it to the call back -- check out rsp:');
-    console.log(rsp);
     var bug_id = rsp.bug.id;
     var html = rsp.html;
     $('.bug_' + bug_id + '_status').replaceWith(html);

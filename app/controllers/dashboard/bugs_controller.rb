@@ -46,9 +46,7 @@ module Dashboard
                 return_obj['callback'] = 'bugTable.updateStatus'
                 return_obj['html'] = render_to_string(partial: '/dashboard/bugs/status_table_cell.html.erb', :formats => [:html], locals: {bug: @bug})
             end
-                
-
-            
+                 
             format.json { render json: return_obj }
           else
             # format.html { render :new }
