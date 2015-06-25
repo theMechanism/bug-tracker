@@ -1,7 +1,7 @@
 userAjaxCallbacks = {};
 
 // callbacks namespaced 
-// object.page.callback
+// object.pageOrHtmlElement.callback
 // userAjaxCallbacks[bugShow][addComment]
 
 userAjaxCallbacks.bugShow = {
