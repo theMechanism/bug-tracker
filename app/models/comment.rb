@@ -3,5 +3,5 @@ class Comment < ActiveRecord::Base
   belongs_to :admin
 
   validates_associated :bug, :admin
-  validates_presence_of :content
+  validates_presence_of :content, :bug, :admin
 end
