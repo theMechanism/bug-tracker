@@ -18,7 +18,7 @@
 
 <script>
   // console.log(<%= modal_urls  %>);
-  // $( document ).ready( function(){
+  $( document ).ready( function(){
     var modalFormUrls = <%= modal_urls  %>;
     var modalForms = {};
 
@@ -68,7 +68,6 @@
             console.log("error json: " + xhr.responseText);
         });
 
-  // });
-  
+  });
   
 </script>

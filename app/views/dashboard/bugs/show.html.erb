@@ -7,6 +7,9 @@
 <%= render 'dashboard/projects/table', projects: [@project]  %>
 
 <h4>Bug Specifics</h4>
+<%= button_tag(class: 'btn btn-default edit_bug') do
+  content_tag(:span, 'Edit Bug', class: 'glyphicon glyphicon-edit')
+end %>
 
 <%= render 'dashboard/bugs/table', bugs: [@bug] %>
 
@@ -20,3 +23,5 @@
   <%= f.input :content %>
   <%= f.button :submit %>
 <% end %>
+
+<%= render 'shared/modal', modal_urls: @modal_urls %>
