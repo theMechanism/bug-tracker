@@ -8,8 +8,9 @@ BugTracker::Application.routes.draw do
     get 'clients/:id' => 'clients#show'
   end
 
-  get "/dashboard" => 'dashboard/projects#index', as:"dashboard"
+  get "/dashboard" => 'dashboard/admins#profile', as:"dashboard"
   namespace :dashboard do
+    root to: 'admins#show'
     resources :clients#, only: [:index, :show, :create, :update, :destroy]
     resources :bugs, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: :create
@@ -20,7 +21,7 @@ BugTracker::Application.routes.draw do
 
 
     #, only: [:index, :show, :new, :create, :update, :destroy]
-    # resources :admins, only: [:index,:new, :create, :update, :destroy]
+    resources :admins, only: [:index, :show, :new, :create, :update, :destroy]
   end
 
   resources :bugs

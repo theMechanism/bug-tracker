@@ -14,5 +14,9 @@ module Dashboard
     end
     def destroy
     end
+
+    def profile
+        # redirect_to dashboard_admin_path(current_admin)
+    end
   end
 end
