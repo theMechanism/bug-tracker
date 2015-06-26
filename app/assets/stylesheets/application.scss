@@ -11,7 +11,7 @@
 }
 .dashboard{
   @import 'dashboard/alert_override';
-
+  @import 'dashboard/modal_override';
 }
 
 .public {
