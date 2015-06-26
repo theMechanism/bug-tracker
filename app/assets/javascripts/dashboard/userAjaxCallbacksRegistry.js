@@ -20,7 +20,7 @@ userAjaxCallbacks.bugTable = {
   updateAdminAssign: function(rsp){
     var bug_id = rsp.bug.id;
     $('.bug_' + bug_id + '_row').replaceWith(rsp.html.row);
-    // if there is a leaderboard, also update
+    // if there is a leaderboard, also update. if not, this fails silently when jquery doesn't find a leaderboard
     $('.leaderboard-container').html(rsp.html.leaderboard);
   }
 }

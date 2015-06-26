@@ -7,4 +7,7 @@ class Admin < ActiveRecord::Base
 
   validates_presence_of :name, :email
 
+  def self.project_managers
+    self.where(is_project_manager: true)
+  end
 end

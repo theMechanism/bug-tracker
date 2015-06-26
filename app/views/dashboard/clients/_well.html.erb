@@ -16,8 +16,10 @@
     </tr>
   </table>
 
-  <h4>Projects <a href="#"><span class="glyphicon glyphicon-plus new_client_project" aria-hidden="true"></span></a></h4>
+  <h4>Projects <a href="#"><span id="client_<%= client.id %>" class="glyphicon glyphicon-plus new_client_project" aria-hidden="true"></span></a></h4>
   
   <%= render 'dashboard/projects/table', projects: client.projects  %>
   
 </div>
+
+<!-- new_client_< %= client.id %>_project -->

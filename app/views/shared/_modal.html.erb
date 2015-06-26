@@ -27,9 +27,12 @@
         modalForms[key] = partial;
       });
       
-      $('.' + key).click(function(){
+      $('.' + key).click(function(e){
+        console.log('in key listener of modal, show event');
+        console.log(e);
         $('.modal-title').html( toCapitalizedWords(key) );
         $('.modal-body').html( modalForms[key] );
+        
         $('.modal').modal(); 
       })  
     });
