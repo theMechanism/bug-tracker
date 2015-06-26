@@ -32,7 +32,9 @@
         console.log(e);
         $('.modal-title').html( GlobalUtils.toCapitalizedWords(key) );
         $('.modal-body').html( modalForms[key] );
-
+        if ( ModalCallbacks.checkIfRegistered(key) ){
+          ModalCallbacks.registeredKeys()[key](e);
+        }
         $('.modal').modal(); 
       })  
     });

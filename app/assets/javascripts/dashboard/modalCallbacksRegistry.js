@@ -9,12 +9,13 @@ ModalCallbacks.registeredKeys = function(){
 ModalCallbacks.checkIfRegistered = function(modalKey) {
   var self = this;
   if ( self.registeredKeys()[modalKey] ){
-    return self.registeredKeys()[modalKey];
+    return true;
   } else {
     return false;
   }
 }
 
-ModalCallbacks.selectClientFromDropDown = function(){
+ModalCallbacks.selectClientFromDropDown = function(event){
   console.log('jeez, just fired. eek!');
+  console.log(event);
 }
