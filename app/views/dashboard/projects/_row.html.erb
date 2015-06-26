@@ -2,6 +2,7 @@
   <td><%= link_to truncate(project.name), dashboard_project_path(project) %></td>
   <td><%= project.blurb %></td>
   <td><%= project.active %></td>
+  <td><%= project.bug_count %></td>
   <td><%= project.expiration %></td>
   <td><%= link_to truncate(project.git_repo_url), project.git_repo_url %></td>
   <td><%= link_to truncate(project.dev_server_url), project.dev_server_url %></td>

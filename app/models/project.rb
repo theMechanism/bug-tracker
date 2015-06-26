@@ -13,6 +13,10 @@ class Project < ActiveRecord::Base
 
   validate :admin_is_project_manager
 
+  def bug_count
+    self.bugs.count
+  end
+
   private 
 
   def admin_is_project_manager
