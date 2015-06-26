@@ -5,7 +5,7 @@
   <% if claimed_by_current_admin(@bug) || current_admin_is_project_manager(@bug) %>
     <%= f.input :status, collection: Bug::VALID_STATUS, include_blank: false %>
   <% else %>
-    Claim this bug to submit.
+    <%= f.label "Claim this bug to submit for review" %>
   <% end %>
   <%= f.input :description %>
   <%= f.association :admin, label: 'Currently assigned admin', include_blank: false  %>

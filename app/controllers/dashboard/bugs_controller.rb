@@ -54,8 +54,11 @@ module Dashboard
                 case bug_params.keys[0]
                 when 'admin_id'
                     @admins = Admin.all
-                    return_obj['callback'] = 'projectShow.updateTeamLeaderboard'
-                    return_obj['html'] = render_to_string(partial: '/dashboard/admins/leaderboard.html.erb', :formats => [:html], locals: {admins: @admins})
+                    return_obj['callback'] = 'bugTable.updateAdminAssign'
+                    return_obj['html'] = {
+                        leaderboard: render_to_string(partial: '/dashboard/admins/leaderboard.html.erb', :formats => [:html], locals: {admins: @admins}),
+                        row: render_to_string(partial: '/dashboard/bugs/row.html.erb', :formats => [:html], locals: {bug: @bug})
+                    }
                 when 'status'
                     return_obj['callback'] = 'bugTable.updateStatus'
                     return_obj['html'] = render_to_string(partial: '/dashboard/bugs/status_table_cell.html.erb', :formats => [:html], locals: {bug: @bug})
