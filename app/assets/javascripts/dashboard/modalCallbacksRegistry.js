@@ -16,6 +16,6 @@ ModalCallbacks.checkIfRegistered = function(modalKey) {
 }
 
 ModalCallbacks.selectClientFromDropDown = function(event){
-  console.log('jeez, just fired. eek!');
-  console.log(event);
+  var client_id = event.currentTarget.id.match(/\d+/)[0];
+  $('#project_client_id').val(client_id);
 }
