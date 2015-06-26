@@ -39,6 +39,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 group :development, :test do
+  gem "mail_view", "~> 2.0.4"
   gem 'valid_attribute'
   gem 'rspec-rails'
   gem 'factory_girl_rails', "~> 4.0"
