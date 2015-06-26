@@ -1,1 +1,16 @@
-<%= render 'form', bug: @bug, url: dashboard_bug_path(@bug) %>
+<!-- < %= render 'form', bug: @bug, url: dashboard_bug_path(@bug) %> -->
+
+<%= simple_form_for @bug, url: dashboard_bug_path(@bug), remote: true do |f| %>
+  <%= f.input :name, disabled: true %>
+  <% if claimed_by_current_admin(@bug) || current_admin_is_project_manager(@bug) %>
+    <%= f.input :status, collection: Bug::VALID_STATUS, include_blank: false %>
+  <% else %>
+    Claim this bug to submit.
+  <% end %>
+  <%= f.input :description %>
+  <%= f.association :admin, label: 'Currently assigned admin', include_blank: false  %>
+  <%= f.input :time_spent %>
+  
+  <%= f.button :submit %>
+
+<% end %>

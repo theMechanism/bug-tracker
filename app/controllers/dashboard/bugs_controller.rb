@@ -38,7 +38,7 @@ module Dashboard
         @comments = @bug.comments.order(:created_at)
         @comment = @bug.comments.new
         @modal_urls = {
-            edit_bug: edit_dashboard_bug_path(@bug)
+            modal_edit_bug: edit_dashboard_bug_path(@bug)
         }.to_json.html_safe
     end
     

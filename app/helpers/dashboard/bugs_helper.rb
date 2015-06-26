@@ -16,4 +16,8 @@ module Dashboard::BugsHelper
   def current_admin_is_project_manager(bug)
     current_admin == bug.project_manager
   end
+
+  def claimed_by_current_admin(bug)
+    bug.admin == current_admin
+  end
 end

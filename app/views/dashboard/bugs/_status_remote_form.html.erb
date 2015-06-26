@@ -1,11 +1,18 @@
 <% if bug.status == 'Open' %>
-
-  <%= simple_form_for bug, url: dashboard_bug_path(bug), remote: true do |f| %>
+  
+  <% if claimed_by_current_admin(bug) %>
+    <%= simple_form_for bug, url: dashboard_bug_path(bug), remote: true do |f| %>
+        
+      <%= f.input :status, as: :hidden, :input_html => { :value => "Verify" } %>
       
-    <%= f.input :status, as: :hidden, :input_html => { :value => "Verify" } %>
-    
-    <%= f.button :submit, "Submit for review" %>
+      <%= f.button :submit, "Submit for review" %>
+    <% end %>
+
+  <% else %>
+    Claim this bug to submit for review.
   <% end %>
+
+  
 
 <% elsif bug.status == 'Verify' %>
 
