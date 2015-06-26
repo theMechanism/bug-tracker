@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @admin.name %></h1>
+    <p>
+      <%= link_to @bug.name, dashboard_bug_url(@bug) %> has been reassigned, you're off the hook.<br>
+    </p>
+
+    <p>For more info visit the bug page at <%= link_to dashboard_bug_url(@bug) %>.</p>
+    <p>Love,</p>
+    <p>Computer</p>
+  </body>
+</html>

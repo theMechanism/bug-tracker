@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @admin.name %></h1>
+    <p>
+      You've been assigned a new bug.<br>
+    </p>
+    <h3>The Deets:</h3>
+    <ul>
+      <li>occured at url: <%=@bug.url %></li>
+      <li>description: <%=@bug.description %></li>
+      <li>browser: <%=@bug.browser %></li>
+
+    </ul>
+    <p>For more info visit the bug page at <%= link_to dashboard_bug_url(@bug) %>.</p>
+    <p>Love,</p>
+    <p>Computer</p>
+  </body>
+</html>

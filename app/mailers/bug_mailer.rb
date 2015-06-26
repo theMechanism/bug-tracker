@@ -6,6 +6,9 @@ class BugMailer < ActionMailer::Base
   end
 
   def alert_admin_assigned_to_bug(bug, admin_id)
+    @bug = bug
+    @admin = Admin.find(admin_id)
+    mail(to: @admin.email, subject: "You have been assigend a new bug.")
   end
 
   def alert_admin_unassigned_from_bug(bug, admin_id)
