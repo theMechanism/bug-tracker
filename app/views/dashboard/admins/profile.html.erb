@@ -1,1 +1,27 @@
-profile.html.erb
+<h3>What should I see in my profile page?</h3>
+
+<ul>
+  <li>
+    All bugs assigned to me, sortable by 
+    <ul>
+      <li>project</li>
+      <li>still open</li>
+      <li>project is active</li>
+    </ul>
+  </li>
+</ul>
+
+<!-- < % @bugs.each do |b| %>
+  <p>< %= b.inspect %></p>
+< % end %>
+
+<hr>
+
+< % @projects.each do |p| %>
+  <p>< %= p.inspect %></p>
+< % end %> -->
+
+<script>
+  var bugs = <%= @bugs.to_json.html_safe %>
+
+</script>

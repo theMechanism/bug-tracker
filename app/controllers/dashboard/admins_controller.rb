@@ -17,6 +17,8 @@ module Dashboard
 
     def profile
         # redirect_to dashboard_admin_path(current_admin)
+        @bugs = current_admin.bugs.where.not(status: 'Closed')
+        @projects = @bugs.map{|b| b.project }.uniq
     end
   end
 end
