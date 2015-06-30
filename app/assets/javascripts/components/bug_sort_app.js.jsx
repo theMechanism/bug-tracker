@@ -3,7 +3,7 @@ var BugSortApp = React.createClass({
   render: function() {
     return (
       <div>
-        <BugFilter />
+        <BugFilter admins={this.state.admins} projects={this.state.projects} statuses={['Open', 'Verify', 'Closed']} />
         <BugTable />
       </div>
 

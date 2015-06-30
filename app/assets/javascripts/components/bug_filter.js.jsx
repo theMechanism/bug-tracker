@@ -2,11 +2,6 @@ var BugFilter = React.createClass({
 
   getInitialState: function () {
       return {
-        options: {
-          admins: [{name: 'Avi', id: 1}, {name:'Dhruv', id:2}, {name:'Mystery Man', id:3}],
-          statuses: ['Open', 'Verify', 'Closed'],
-          projects: [{name:'Rhinestones', id:1}, {name:'Undies', id:2}, {name:'Chicken Bait', id:3}]
-        },
         currentlySelected: 'admins',
         filterText: ''
       }
@@ -30,13 +25,13 @@ var BugFilter = React.createClass({
     },
     mapOptionsToSelectA: function(){
       var self = this;
-      var options = Object.getOwnPropertyNames(self.state.options);
+      var options = Object.getOwnPropertyNames(self.props);
       return self.mapOptionsToSelect(options);
     },
     mapToSelectB: function(){
       var optionSelect = [<option value='All'>All</option>];
       var self = this;
-      var options = self.state.options[self.state.currentlySelected]
+      var options = self.props[self.state.currentlySelected]
       optionSelect.push(self.mapOptionsToSelect(options));
       return optionSelect;
     },
@@ -50,7 +45,7 @@ var BugFilter = React.createClass({
         <div className="bugsFilter">
           <label for="">Group Bugs By:</label>
           <br/>
-          <select onChange={this.handleOptionSelection}>
+          <select onChange={this.handleGroupBySelection}>
             {selectA}
           </select>
           <hr/>
@@ -65,10 +60,8 @@ var BugFilter = React.createClass({
         </div>
       );
     },
-    handleOptionSelection: function(event){
+    handleGroupBySelection: function(event){
       this.setState({currentlySelected: event.target.value});
-      var foo = this.state.currentlySelected;
-      console.log(foo);
     },
     handleTextInput: function(event){
       this.setState({filterText: event.target.value});
