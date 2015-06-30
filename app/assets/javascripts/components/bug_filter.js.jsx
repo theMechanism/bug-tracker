@@ -29,7 +29,7 @@ var BugFilter = React.createClass({
     },
     mapOptionsToSelectA: function(){
       var self = this;
-      var options = Object.getOwnPropertyNames(self.props);
+      var options = self.props.groups;
       return self.mapOptionsToSelect(options);
     },
     mapToSelectB: function(){
