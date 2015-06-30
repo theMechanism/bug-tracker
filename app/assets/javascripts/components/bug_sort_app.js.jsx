@@ -3,7 +3,7 @@ var BugSortApp = React.createClass({
   render: function() {
     var bugFilter, bugTable;
     if (this.state.admins && this.state.projects){
-      bugTable = <BugTable dispatcher={this.state.dispatcher} bugs={this.state.bugs}/>;
+      bugTable = <BugTable dispatcher={this.state.dispatcher} bugs={this.state.bugs} admins={this.state.admins} projects={this.state.projects}/>;
       bugFilter = <BugFilter dispatcher={this.state.dispatcher} admins={this.state.admins} projects={this.state.projects} statuses={['Open', 'Verify', 'Closed']} groups={['admins', 'projects', 'statuses']} />;
     } else {
       bugTable = '';
