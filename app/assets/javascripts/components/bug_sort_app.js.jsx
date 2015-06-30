@@ -15,16 +15,32 @@ var BugSortApp = React.createClass({
     dispatcher.attach(self);
     
     return {
-      dispatcher: dispatcher
+      dispatcher: dispatcher,
+      bugs: [],
+      admins: [],
+      projects: []
     }
   },
   componentDidMount: function(){
     var self = this;
+
     $.getJSON(this.props.bugs_path, function(bugs){
       self.setState({bugs: bugs});
       console.log('self.state.bugs');
 
       console.log(self.state.bugs);
+    });
+    $.getJSON(this.props.admins_path, function(admins){
+      self.setState({admins: admins});
+      console.log('self.state.admins');
+
+      console.log(self.state.admins);
+    });
+    $.getJSON(this.props.projects_path, function(projects){
+      self.setState({projects: projects});
+      console.log('self.state.projects');
+
+      console.log(self.state.projects);
     });
   },
   test: function(){
