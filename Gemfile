@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'simple_form'
 
 gem 'underscore-rails'
+gem 'react-rails', '~> 1.0' 
 
 gem "font-awesome-rails"
 
