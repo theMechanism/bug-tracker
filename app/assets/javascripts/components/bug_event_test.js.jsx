@@ -11,7 +11,7 @@ var BugEventTest = React.createClass({
     var self = this;
     console.log(this.props);
 
-    this.props.dispatcher.attach(self);
+    this.props.dispatcher.register(self);
   },
   test: function(){
     console.log('in child, event test, test is called');

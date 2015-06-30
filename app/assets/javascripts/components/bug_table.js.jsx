@@ -1,16 +1,20 @@
 var BugTable = React.createClass({
 
-  changeGroupBy: function(e){
-    this.setState({groupBy: e.target.value});
-  },
+  // changeGroupBy: function(data){
+  //   console.log('listened to changeGroupBy in BugTable, data is: ')
+  //   console.log(data)
+  //   this.setState({groupBy: data});
+  // },
   arrangeBugRows: function(){
     var self = this;
-    return _.sortBy(self.state.bugs, function(b){ 
+    return _.sortBy(self.props.bugs, function(b){ 
       return b[self.state.groupBy];
     });
+    // return [{admin_id: 1, status: 'foo', project_id: 1}]
   },
   render: function() {
-    var bugRows = this.arrangeBugRows().map(function(b){
+    var self = this;
+    var bugRows = self.arrangeBugRows().map(function(b){
       return (
         <tr>
           <td>
@@ -56,11 +60,13 @@ var BugTable = React.createClass({
   },
   getInitialState: function(){
     return {
-      bugs: {},
       groupBy: 'admin_id'
     };
   },
   componentDidMount: function(){
-    
+    var self = this;
+    this.props.dispatcher.register(self);
+    console.log('checking props post mount: ');
+    console.log(this.props);
   }
 });

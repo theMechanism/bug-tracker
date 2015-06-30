@@ -6,6 +6,10 @@ var BugFilter = React.createClass({
         filterText: ''
       }
     },
+    componentDidMount: function(){
+      var self = this;
+      this.props.dispatcher.register(self);
+    },
     mapOptionsToSelect: function (options) {
       var self = this;
       var optionSelect = options.map(function(option) {
@@ -62,6 +66,7 @@ var BugFilter = React.createClass({
     },
     handleGroupBySelection: function(event){
       this.setState({currentlySelected: event.target.value});
+      this.props.dispatcher.notify('changeGroupBy', this.state.currentlySelected);
     },
     handleTextInput: function(event){
       this.setState({filterText: event.target.value});
