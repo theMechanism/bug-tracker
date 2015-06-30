@@ -63,7 +63,7 @@ var BugTable = React.createClass({
   componentDidMount: function(){
     var self = this;
     $.getJSON('/dashboard/bugs', function(bugs){
-      console.log(bugs);
+      // console.log(bugs);
       self.setState({bugs: bugs});
     });
   }
