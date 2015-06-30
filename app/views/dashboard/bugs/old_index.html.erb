@@ -1,0 +1,25 @@
+<h3>Bug Display Options</h3>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#default">All</a></li>
+  <li role="presentation"><a href="#unassigned">All Unassigned</a></li>
+  <li role="presentation"><a href="#open">All Open</a></li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="default">
+    <%= render 'table', bugs: @bugs %>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="unassigned">
+    <%= render 'table', bugs: @unassigned %>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="open">
+    <%= render 'table', bugs: @open %>
+  </div>
+</div>
+
+<script>
+  $('.nav-tabs a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+</script>
