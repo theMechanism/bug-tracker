@@ -8,10 +8,30 @@ var BugTable = React.createClass({
     };
     this.setState({groupBy: groupMap[data]});
   },
-  arrangeBugRows: function(){
+  changeFilterFor: function(data){
+    this.setState({filterFor: data});
+  },
+  groupBugRows: function(){
     var self = this;
     return _.sortBy(self.props.bugs, function(b){ 
       return b[self.state.groupBy];
+    });
+  },
+  filterBugRows: function(bugs){
+    if (this.state.filterFor === 'all') {
+      return bugs;
+    }
+    var self = this;
+     // this.state.filterFor 
+    var target = self.state.groupBy;
+    var id = Number(self.state.filterFor.split('_')[1]);
+
+    console.log('target_ ' + target);
+    console.log('id_ ' + id);
+
+    return _.filter(bugs, function(bug){
+      console.log(bug);
+      return bug[target] === id;
     });
   },
   getObjNameFromId: function(group_name, id){
@@ -20,7 +40,8 @@ var BugTable = React.createClass({
   },
   render: function() {
     var self = this;
-    var bugRows = self.arrangeBugRows().map(function(b){
+    var grouped = self.groupBugRows();
+    var bugRows = this.filterBugRows(grouped).map(function(b){
       return (
         <tr key={'bug_' + b.id}>
           <td>
@@ -65,7 +86,8 @@ var BugTable = React.createClass({
   },
   getInitialState: function(){
     return {
-      groupBy: 'admin_id'
+      groupBy: 'admin_id',
+      filterFor: 'all'
     };
   },
   componentDidMount: function(){
