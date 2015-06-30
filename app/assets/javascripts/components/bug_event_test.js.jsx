@@ -11,12 +11,12 @@ var BugEventTest = React.createClass({
     var self = this;
     console.log(this.props);
 
-    this.props.filterUpdate.attach(self);
+    this.props.dispatcher.attach(self);
   },
   test: function(){
     console.log('in child, event test, test is called');
   },
   notify: function(){
-    this.props.filterUpdate.notify('test');
+    this.props.dispatcher.notify('test');
   }
 });

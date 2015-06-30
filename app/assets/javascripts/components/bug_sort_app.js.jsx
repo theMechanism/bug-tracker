@@ -3,7 +3,6 @@ var BugSortApp = React.createClass({
   render: function() {
     return (
       <div>
-        <BugEventTest filterUpdate={this.state.filterUpdate} />
         <BugFilter />
         <BugTable />
       </div>
@@ -12,19 +11,21 @@ var BugSortApp = React.createClass({
   },
   getInitialState: function(){
     var self = this;
-    var filterUpdate = new Event();
-    filterUpdate.attach(self);
+    var dispatcher = new Dispatcher();
+    dispatcher.attach(self);
     
     return {
-      filterUpdate: filterUpdate
+      dispatcher: dispatcher
     }
   },
   componentDidMount: function(){
-    // var self = this;
-    // var filterUpdate = new Event();
-    // filterUpdate.attach(self);
+    var self = this;
+    $.getJSON(this.props.bugs_path, function(bugs){
+      self.setState({bugs: bugs});
+      console.log('self.state.bugs');
 
-    // self.setState({filterUpdate: filterUpdate});
+      console.log(self.state.bugs);
+    });
   },
   test: function(){
     console.log('inside parent component, test is called');
