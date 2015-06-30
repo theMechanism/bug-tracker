@@ -33,7 +33,7 @@ var BugFilter = React.createClass({
       return self.mapOptionsToSelect(options);
     },
     mapToSelectB: function(){
-      var optionSelect = [<option value='All'>All</option>];
+      var optionSelect = [<option value='all'>All</option>];
       var self = this;
       var options = self.props[self.state.currentlySelected]
       optionSelect.push(self.mapOptionsToSelect(options));
@@ -66,7 +66,7 @@ var BugFilter = React.createClass({
     },
     handleGroupBySelection: function(event){
       this.setState({currentlySelected: event.target.value});
-      this.props.dispatcher.notify('changeGroupBy', this.state.currentlySelected);
+      this.props.dispatcher.notify('changeGroupBy', event.target.value);
     },
     handleTextInput: function(event){
       this.setState({filterText: event.target.value});

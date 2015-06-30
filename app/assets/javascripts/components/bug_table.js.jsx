@@ -1,22 +1,27 @@
 var BugTable = React.createClass({
 
-  // changeGroupBy: function(data){
-  //   console.log('listened to changeGroupBy in BugTable, data is: ')
-  //   console.log(data)
-  //   this.setState({groupBy: data});
-  // },
+  changeGroupBy: function(data){
+    console.log('listened to changeGroupBy in BugTable, data is: ');
+    console.log(data);
+    var groupMap = {
+      'admins': 'admin_id',
+      'statuses': 'status',
+      'projects': 'project_id'
+    };
+
+    this.setState({groupBy: groupMap[data]});
+  },
   arrangeBugRows: function(){
     var self = this;
     return _.sortBy(self.props.bugs, function(b){ 
       return b[self.state.groupBy];
     });
-    // return [{admin_id: 1, status: 'foo', project_id: 1}]
   },
   render: function() {
     var self = this;
     var bugRows = self.arrangeBugRows().map(function(b){
       return (
-        <tr>
+        <tr key={'bug_' + b.id}>
           <td>
             admin #{b.admin_id}
           </td>
@@ -32,14 +37,10 @@ var BugTable = React.createClass({
 
     return (
       <div>
+        
         <hr/>
-        <select onChange={this.changeGroupBy}>
-          <option value='admin_id'>admins</option>
-          <option value='project_id'>projects</option>
-          <option value='status'>status</option>
-        </select>
-        <hr/>
-        {this.state.groupBy}
+        <h4>grouped by {this.state.groupBy} </h4>
+        
         <br/>
         <table>
           <tr>
@@ -53,7 +54,10 @@ var BugTable = React.createClass({
               Project
             </th>
           </tr>
-          {bugRows}
+          <tbody>
+            {bugRows}
+          </tbody>
+          
         </table>
       </div>
     );
