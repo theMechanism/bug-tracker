@@ -4,9 +4,10 @@ module Dashboard
     before_filter :deny_access, :unless => :is_admin?
     
     def index
-        @bugs = Bug.all
-        @unassigned = @bugs.select{|b| b.admin_id == nil}
-        @open = @bugs.select{|b| b.status == 'Open'}
+        respond_to do |format|
+            format.html
+            format.json { render json: Bug.all }
+        end
     end
 
     def new 
