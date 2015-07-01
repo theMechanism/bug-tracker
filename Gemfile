@@ -51,6 +51,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'dotenv-rails'
 end
 
 gem 'rails_12factor', group: :production
