@@ -46,22 +46,24 @@ var BugFilter = React.createClass({
     var selectA = this.mapOptionsToSelectA();
 
     return (
-      <div className="bugsFilter">
-        <label for="">Group Bugs By:</label>
-        <br/>
-        <select onChange={this.handleGroupBySelection}>
-          {selectA}
-        </select>
-        <hr/>
-        <label for="">Filter for:</label>
-        <br/>
-        <select onChange={this.handleFilterForSelection}>
-          {selectB}
-        </select>
-        <hr/>
-        <label for="">Search text for:</label>
-        <input type="text" value={this.state.filterText} onChange={this.handleTextInput}/>
-      </div>
+      <form className="bugsFilter form-inline well">
+        <div className="form-group">
+          <label for="groupBy">Group Bugs By:</label>
+          <select onChange={this.handleGroupBySelection} className="form-control" id="groupBy">
+            {selectA}
+          </select>
+        </div>
+        <div className="form-group">  
+          <label for="filterFor">Filter for:</label>
+          <select onChange={this.handleFilterForSelection} className="form-control" id="filterFor">
+            {selectB}
+          </select>
+        </div>
+        <div className="form-group">  
+          <label for="">Search text for:</label>
+          <input type="text" value={this.state.filterText} onChange={this.handleTextInput}/>
+        </div>
+      </form>
     );
   },
   handleGroupBySelection: function(event){

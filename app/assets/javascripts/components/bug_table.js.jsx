@@ -45,11 +45,7 @@ var BugTable = React.createClass({
     var target = self.state.groupBy;
     var val = self.state.filterFor.match(/_/) ? Number(self.state.filterFor.split('_')[1]) : self.state.filterFor;
 
-    // console.log('target_ ' + target);
-    console.log('val_ ' + val);
-
     return _.filter(bugs, function(bug){
-      // console.log(bug);
       return bug[target] === val;
     });
   },
@@ -57,27 +53,43 @@ var BugTable = React.createClass({
     var obj = _.findWhere(this.props[group_name], {id: id});
     return obj.name;
   },
-  render: function() {
+  buildBugRows: function(bugs){
     var self = this;
-    var grouped = self.groupBugRows();
-    var filteredOnce = this.filterBugRows(grouped);
-    var filterTwice = this.filterBugsForText(filteredOnce);
-    var bugRows = filterTwice.map(function(b){
+    return bugs.map(function(b){
       return (
         <tr key={'bug_' + b.id}>
           <td>
-            {self.getObjNameFromId('admins', b.admin_id)}
+            <a href={self.props.urls.bugs_path + '/' + b.id }>
+              {b.name}
+            </a>
+          </td>
+          <td>
+            <a href={self.props.urls.projects_path + '/' + b.project_id }>
+              {self.getObjNameFromId('projects', b.project_id)}
+            </a>
+          </td>
+          <td>
+            {b.description}
           </td>
           <td>
             { b.status }
           </td>
           <td>
-            {self.getObjNameFromId('projects', b.project_id)}
+            <a href={self.props.urls.admins_path + '/' + b.admin_id }>
+              {self.getObjNameFromId('admins', b.admin_id)}
+            </a>
           </td>
         </tr>
       )
     });
-
+  },
+  render: function() {
+    var self = this;
+    var grouped = self.groupBugRows();
+    var filteredOnce = this.filterBugRows(grouped);
+    var filterTwice = this.filterBugsForText(filteredOnce);
+    var bugRows = this.buildBugRows(filterTwice);
+    
     return (
       <div>
         
@@ -85,17 +97,24 @@ var BugTable = React.createClass({
         <h4>grouped by {this.state.groupBy} </h4>
         
         <br/>
-        <table>
+        <table className="table">
           <tr>
             <th>
-              Assigned Admin
+              Bug
+            </th>
+            <th>
+              Project
+            </th>
+            <th>
+              Description
             </th>
             <th>
               Status
             </th>
             <th>
-              Project
+              Assigned Admin
             </th>
+            
           </tr>
           <tbody>
             {bugRows}
@@ -114,7 +133,6 @@ var BugTable = React.createClass({
   componentDidMount: function(){
     var self = this;
     this.props.dispatcher.register(self);
-    // console.log('checking props post mount: ');
-    // console.log(this.props);
+    console.log(this.props);
   }
 });

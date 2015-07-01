@@ -3,7 +3,7 @@ var BugSortApp = React.createClass({
   render: function() {
     var bugFilter, bugTable;
     if (this.state.admins && this.state.projects){
-      bugTable = <BugTable dispatcher={this.state.dispatcher} bugs={this.state.bugs} admins={this.state.admins} projects={this.state.projects}/>;
+      bugTable = <BugTable dispatcher={this.state.dispatcher} bugs={this.state.bugs} admins={this.state.admins} projects={this.state.projects} urls={this.props}/>;
       bugFilter = <BugFilter dispatcher={this.state.dispatcher} admins={this.state.admins} projects={this.state.projects} statuses={['Open', 'Verify', 'Closed']} groups={['admins', 'projects', 'statuses']} />;
     } else {
       bugTable = '';
@@ -31,29 +31,12 @@ var BugSortApp = React.createClass({
 
     $.getJSON(this.props.bugs_path, function(bugs){
       self.setState({bugs: bugs});
-      // console.log('self.state.bugs');
-
-      // console.log(self.state.bugs);
     });
     $.getJSON(this.props.admins_path, function(admins){
       self.setState({admins: admins});
-      // console.log('self.state.admins');
-
-      // console.log(self.state.admins);
     });
     $.getJSON(this.props.projects_path, function(projects){
       self.setState({projects: projects});
-      // console.log('self.state.projects');
-
-      // console.log(self.state.projects);
     });
   }
-  // ,
-  // test: function(){
-  //   console.log('inside parent component, test is called');
-  // }, 
-  // changeGroupBy: function(data){
-  //   console.log('in sort app parent, passed this data: ');
-  //   console.log(data);
-  // }
 });
