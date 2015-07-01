@@ -7,12 +7,7 @@ class BugMailer < ActionMailer::Base
   end
 
   def alert_admin_assigned_to_bug(bug, admin_id)
-    
     @bug = bug
-    @url = dashboard_bug_url(@bug)
-    p '#'*80
-    p 'did we get url?'
-    p "#{@url.inspect}"
     @admin = Admin.find(admin_id)
     mail(to: @admin.email, subject: "You have been assigend a new bug.")
   end
