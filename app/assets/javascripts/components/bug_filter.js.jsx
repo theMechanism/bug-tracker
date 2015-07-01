@@ -73,8 +73,9 @@ var BugFilter = React.createClass({
     // this.setState({currentFilterFor: e.target.value});
     this.props.dispatcher.notify('changeFilterFor', e.target.value);
   },
-  handleTextInput: function(event){
-    this.setState({filterText: event.target.value});
+  handleTextInput: function(e){
+    this.setState({filterText: e.target.value});
+    this.props.dispatcher.notify('updateFilterText', e.target.value);
   }
 
 });
