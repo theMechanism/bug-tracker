@@ -1,1 +1,22 @@
-<h3>foo</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @project_manager.name %></h1>
+    <p>
+      <%= @admin.name %> submit a bug for verification from the <%= @bug.project.name %> project.<br>
+    </p>
+    <h3>The Deets:</h3>
+    <ul>
+      <li>occured at url: <%= @bug.url %></li>
+      <li>description: <%=@bug.description %></li>
+      <li>browser: <%=@bug.browser %></li>
+
+    </ul>
+    <p>To verify or re-open visit the bug page at <%= link_to @bug.name, dashboard_bug_url(@bug) %>.</p>
+    <p>Love,</p>
+    <p>Computer</p>
+  </body>
+</html>
