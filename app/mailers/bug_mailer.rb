@@ -1,5 +1,5 @@
 class BugMailer < ActionMailer::Base
-  include Rails.application.routes.url_helpers
+  # include Rails.application.routes.url_helpers
   default from: "BugTracker@themechanism.com"
   def submit_email(bug)
     @bug = bug
@@ -9,10 +9,27 @@ class BugMailer < ActionMailer::Base
   def alert_admin_assigned_to_bug(bug, admin_id)
     @bug = bug
     @admin = Admin.find(admin_id)
-    mail(to: @admin.email, subject: "You have been assigend a new bug.")
+    mail(to: @admin.email, subject: "You have been assigned a new bug.")
   end
 
   def alert_admin_unassigned_from_bug(bug, admin_id)
+    @bug = bug
+    @admin = Admin.find(admin_id)
+    mail(to: @admin.email, subject: "You have been unassigned from a bug.")
   end
+
+  def alert_project_manager_that_bug_needs_verification(bug)
+    @bug = bug
+    @admin = @bug.admin
+    @project_manager = @bug.project.admin
+    mail(to: @project_manager.email, subject: "#{@admin.name} submit a bug to verify.")
+  end
+
+  def alert_admin_revert_to_open(bug)
+  end
+
+  def alert_admin_is_closed(bug)
+  end
+
+  # TODO - do we need comment alerts? also an in-app mail or alert system, ala social network messages
 end
-# BugMailer.alert_admin_assigned_to_bug(Bug.first, 1)
