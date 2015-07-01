@@ -21,13 +21,22 @@ module Dashboard
     end
 
     def create
+        p '#'*80
+        p 'chck the params'
+        p "#{params.inspect}"
         @project = Project.find(params[:project_id])
+        p 'chck the bug_params'
+        p "#{bug_params.inspect}"
         @bug = @project.bugs.build(bug_params)
+        p 'chck the bug'
+        p "#{@bug.inspect}"
         if @bug.save
+            p 'bug DID save'
             render json: { 
                 redirect_url: dashboard_project_path(@project)
             }
         else
+            p 'bug did NOT save'
             render :new, layout: false
         end
     end
