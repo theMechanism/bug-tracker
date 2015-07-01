@@ -18,10 +18,11 @@ BugTracker::Application.routes.draw do
     resources :projects do
       resources :bugs, only: [:create, :new]
     end
-
-
-    #, only: [:index, :show, :new, :create, :update, :destroy]
     resources :admins, only: [:index, :show, :new, :create, :update, :destroy]
+
+    if Rails.env.development?
+      mount MailPreview => 'mail_preview'
+    end
   end
 
   resources :bugs
