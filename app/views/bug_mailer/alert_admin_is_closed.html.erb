@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @admin.name %></h1>
+    <p>
+      <%= @project_manager.name %> closed the <%= @bug.name %> bug after you submit your fix.<br>
+      Hurray! Do a little dance!
+    </p>
+
+    </ul>
+    <p>To view any comments, or review the submission visit <%= link_to @bug.name, dashboard_bug_url(@bug) %>.</p>
+    <p>Love,</p>
+    <p>Computer</p>
+  </body>
+</html>

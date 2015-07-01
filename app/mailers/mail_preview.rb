@@ -18,8 +18,13 @@
   end
 
   def alert_admin_revert_to_open
+    @bug = Bug.first
+    BugMailer.alert_admin_revert_to_open(@bug)
   end
 
   def alert_admin_is_closed
+    @bug = Bug.first
+    
+    BugMailer.alert_admin_is_closed(@bug)
   end
 end
