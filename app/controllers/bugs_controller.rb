@@ -1,12 +1,12 @@
 class BugsController < ApplicationController
 	include ActionController::Helpers
   	include ActionController::Cookies
-	
-	# before_filter :authenticate_user!, :except => [:show, :index, :create, :new]  
+
+	# before_filter :authenticate_user!, :except => [:show, :index, :create, :new]
 	skip_before_action :verify_authenticity_token
 
 	def index
-		
+
 	end
 
 	def show
@@ -39,8 +39,8 @@ class BugsController < ApplicationController
 	end
 	private
 		def bug_params
-				params.require(:bug).permit(:project_id, :name, :url, :browser, :status, 
-					:params, :width, :height, :description, :os, :ua, 
+				params.require(:bug).permit(:project_id, :name, :url, :browser, :status,
+					:params, :width, :height, :description, :os, :ua,
 					:browser_version)
 		end
 
