@@ -12,10 +12,10 @@ BugTracker::Application.configure do
     :enable_starttls_auto => true,
     :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "6vdf-pwpq.accessdomain.com",
+    # :domain => "mechanism.com",
     :authentication => :login,
-    :user_name => "safeFareTesting@gmail.com",
-    :password => "linux*1989"
+    :user_name => ENV['GMAIL_ADDY'],
+    :password => ENV['GMAIL_PWORD']
   }
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true

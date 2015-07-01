@@ -14,3 +14,4 @@ class BugMailer < ActionMailer::Base
   def alert_admin_unassigned_from_bug(bug, admin_id)
   end
 end
+# BugMailer.alert_admin_assigned_to_bug(Bug.first, 1)
