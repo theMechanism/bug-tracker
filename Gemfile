@@ -52,6 +52,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'dotenv-rails'
+  gem 'pry-byebug'
 end
 
 gem 'rails_12factor', group: :production

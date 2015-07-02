@@ -46,8 +46,12 @@ module Dashboard
     
     def update 
         @bug = Bug.find(params[:id])
+        initial_status = @bug.status
+        initial_admin = @bug.admin_id
         respond_to do |format|
           if @bug.update_attributes(bug_params) #
+            p '#'*80
+            p 'bug did update... i think'
             return_obj = {}
             return_obj['bug'] = @bug
             if bug_params.keys.count > 1 
@@ -67,10 +71,19 @@ module Dashboard
                 end
             end 
             format.json { render json: return_obj }
-            p '#'*80
-            p 'just render a json - did it return? and now about to call the mailer'
-            @bug.alert_mailer_of_relevant_changes
+            if initial_admin != @bug.admin.id
+                BugMailer.alert_admin_assigned_to_bug(@bug, @bug.admin.id).deliver
+                BugMailer.alert_admin_unassigned_from_bug(@bug, initial_admin).deliver
+            end
+            if initial_status != @bug.status
+                @bug.handle_status_change
+            end
+            
           else
+            p '#'*80
+            p 'else condition'
+            p "#{@bug.errors.full_messages }"
+            # binding.pry
             format.json { render json: 
                 { 
                     errors: @bug.errors.full_messages 

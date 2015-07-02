@@ -30,9 +30,7 @@ var BugTable = React.createClass({
     
     return _.filter(bugs, function(b){
       var bText = _.clone(b);
-      console.log('calling on admins for bug #' + b.id);
       bText.admin_id = self.getObjNameFromId('admins', b.admin_id);
-      console.log('calling on projects for bug #' + b.id);
       bText.project_id = self.getObjNameFromId('projects', b.project_id);
       
       var vals = _.values(bText);
@@ -52,10 +50,6 @@ var BugTable = React.createClass({
     });
   },
   getObjNameFromId: function(group_name, id){
-    console.log(group_name, id);
-    console.log('props too');
-    console.log(this.props);
-
     var obj = _.findWhere(this.props[group_name], {id: id});
     return obj ? obj.name : '';
   },

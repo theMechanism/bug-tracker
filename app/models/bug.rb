@@ -1,5 +1,6 @@
 class Bug < ActiveRecord::Base
   # see models/concerns folder for email callbacks
+  # include ActiveModel::Dirty
   include BugMailerAlert
 
   belongs_to :admin
@@ -14,6 +15,8 @@ class Bug < ActiveRecord::Base
   validates_associated :project
   validate :ensure_valid_admin_id
 
+  after_save :print_changes
+
   public 
   
   def project_manager
@@ -21,6 +24,12 @@ class Bug < ActiveRecord::Base
   end
 
   private 
+
+  def print_changes
+    p '#'*80
+    p 'changes =>'
+    self.admin_id_changed?
+  end
 
   def ensure_valid_admin_id
     if self.admin_id && Admin.where(id: self.admin_id).empty?
