@@ -91,17 +91,13 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
 
   describe 'PUT update', :associated_bug do
     before(:each) do |example|
-      
+      @update_params = {}
       if example.metadata[:admin]
-        @update_params = {
-          admin_id: create(:admin, :second_dev).id
-        }
+        @update_params.merge!(admin_id: create(:admin, :second_dev).id)
       end
 
       if example.metadata[:status]
-        @update_params = {
-          status: "Verify"
-        }
+        @update_params.merge!(status: "Verify")
       end
 
       if example.metadata[:valid]
@@ -135,12 +131,16 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
     it 'valid_admin params, returns leaderboard partial', :valid, :admin  do
       expect(response).to render_template(:partial => '_leaderboard.html.erb')
     end
-    it 'valid_admin params, sends emails to admins, old + new', :valid, :admin  do
-      mail_count = ActionMailer::Base.deliveries.count
-      expect(mail_count).to eq(2)
+    it 'valid_admin params, sends emails to admins, old + new', :admin  do
+      @bug.update_attributes(admin: Admin.first)
+      expect{
+        patch :update, {
+          id: @bug.id, 
+          bug: @update_params,
+          format: :json
+        }
+      }.to change{ActionMailer::Base.deliveries.count }.by(2)
     end
-
-    # expect { subject.send_instructions }.to change { ActionMailer::Base.deliveries.count }.by(1)
 
     # SINGLE ATTRIBUTE -- STATUS
 
@@ -153,13 +153,47 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
       dbl_check_db = Bug.find(@bug.id).attributes
       expect(rsp_bug_hash['id']).to eq(dbl_check_db['id'])
     end
-    
     it 'valid, status params, returns json w js callback string', :valid, :status do 
       callback = JSON.parse(response.body)["callback"]
       expect(callback).to eq('bugTable.updateStatus')
     end
     it 'valid_admin params, returns leaderboard partial', :valid, :status  do
       expect(response).to render_template(:partial => '_status_table_cell.html.erb')
+    end
+    it 'valid status params, sends email on change', :status  do
+      @bug.update_attributes(admin: Admin.first)
+      expect{
+        patch :update, {
+          id: @bug.id, 
+          bug: @update_params,
+          format: :json
+        }
+      }.to change{ActionMailer::Base.deliveries.count }.by(1)
+    end
+    
+    ## MULTIPLE ATTRS
+
+    it 'valid paras, updates bug', :admin, :status, :valid do 
+      updated_status = Bug.find(@bug.id).status
+      expect(updated_status).to eq(@update_params[:status])
+      updated_admin = Bug.find(@bug.id).admin.id
+      expect(updated_admin).to eq(@update_params[:admin_id])
+    end
+
+    it 'valid params, returns json w redirect_url',  :admin, :status, :valid do 
+      redirect_url = JSON.parse(response.body)["redirect_url"]
+      expect(redirect_url).to eq(dashboard_bug_path(@bug))
+    end
+
+    it 'valid status params, sends email on change', :status, :admin  do
+      @bug.update_attributes(admin: Admin.first)
+      expect{
+        patch :update, {
+          id: @bug.id, 
+          bug: @update_params,
+          format: :json
+        }
+      }.to change{ActionMailer::Base.deliveries.count }.by(3)
     end
 
 
