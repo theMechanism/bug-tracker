@@ -1,0 +1,11 @@
+<script type="text/javascript">
+  setTimeout(
+    function(){
+      var a = document.createElement("script");
+      var b = document.getElementsByTagName("script")[0];
+      a.src = "<%= root_url %>/mech-bug-tracker.js?projectID=<%= @project.id %>";
+      a.async = true;
+      a.type = "text/javascript";
+      b.parentNode.insertBefore(a,b)
+  }, 1);
+</script>

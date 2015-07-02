@@ -17,6 +17,7 @@ BugTracker::Application.routes.draw do
     end
     resources :projects do
       resources :bugs, only: [:create, :new]
+      get '/embeddable_script' => 'widgets#embeddable_script'
     end
     resources :admins, only: [:index, :show, :new, :create, :update, :destroy]
 
@@ -27,6 +28,9 @@ BugTracker::Application.routes.draw do
 
   resources :bugs
   resource :clients
+
+
+
   match "/getform" => "bugs#form", via: [:get]
   match "/getformstyle" => "bugs#style", via: [:get]
   # You can have the root of your site routed with "root"
