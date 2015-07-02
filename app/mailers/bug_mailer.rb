@@ -6,9 +6,9 @@ class BugMailer < ActionMailer::Base
     mail(to: "avi.fox-rosen@themechanism.com", subject: "A New Bug Has Been Added To #{@bug.project.name}")
   end
 
-  def alert_admin_assigned_to_bug(bug, admin_id)
+  def alert_admin_assigned_to_bug(bug)
     @bug = bug
-    @admin = Admin.find(admin_id)
+    @admin = @bug.admin
     mail(to: @admin.email, subject: "You have been assigned a new bug.")
   end
 

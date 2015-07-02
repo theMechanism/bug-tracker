@@ -269,3 +269,6 @@ DEPENDENCIES
   underscore-rails
   unicorn
   valid_attribute
+
+BUNDLED WITH
+   1.10.3

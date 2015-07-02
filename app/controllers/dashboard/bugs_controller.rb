@@ -47,12 +47,11 @@ module Dashboard
     def update
         @bug = Bug.find(params[:id])
         # p "inspect bug in update method #{@bug.inspect}"
-        initial_status = @bug.status
-        initial_admin = @bug.admin_id
+        initial_bug = @bug.dup
         respond_to do |format|
           if @bug.update_attributes(bug_params) #
 
-            BugMailerAlert::alert_mailer_of_relevant_changes(@bug, initial_admin)
+            BugMailerAlert::alert_mailer_of_relevant_changes(@bug, initial_bug)
             return_obj = {}
             return_obj['bug'] = @bug
             if bug_params.keys.count > 1
@@ -72,9 +71,9 @@ module Dashboard
                 end
             end
             format.json { render json: return_obj }
-            if initial_status != @bug.status
-                @bug.handle_status_change
-            end
+            # if initial_status != @bug.status
+            #     @bug.handle_status_change
+            # end
           else
             format.json { render json:
                 {
