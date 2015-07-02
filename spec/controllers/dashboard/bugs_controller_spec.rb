@@ -99,13 +99,13 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
       end
 
       if example.metadata[:status]
-        @bug.update_attributes(admin: Admin.first)
         @update_params = {
           status: "Verify"
         }
       end
 
       if example.metadata[:valid]
+        @bug.update_attributes(admin: Admin.first)
         patch :update, {
           id: @bug.id, 
           bug: @update_params,
@@ -114,7 +114,7 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
       end
     end
 
-    # SINGLE ATTRIBUTE -- ADMIN_ID
+    # SINGLE ATTRIBUTE -- reassign ADMIN_ID
 
     it 'valid admin, updates bug', :valid, :admin do 
       updated_admin = Bug.find(@bug.id).admin.id
@@ -135,6 +135,12 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
     it 'valid_admin params, returns leaderboard partial', :valid, :admin  do
       expect(response).to render_template(:partial => '_leaderboard.html.erb')
     end
+    it 'valid_admin params, sends emails to admins, old + new', :valid, :admin  do
+      mail_count = ActionMailer::Base.deliveries.count
+      expect(mail_count).to eq(2)
+    end
+
+    # expect { subject.send_instructions }.to change { ActionMailer::Base.deliveries.count }.by(1)
 
     # SINGLE ATTRIBUTE -- STATUS
 
@@ -157,18 +163,18 @@ RSpec.describe Dashboard::BugsController, :type => :controller do
     end
 
 
-    # it 'invalid params, renders form w errors displayed, no change to bug admin' do 
-    #   initial_admin = @bug.admin
-    #   patch :update, {
-    #     id: @bug.id, 
-    #     bug: {admin_id: Admin.last.id + 1},
-    #     format: :json
-    #   }
-    #   unchanged_admin = Bug.find(@bug.id).admin
-    #   errors = JSON.parse(response.body)
-    #   expect(errors).not_to be_empty
-    #   expect(initial_admin).to eq(unchanged_admin)
-    # end 
+    it 'invalid params, renders form w errors displayed, no change to bug admin' do 
+      initial_admin = @bug.admin
+      patch :update, {
+        id: @bug.id, 
+        bug: {admin_id: Admin.last.id + 1},
+        format: :json
+      }
+      unchanged_admin = Bug.find(@bug.id).admin
+      errors = JSON.parse(response.body)
+      expect(errors).not_to be_empty
+      expect(initial_admin).to eq(unchanged_admin)
+    end 
   end
 
 end
