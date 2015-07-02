@@ -6,5 +6,9 @@ FactoryGirl.define do
     name 'not blank'
 
     association :project, factory: :project
+
+    trait :w_admin do
+      association :admin, factory: :admin
+    end
   end
 end

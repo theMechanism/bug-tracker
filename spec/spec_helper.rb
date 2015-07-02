@@ -18,6 +18,9 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   config.include Devise::TestHelpers, :type => :controller
+  
+  config.include Rails.application.routes.url_helpers
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

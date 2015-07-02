@@ -5,7 +5,8 @@ class Bug < ActiveRecord::Base
 
   belongs_to :admin
   belongs_to :project
-  has_many :comments, dependent: :destroy
+  has_many :comments, 
+    dependent: :destroy
 
 	VALID_STATUS = ['Open', 'Verify', 'Closed']
 

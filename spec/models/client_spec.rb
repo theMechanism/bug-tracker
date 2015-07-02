@@ -17,8 +17,8 @@ RSpec.describe Client, :type => :model do
       c_count = Comment.all.count
       p = client.projects.create(name: 'big project')
       b = p.bugs.create(description: 'bug', name:'buggy bug')
-      c = b.comments.create(content: 'foo')
-      
+      c = b.comments.create(content: 'foo', admin: create(:admin))
+
       expect(Project.all.count).to eq(p_count + 1)
       expect(Bug.all.count).to eq(b_count + 1)
       expect(Comment.all.count).to eq(c_count + 1)

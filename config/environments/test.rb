@@ -32,6 +32,8 @@ BugTracker::Application.configure do
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  # config.action_mailer.default_url_options = { :host => "test.yourhost.com" }
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 end
