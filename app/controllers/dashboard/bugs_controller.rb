@@ -21,17 +21,9 @@ module Dashboard
     end
 
     def create
-        p '#'*80
-        p 'chck the params'
-        p "#{params.inspect}"
         @project = Project.find(params[:project_id])
-        p 'chck the bug_params'
-        p "#{bug_params.inspect}"
         @bug = @project.bugs.build(bug_params)
-        p 'chck the bug'
-        p "#{@bug.inspect}"
         if @bug.save
-            p 'bug DID save'
             render json: { 
                 redirect_url: dashboard_project_path(@project)
             }
@@ -73,10 +65,11 @@ module Dashboard
                     return_obj['callback'] = 'bugTable.updateStatus'
                     return_obj['html'] = render_to_string(partial: '/dashboard/bugs/status_table_cell.html.erb', :formats => [:html], locals: {bug: @bug})
                 end
-            end
-            
-                 
+            end 
             format.json { render json: return_obj }
+            p '#'*80
+            p 'just render a json - did it return? and now about to call the mailer'
+            @bug.alert_mailer_of_relevant_changes
           else
             format.json { render json: 
                 { 

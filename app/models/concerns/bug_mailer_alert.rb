@@ -1,16 +1,15 @@
 module BugMailerAlert
   extend ActiveSupport::Concern
 
-  included do
-    after_save :handle_admin_change
-    after_save :handle_status_change
-
+  def alert_mailer_of_relevant_changes
+    handle_admin_change
+    handle_status_change
   end
 
+  private
+
   def handle_admin_change
-    admin_changed = self.admin_id_changed?
-    
-    if admin_changed
+    if self.admin_id_changed?
       old_ad_id = self.admin_id_was
       new_ad_id = self.admin_id
       
@@ -21,8 +20,6 @@ module BugMailerAlert
 
   def handle_status_change
     if self.status_changed?
-      # p '#'*80
-      # p 'fires on create. derp'
       case self.status 
       when 'Verify'
         BugMailer.alert_project_manager_that_bug_needs_verification(self)
