@@ -28,7 +28,6 @@ module Dashboard
                 redirect_url: dashboard_project_path(@project)
             }
         else
-            p 'bug did NOT save'
             render :new, layout: false
         end
     end
@@ -46,12 +45,11 @@ module Dashboard
     
     def update 
         @bug = Bug.find(params[:id])
+        # p "inspect bug in update method #{@bug.inspect}"
         initial_status = @bug.status
         initial_admin = @bug.admin_id
         respond_to do |format|
           if @bug.update_attributes(bug_params) #
-            p '#'*80
-            p 'bug did update... i think'
             return_obj = {}
             return_obj['bug'] = @bug
             if bug_params.keys.count > 1 
@@ -73,17 +71,15 @@ module Dashboard
             format.json { render json: return_obj }
             if initial_admin != @bug.admin.id
                 BugMailer.alert_admin_assigned_to_bug(@bug, @bug.admin.id).deliver
-                BugMailer.alert_admin_unassigned_from_bug(@bug, initial_admin).deliver
+
+                BugMailer.alert_admin_unassigned_from_bug(@bug, initial_admin).deliver if initial_admin
             end
             if initial_status != @bug.status
                 @bug.handle_status_change
             end
             
           else
-            p '#'*80
-            p 'else condition'
-            p "#{@bug.errors.full_messages }"
-            # binding.pry
+
             format.json { render json: 
                 { 
                     errors: @bug.errors.full_messages 

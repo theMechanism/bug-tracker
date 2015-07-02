@@ -12,6 +12,11 @@ FactoryGirl.define do
       email Faker::Internet.email
       password Faker::Internet.password
     end
+
+    trait :second_dev do 
+      name "Second Dev"
+      email Faker::Internet.email
+    end
   
   end
 
