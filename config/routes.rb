@@ -24,6 +24,8 @@ BugTracker::Application.routes.draw do
     if Rails.env.development?
       mount MailPreview => 'mail_preview'
     end
+
+    get '/test_page' => 'widgets#test_page'
   end
 
   resources :bugs

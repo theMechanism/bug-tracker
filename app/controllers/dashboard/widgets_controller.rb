@@ -9,5 +9,9 @@ module Dashboard
       render layout: false
     end
 
+    def test_page
+
+    end
+
   end
 end
