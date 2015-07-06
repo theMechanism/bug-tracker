@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Dashboard::WidgetsController, :type => :controller do
 
