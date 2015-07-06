@@ -5,7 +5,7 @@ module Dashboard
     skip_before_filter :deny_access, :only => [:test_page]
     
     layout "test_page", only: [:test_page]
-    
+
     def embeddable_script
       # CHECK THAT PROJECT IS ACTIVE
       @project = Project.find(params[:project_id])
@@ -14,7 +14,6 @@ module Dashboard
 
     def test_page
       @project = Project.last
-      # layout: test_page
     end
 
   end

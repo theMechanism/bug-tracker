@@ -3,6 +3,7 @@ BugTracker::Application.configure do
 
   # note from capybara -- may need this if random errors 
   # config.allow_concurrency = false
+  Capybara.javascript_driver = :webkit
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that

@@ -53,6 +53,7 @@ group :development, :test do
   gem 'faker'
   gem 'dotenv-rails'
   gem 'pry-byebug'
+  gem 'capybara-webkit'
 end
 
 gem 'rails_12factor', group: :production
