@@ -53,7 +53,8 @@ group :development, :test do
   gem 'faker'
   gem 'dotenv-rails'
   gem 'pry-byebug'
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit' # headless testing would be preferable, but iframe tests fail. so selenium it is
+  gem 'selenium-webdriver', '~> 2.46.2'
 end
 
 gem 'rails_12factor', group: :production
