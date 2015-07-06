@@ -3,7 +3,8 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
-require 'capybara'
+require 'capybara/rails'
+require 'capybara/rspec'
 require 'devise'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -20,6 +21,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   
   config.include Rails.application.routes.url_helpers
+  config.include Capybara::DSL
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
   # ## Mock Framework
   #
