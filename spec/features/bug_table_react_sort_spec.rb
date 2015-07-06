@@ -1,9 +1,13 @@
 require 'spec_helper'
 
-describe "iframe actions on test_page", type: :feature do
+describe "bug sort table in dashboard/bugs/index page", type: :feature do
   before(:each) do |example|
+    @bug = create(:bug)
 
-    create(:project)
+    @project = @bug.project
+    @project_manager =  @project.admin
+    second_dev
+
 
     if example.metadata[:user_clicks_n_expands] 
       visit dashboard_test_page_path

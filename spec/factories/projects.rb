@@ -5,6 +5,7 @@ FactoryGirl.define do
   	name 'My Buggy Project'
     git_repo_url Faker::Internet.url
     dev_server_url Faker::Internet.url
+    active true
 
     association :client, factory: :client
     association :admin, factory: :project_manager

@@ -9,6 +9,7 @@ module Dashboard
     def embeddable_script
       # CHECK THAT PROJECT IS ACTIVE
       @project = Project.find(params[:project_id])
+      @client = @project.client
       render layout: false
     end
 
