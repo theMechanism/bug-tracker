@@ -11,6 +11,16 @@
   </li>
 </ul>
 
+<%= react_component(
+  'BugSortApp',
+  {
+    admins_path: dashboard_admins_path,
+    bugs_path: dashboard_admin_bugs_path(@admin),
+    projects_path: dashboard_projects_path
+  }
+
+) %>
+
 <!-- < % @bugs.each do |b| %>
   <p>< %= b.inspect %></p>
 < % end %>

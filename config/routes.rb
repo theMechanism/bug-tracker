@@ -19,8 +19,10 @@ BugTracker::Application.routes.draw do
       resources :bugs, only: [:create, :new]
       get '/embeddable_script' => 'widgets#embeddable_script'
     end
-    resources :admins, only: [:index, :show, :new, :create, :update, :destroy]
-
+    resources :admins do#, only: [:index, :show, :new, :create, :update, :destroy]
+      resources :bugs, only: :index
+    end
+    
     if Rails.env.development?
       mount MailPreview => 'mail_preview'
     end
