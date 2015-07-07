@@ -11,8 +11,18 @@ module Dashboard
 
     def show
     end
+
     def update
+        @admin = Admin.find(params[:id])
+        if @admin.update_attributes(admin_params)
+            render json: { 
+                redirect_url: dashboard_admin_path(@admin)
+            }
+        else
+            render :edit, layout: false
+        end
     end
+
     def destroy
     end
 
@@ -30,6 +40,11 @@ module Dashboard
         @modal_urls = {
             edit_admin: edit_dashboard_admin_path(@admin)
         }.to_json.html_safe
+    end
+
+    private 
+    def admin_params
+      params.require(:admin).permit(:name, :is)
     end
   end
 end
