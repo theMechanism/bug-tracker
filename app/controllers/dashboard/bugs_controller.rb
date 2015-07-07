@@ -5,6 +5,9 @@ module Dashboard
     before_filter :deny_access, :unless => :is_admin?
 
     def index
+        p '#'*80
+        p 'admin scoped bugs, heres the params'
+        p "#{params.inspect}"
         respond_to do |format|
             format.html
             format.json { render json: Bug.all }

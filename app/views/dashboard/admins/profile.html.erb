@@ -1,6 +1,6 @@
 <h3>What should I see in my profile page?</h3>
 
-<ul>
+<!-- <ul>
   <li>
     All bugs assigned to me, sortable by 
     <ul>
@@ -9,9 +9,21 @@
       <li>project is active</li>
     </ul>
   </li>
-</ul>
+</ul> -->
 
-<%= react_component(
+<h4>My Bugs</h4>
+<div>
+  <%= content_tag(:a, fa_icon('plus', text: "Edit My Shit"), class: 'btn  btn-default new_bug' )%>
+</div>
+<%= render 'dashboard/bugs/table', bugs: @bugs %>
+<%= render 'shared/modal', modal_urls: @modal_urls %>
+
+
+<!--  
+
+  MAYBE THE SORTER IS NOT NECESSARY FOR PROFILE PAGE? 
+
+< %= react_component(
   'BugSortApp',
   {
     admins_path: dashboard_admins_path,
@@ -21,17 +33,4 @@
 
 ) %>
 
-<!-- < % @bugs.each do |b| %>
-  <p>< %= b.inspect %></p>
-< % end %>
-
-<hr>
-
-< % @projects.each do |p| %>
-  <p>< %= p.inspect %></p>
-< % end %> -->
-
-<script>
-  var bugs = <%= @bugs.to_json.html_safe %>
-
-</script>
+-->
