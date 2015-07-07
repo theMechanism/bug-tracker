@@ -18,7 +18,7 @@ module Dashboard
 
     def edit
         @admin = Admin.find(params[:id])
-
+        render layout: false
     end
 
     def profile
