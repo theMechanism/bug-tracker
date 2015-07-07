@@ -7,9 +7,11 @@ module Dashboard
     end
 
     def create
+
     end
 
     def show
+        redirect_to dashboard_path if params[:id].to_i == current_admin.id
     end
 
     def update
