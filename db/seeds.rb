@@ -22,6 +22,13 @@ when "development"
   )
   clients = []
   admins = []
+
+  clients << Client.create(email: 'avi.fox-rosen@themechanism.com',
+      name_of_co: 'Avi FR Manufacturing',
+      name_of_primary_contact: 'Avi Client',
+      misc_info: 'who the hell owns this company anyway ?',
+      password: 'password'
+    )
   
   10.times do 
     clients << Client.create(email: Faker::Internet.email,
