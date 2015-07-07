@@ -46,7 +46,7 @@ module Dashboard
 
     private 
     def admin_params
-      params.require(:admin).permit(:name, :is)
+      params.require(:admin).permit(:name, :is_project_manager)
     end
   end
 end
