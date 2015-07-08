@@ -14,7 +14,7 @@
 <div class="full-width-header">
   <div class="bar"></div>
   <div class="absolute-content-wrp extra-padding">
-    <h1 class='col-md-12'><%=@client.project.name.upcase || ''%></h1>
+    <h1 class='col-md-12'><%=@client.name_of_co.upcase || ''%></h1>
 
   </div>
 
@@ -32,7 +32,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @client.project.bugs.each do |bug| %>
+        <% @client.projects.first.bugs.each do |bug| %>
 
           <tr class='col-md-12 margin-top'>
             <td class="status <%= bug.status.downcase %>"><div class="bug-icn"></div></td>
@@ -43,7 +43,7 @@
             <td class='align-left'>
               <div class="bug-desc"><%= bug.description.to_s[0..40].gsub(/\s\w+$/,'...') %></div>
               <div class="see-more <%=bug.id%>">See more...</div>
-            </td>
+            </td> 
           </tr>
           <tr class='more-info <%=bug.id%>'>
             <td colspan='0' class='data-cont'>

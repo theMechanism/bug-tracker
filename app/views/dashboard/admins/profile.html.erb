@@ -1,27 +1,38 @@
 <h3>What should I see in my profile page?</h3>
 
-<ul>
+<div>
+  <%= content_tag(:a, fa_icon('plus', text: "Edit My Profile"), class: 'btn  btn-default edit_admin' )%>
+</div>
+
+<ul class='list'>
   <li>
-    All bugs assigned to me, sortable by 
-    <ul>
-      <li>project</li>
-      <li>still open</li>
-      <li>project is active</li>
-    </ul>
+    <%= @admin.name %>
+  </li>
+  <li>
+    <%= @admin.email %>
   </li>
 </ul>
 
-<!-- < % @bugs.each do |b| %>
-  <p>< %= b.inspect %></p>
-< % end %>
 
-<hr>
+<h4>Bugs Assigned to Me</h4>
+<%= render 'dashboard/bugs/table', bugs: @bugs %>
 
-< % @projects.each do |p| %>
-  <p>< %= p.inspect %></p>
-< % end %> -->
 
-<script>
-  var bugs = <%= @bugs.to_json.html_safe %>
+<%= render 'shared/modal', modal_urls: @modal_urls %>
 
-</script>
+
+<!--  
+
+  MAYBE THE SORTER IS NOT NECESSARY FOR PROFILE PAGE? 
+
+< %= react_component(
+  'BugSortApp',
+  {
+    admins_path: dashboard_admins_path,
+    bugs_path: dashboard_admin_bugs_path(@admin),
+    projects_path: dashboard_projects_path
+  }
+
+) %>
+
+-->
