@@ -1,0 +1,2 @@
+class IframesController < ApplicationController
+end
