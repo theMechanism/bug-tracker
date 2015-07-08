@@ -62,12 +62,20 @@ when "development"
 
   projects = Project.all
 
+  browsers = ['Chrome', 'Firefox', 'IE', 'Safari']
+  oses = ['windows', 'osx', 'linux', 'atari']
+
   projects.each do |proj|
     5.times do 
       proj.bugs.create(
         description: Faker::Lorem.sentence, 
         admin: admins.sample,
-        name: Faker::Lorem.word
+        name: Faker::Name.name,
+        url: Faker::Internet.url, 
+        browser_version: browsers.sample, 
+        status: "Open", 
+        created_at: Faker::Time.between(DateTime.now - 30, DateTime.now), 
+        os: oses.sample
       )
     end
   end
