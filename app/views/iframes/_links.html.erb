@@ -1,5 +1,9 @@
 <div id="tabs-3">
   
-    <h3>dude, here are some gnarly links for sure</h3>
+    <ul>
+      <li><%= link_to "Trello", root_url,  :target => "_blank" %></li>
+      <li><%= link_to project.client.name_of_co, root_url,  :target => "_blank" %></li>
+      <li><%= mail_to project.admin.email, 'Email your project manager' %></li>
+    </ul>
   
 </div>

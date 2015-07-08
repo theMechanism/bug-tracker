@@ -11,8 +11,8 @@
 
         <%= render 'tabs_menu' %>
         <%= render 'form' %>
-        <%= render 'table' %>
-        <%= render 'links' %>
+        <%= render 'table', bugs: @bugs %>
+        <%= render 'links', project: @project %>
       </div>
     </div>
   </div>
