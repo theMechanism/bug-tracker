@@ -24,8 +24,14 @@ class BugsController < ApplicationController
 		end
 	end
 	def form
-		html = File.read("public/mech-bug-tracker.html").to_s
-		json = {"html" => html}.to_json
+		p '#'*80
+		p 'in bugs controller'
+		p "#{params.inspect}"
+		# mech-bug-tracker.js
+		# html = File.read("public/mech-bug-tracker.html").to_s
+		js = File.read("public/mech-bug-tracker.js").to_s
+
+		json = {"js" => js}.to_json
 		callback = params[:callback]
 		jsonp = callback + "(" + json + ")"
 		render :text => jsonp,  :content_type => "text/javascript"
