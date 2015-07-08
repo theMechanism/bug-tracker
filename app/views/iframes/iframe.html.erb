@@ -3,10 +3,17 @@
     <div>Report A Bug!</div>
   </div>
   <div class="mech-bug-wrap left" id="mech-bug-report">
+
     <div class="mech-bug-padding">
       <div class="mech-bug-logo"></div>
       <div class="mech-bug-close">x</div>
-      <%= render 'bugs/form' %>
+      <div id="menu-tabs">
+
+        <%= render 'tabs_menu' %>
+        <%= render 'bugs/form' %>
+        <%= render 'table' %>
+        <%= render 'links' %>
+      </div>
     </div>
   </div>
   <%= render 'feedback' %>

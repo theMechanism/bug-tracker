@@ -7,6 +7,6 @@ class IframesController < ApplicationController
   layout 'iframe'
 
   def iframe
-
+    @project = Project.find(params[:id])
   end
 end
