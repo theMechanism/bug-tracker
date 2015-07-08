@@ -2,7 +2,8 @@
 <div id="tabs-2">
   
     <% bugs.each do |b| %>
-      <%= b.inspect %>
+      <p><%= b.name %> || <%= b.status %> || <%= b.created_at %> </p>
+      
     <% end %>
   
 </div>
