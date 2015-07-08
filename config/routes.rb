@@ -36,7 +36,9 @@ BugTracker::Application.routes.draw do
 
 
   # match "/getform" => "bugs#form", via: [:get]
-  get "projects/:id/getform" => "bugs#form", as: :project_iframe
+  get "projects/:id/iframe_load_script" => "bugs#form", as: :project_iframe_load_script
+  get "projects/:id/iframe" => "iframes#iframe", as: :project_iframe
+
   match "/getformstyle" => "bugs#style", via: [:get]
   # You can have the root of your site routed with "root"
 

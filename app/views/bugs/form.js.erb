@@ -8,10 +8,10 @@
 
   var //scriptName  = 'mech-bug-tracker.js',      // should match the name of this script
     // script_tag  = getScriptTag(scriptName),
-    serverURL   = "<%= root_url %>",
-    iframeFile  = 'iframe-mech-bug-tracker.html',
+    // serverURL   = "<%= root_url %>",
+    iframeFile  = "<%= project_iframe_url(@project) %>",
     depends   = {
-      'easyXDM': serverURL + 'js/easyXDM.min.js'
+      'easyXDM': "<%= root_url %>" + 'js/easyXDM.min.js'
     };
 
 
@@ -87,7 +87,7 @@
     
     var rpc = new easyXDM.Rpc({
 
-      remote: serverURL + iframeFile,
+      remote: iframeFile,
       container: iframeContainer,
       // debugger;
       props: {
