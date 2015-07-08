@@ -24,14 +24,7 @@ class BugsController < ApplicationController
 		end
 	end
 	def form
-		p '#'*80
-		p 'in bugs controller'
-		p "#{params.inspect}"
 		@project = Project.find(params[:id])
-
-		p '#'*80
-		p 'project?'
-		p "#{@project.inspect}"
 		js = @project.active ? "form.js.erb" : "period_expired.js.erb"
 		script = render_to_string(js) 
 
