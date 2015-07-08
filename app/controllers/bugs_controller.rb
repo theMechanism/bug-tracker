@@ -29,7 +29,11 @@ class BugsController < ApplicationController
 		p "#{params.inspect}"
 		# mech-bug-tracker.js
 		# html = File.read("public/mech-bug-tracker.html").to_s
-		js = File.read("public/mech-bug-tracker.js").to_s
+		@project = Project.find(params[:id])
+		p '#'*80
+		p 'project?'
+		p "#{@project.inspect}"
+		js = render_to_string("form.js.erb") #File.read("public/mech-bug-tracker.js").to_s
 
 		json = {"js" => js}.to_json
 		callback = params[:callback]
