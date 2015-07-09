@@ -11,16 +11,7 @@
       'easyXDM': "<%= root_url %>" + 'js/easyXDM.min.js'
     };
 
-
-  Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-  };
-  
-  var scriptCount = Object.size(depends); // count of scripts required
+  var scriptCount = countObjProps(depends); // count of scripts required
   var scriptLoads = 0;  // count of script loaded
 
   for (var key in depends) {
@@ -34,6 +25,11 @@
     if (scriptLoads === scriptCount) {
       main();
     }
+  }
+
+  function countObjProps(obj){
+    var names = Object.getOwnPropertyNames(obj);
+    return names.length;
   }
 
   function loadScript (dependency, src, callback) {
