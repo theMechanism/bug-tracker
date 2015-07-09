@@ -1,7 +1,4 @@
-//= require jquery_2
-//= require jquery_ujs
+//= require_tree ./iframes
 
-if ($){
-  console.log('logging from the iframes.js manifest');  
-}
+
 
