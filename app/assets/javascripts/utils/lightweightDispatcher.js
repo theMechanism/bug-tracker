@@ -1,5 +1,6 @@
-function Dispatcher() {
+function Dispatcher(validActions) {
     this._listeners = [];
+    this._validActions = validActions || {};
 }
 
 Dispatcher.prototype = {

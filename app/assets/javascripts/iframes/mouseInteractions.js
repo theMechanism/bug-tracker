@@ -7,3 +7,7 @@ $( ".mech-bug-wrap" ).mouseenter(function() {
   $( this ).fadeTo( "fast", 1);
   console.log('out of bounds, bg should retract + become more opaque');
 });
+
+function chickenOrEgg(){
+  console.log('never intteeed');
+}

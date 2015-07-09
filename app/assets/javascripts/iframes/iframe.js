@@ -24,7 +24,7 @@ function mechBugInit() {
               parentInfo: {}
           }
       });
-
+    
     var mechBugTracker = $('#mech-bug-tracker'),
       mechBugReport = $('#mech-bug-report'),
       mechBugResponse = $('#mech-bug-response'),
@@ -61,7 +61,6 @@ function mechBugInit() {
         return $.cookie('mechBugTracker');
       }
     };
-
     mechBugFormName.val(cookieMonster.retrieveName());
 
     mechPullTab.x = 180;
