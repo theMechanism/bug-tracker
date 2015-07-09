@@ -15,6 +15,8 @@ module Dashboard
 
     def test_page
       @project = Project.last
+      # no layout to ensure not reloading scripts from tree
+      render layout: false
     end
 
   end
