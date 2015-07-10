@@ -6,23 +6,13 @@
 
   var console = window.console || { log: function() {} };
 
-  var scriptName  = '<%= project_iframe_load_script_path(@project) %>',      // should match the name of this script
-    script_tag  = getScriptTag(scriptName),
-    serverURL   = 'http://localhost:8888',
-    iframeFile  = 'iframe-mech-bug-tracker.html',
+  var iframeFile  = "<%= project_iframe_load_script_path(@project) %>",
+    serverURL   = "<%= root_url %>",
     depends   = {
-      'easyXDM': serverURL + 'js/easyXDM.min.js'
+      'easyXDM': "<%= root_url %>" + 'js/easyXDM.min.js'
     };
-    debugger;
-  Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-  };
 
-  var scriptCount = Object.size(depends); // count of scripts required
+  var scriptCount = countObjProps(depends); // count of scripts required
   var scriptLoads = 0;  // count of script loaded
 
   for (var key in depends) {
@@ -36,6 +26,11 @@
     if (scriptLoads === scriptCount) {
       main();
     }
+  }
+
+  function countObjProps(obj){
+    var names = Object.getOwnPropertyNames(obj);
+    return names.length;
   }
 
   function loadScript (dependency, src, callback) {
@@ -61,8 +56,7 @@
   }
 
   function main() {
-
-    var projectID = getParams(script_tag).projectID,
+    var projectID = <%= @project.id %>,
       iframeContainer = document.createElement('div');
 
     iframeContainer.style.position = 'fixed';
@@ -74,8 +68,10 @@
     iframeContainer.style['max-height'] = '100%';
     iframeContainer.style['max-width'] = '100%';
 
+    // console.log('constructed iframe, check it: ' + iframeContainer);
+    // console.log(iframeContainer);
     document.getElementsByTagName('body')[0].appendChild(iframeContainer);
-
+    // console.log('and we just appended to body');
 
     try {
       if (!projectID) {
@@ -84,8 +80,9 @@
     } catch(e) {
       console.log(e);
     }
-
+    
     var rpc = new easyXDM.Rpc({
+
       remote: serverURL + iframeFile,
       container: iframeContainer,
       props: {
@@ -133,16 +130,12 @@
           }
     });
   }
-
-  // Extract "GET" parameters from a JS include querystring
   function getScriptTag(script_name) {
     // Find all script tags
     var scripts = document.getElementsByTagName('script');
     // Look through them trying to find ourselves
     for(var i=0; i<scripts.length; i++) {
-      
-      if(scripts[i].src.indexOf( script_name) > -1) {
-        debugger;
+      if(scripts[i].src.indexOf('/' + script_name) > -1) {
         return scripts[i];
       }
     }
@@ -161,6 +154,5 @@
     }
     return p;
   }
-
 })();
 
