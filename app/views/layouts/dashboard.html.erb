@@ -35,7 +35,7 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag namespaced_assets(params[:controller]) , 'data-turbolinks-track' => true %>
   </head>
   <body class='dashboard'>
     <%= render 'layouts/menus/dashboard_menu' %>
