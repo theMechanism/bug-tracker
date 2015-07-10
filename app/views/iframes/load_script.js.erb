@@ -130,5 +130,29 @@
           }
     });
   }
+  function getScriptTag(script_name) {
+    // Find all script tags
+    var scripts = document.getElementsByTagName('script');
+    // Look through them trying to find ourselves
+    for(var i=0; i<scripts.length; i++) {
+      if(scripts[i].src.indexOf('/' + script_name) > -1) {
+        return scripts[i];
+      }
+    }
+    // No scripts match
+    return {};
+  }
+  function getParams(script_tag) {
+    // Get an array of key=value strings of params
+    var pa = script_tag.src.split('?').pop().split('&');
+
+    // Split each key=value into array, the construct js object
+    var p = {};
+    for(var j=0; j<pa.length; j++) {
+      var kv = pa[j].split('=');
+      p[kv[0]] = kv[1];
+    }
+    return p;
+  }
 })();
 
