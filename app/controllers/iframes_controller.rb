@@ -12,6 +12,9 @@ class IframesController < ApplicationController
   end
 
   def project_load_script
+    p '#'*80 
+    p 'request header'
+    p "#{request.referrer.inspect}"
     @project = Project.find(params[:id])
     js = @project.active ? "load_script.js.erb" : "period_expired.js.erb"
     script = render_to_string(js) 

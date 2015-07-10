@@ -55,7 +55,6 @@
   }
 
   function main() {
-
     var projectID = <%= @project.id %>,
       iframeContainer = document.createElement('div');
 
@@ -68,7 +67,10 @@
     iframeContainer.style['max-height'] = '100%';
     iframeContainer.style['max-width'] = '100%';
 
+    // console.log('constructed iframe, check it: ' + iframeContainer);
+    // console.log(iframeContainer);
     document.getElementsByTagName('body')[0].appendChild(iframeContainer);
+    // console.log('and we just appended to body');
 
     try {
       if (!projectID) {
@@ -127,8 +129,6 @@
               }
           }
     });
-    
   }
-
 })();
 
