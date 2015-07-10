@@ -1,0 +1,1 @@
+http://pristinecrap.com/2013/12/31/easyxdm-made-easy-really/

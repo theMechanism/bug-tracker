@@ -6,7 +6,8 @@
 
   var console = window.console || { log: function() {} };
 
-  var iframeFile  = "<%= project_iframe_url(@project) %>",
+  var iframeFile  = "<%= project_iframe_path(@project) %>",
+    serverURL   = "<%= root_url %>",
     depends   = {
       'easyXDM': "<%= root_url %>" + 'js/easyXDM.min.js'
     };
@@ -82,9 +83,8 @@
     
     var rpc = new easyXDM.Rpc({
 
-      remote: iframeFile,
+      remote: serverURL + iframeFile,
       container: iframeContainer,
-      // debugger;
       props: {
         id: 'mech-bug-iframe',
         frameborder: '0',
