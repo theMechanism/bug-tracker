@@ -2,13 +2,14 @@
 
 console.log('drop in the big boy');
 
-WebFont.load({
-  google: {
-    families: ['Open Sans:400,700']
-  },
-  active: mechBugInit
-});
+// WebFont.load({
+//   google: {
+//     families: ['Open Sans:400,700']
+//   },
+//   active: mechBugInit
+// });
 
+mechBugInit();
 
 function mechBugInit() {
   'use strict';

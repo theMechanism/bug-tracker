@@ -1,12 +1,13 @@
 /* global jQuery, easyXDM, Modernizr, bowser, console, WebFont */
 
-WebFont.load({
-	google: {
-		families: ['Open Sans:400,700']
-	},
-	active: mechBugInit
-});
+// WebFont.load({
+// 	google: {
+// 		families: ['Open Sans:400,700']
+// 	},
+// 	active: mechBugInit
+// });
 
+mechBugInit();
 
 function mechBugInit() {
 	'use strict';

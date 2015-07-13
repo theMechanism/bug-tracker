@@ -7,18 +7,16 @@ class IframesController < ApplicationController
   layout 'iframe'
 
   def iframe
-    p '#'*80
-    p 'checkout request url'
-    p "#{request.url.inspect}"
-    p 'checkout request host from deployed domain'
-    p "#{request.host.inspect}"
-    
     @project = Project.find_by(dev_server_url: request.host)
     @bugs = @project.bugs
-    respond_to do |format|
-        format.html
-        format.json { render json: @project }
-    end
+    # render layout: false
+    # respond_to do |format|
+    #     format.html
+    #     format.json { render json: @project }
+    # end
+    render json: {
+      content: render_to_string(partial: '/iframes/iframe.html.erb', :formats => [:html], locals: {project: @project, bugs: @bugs})
+    }
   end
 
   def project_load_script
