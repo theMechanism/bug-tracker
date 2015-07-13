@@ -7,7 +7,13 @@ class IframesController < ApplicationController
   layout 'iframe'
 
   def iframe
-    @project = Project.find(params[:id])
+    p '#'*80
+    p 'checkout request url'
+    p "#{request.url.inspect}"
+    p 'checkout request host from deployed domain'
+    p "#{request.host.inspect}"
+    
+    @project = Project.find_by(dev_server_url: request.host)
     @bugs = @project.bugs
     respond_to do |format|
         format.html
@@ -16,9 +22,9 @@ class IframesController < ApplicationController
   end
 
   def project_load_script
-    p '#'*80 
-    p 'request header'
-    p "#{request.referrer.inspect}"
+    # p '#'*80 
+    # p 'request header'
+    # p "#{request.referrer.inspect}"
     @project = Project.find(params[:id])
     js = @project.active ? "load_script.js.erb" : "period_expired.js.erb"
     script = render_to_string(js) 

@@ -9,8 +9,7 @@ class Project < ActiveRecord::Base
   validates_associated :client
 
   validates :git_repo_url, format: { with: URI.regexp }, if: Proc.new { |a| a.git_repo_url.present? }, allow_nil: true
-  validates :dev_server_url, format: { with: URI.regexp }, if: Proc.new { |a| a.dev_server_url.present? }, allow_nil: true
-
+  validates :dev_server_url, uniqueness: true, allow_nil: true
   validate :admin_is_project_manager
 
   def bug_count

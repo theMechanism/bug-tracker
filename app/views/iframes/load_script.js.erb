@@ -89,13 +89,15 @@
     var rpc = new easyXDM.Rpc({
       remote: serverURL + iframeFile,
       container: iframeContainer,
+      
       props: {
-        id: 'mech-bug-iframe',
+        id: 'mech-bug-iframe project_id_<%= @project.id%>',
         frameborder: '0',
         scrolling: 'no',
         marginwidth: '0',
         marginheight: '0',
         allowTransparency: 'true',
+        special_url: '<%= project_iframe_path(@project) %>',
         style: {
           height: '100%',
           width: '100%',
@@ -105,7 +107,14 @@
     },
     {
       local: {
-              resizeiFrame: function (widthReq, heightReq, allowScroll) {
+        getCustomStructure: function(passingString){
+          console.log();
+          $.getJSON(serverURL + 'iframe', function(r){
+            console.log('in ajax callback');
+            console.log(r);
+          });
+        },
+        resizeiFrame: function (widthReq, heightReq, allowScroll) {
           var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
             windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
