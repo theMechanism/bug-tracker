@@ -1,14 +1,7 @@
 <h3><%= @project.name %></h3>
 <div class="row">
   <div class="col-lg-8 col-md-8">
-    <div class="well">
-      <pre>
-&lt;script&gt;
-<%= render 'dashboard/widgets/code', :project => @project %>
-&lt;/script&gt;
-      </pre>
-      
-    </div>
+
     <h4>Project Details</h4>
     <%= render 'dashboard/projects/table', projects: [@project]  %>
 
@@ -17,6 +10,15 @@
       <%= content_tag(:a, fa_icon('plus', text: "New Bug"), class: 'btn  btn-default new_bug' )%>
     </div>
     <%= render 'dashboard/bugs/table', bugs: @bugs %>
+    <div class="well">
+      <h4>Embeddable script -- drop into project landing page</h4>
+      <pre>
+&lt;script&gt;
+<%= render 'dashboard/widgets/code', :project => @project %>
+&lt;/script&gt;
+      </pre>
+      
+    </div>
     
     
   </div>

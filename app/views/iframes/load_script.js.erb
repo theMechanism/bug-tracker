@@ -8,12 +8,11 @@
 
   var scriptName  = '<%= project_iframe_load_script_path(@project) %>',      // should match the name of this script
     script_tag  = getScriptTag(scriptName),
-    serverURL   = 'http://localhost:8888',
+    serverURL   = '<%= root_url %>',
     iframeFile  = 'iframe-mech-bug-tracker.html',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
-    debugger;
   Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {
@@ -142,7 +141,6 @@
     for(var i=0; i<scripts.length; i++) {
       
       if(scripts[i].src.indexOf( script_name) > -1) {
-        debugger;
         return scripts[i];
       }
     }

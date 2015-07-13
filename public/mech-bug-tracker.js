@@ -14,7 +14,6 @@
 			'easyXDM': serverURL + 'js/easyXDM.min.js'
 		};
 
-		debugger;
 	Object.size = function(obj) {
 		var size = 0, key;
 		for (key in obj) {
