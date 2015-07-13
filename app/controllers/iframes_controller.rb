@@ -9,6 +9,10 @@ class IframesController < ApplicationController
   def iframe
     @project = Project.find(params[:id])
     @bugs = @project.bugs
+    respond_to do |format|
+        format.html
+        format.json { render json: @project }
+    end
   end
 
   def project_load_script

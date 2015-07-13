@@ -1,5 +1,5 @@
 /* global console, easyXDM */
-
+// <%= project_iframe_path(@project)%>
 (function() {
 
   'use strict';
@@ -9,10 +9,12 @@
   var scriptName  = '<%= project_iframe_load_script_path(@project) %>',      // should match the name of this script
     script_tag  = getScriptTag(scriptName),
     serverURL   = '<%= root_url %>',
-    iframeFile  = 'iframe-mech-bug-tracker.html',
+    iframeFile  = 'footest.html',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
+
+  // TODO -- don't monkey patch Object...
   Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {
@@ -61,7 +63,7 @@
 
   function main() {
 
-    var projectID = getParams(script_tag).projectID,
+    var projectID = <%= @project.id %>,
       iframeContainer = document.createElement('div');
 
     iframeContainer.style.position = 'fixed';
