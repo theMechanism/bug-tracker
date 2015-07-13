@@ -1,6 +1,14 @@
 <h3><%= @project.name %></h3>
 <div class="row">
   <div class="col-lg-8 col-md-8">
+    <div class="well">
+      <pre>
+&lt;script&gt;
+<%= render 'dashboard/widgets/code', :project => @project %>
+&lt;/script&gt;
+      </pre>
+      
+    </div>
     <h4>Project Details</h4>
     <%= render 'dashboard/projects/table', projects: [@project]  %>
 

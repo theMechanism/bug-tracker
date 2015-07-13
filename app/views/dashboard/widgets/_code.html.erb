@@ -1,0 +1,15 @@
+setTimeout(
+  function(){
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = "<%= project_iframe_load_script_url(@project) %>" + "?callback=parseMechBugTrackerScript";
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a,b)
+}, 1);
+
+function parseMechBugTrackerScript(r){
+  var script = r.js;
+  console.log(script);
+  new Function(script)(); 
+}
