@@ -9,4 +9,5 @@ var rpc = new easyXDM.Rpc({},
 
 $(document).ready(function(){
   console.log(rpc);
+  rpc.parentInfo(function(parentInfo){console.log(parentInfo.custom_iframe_path)})
 });
