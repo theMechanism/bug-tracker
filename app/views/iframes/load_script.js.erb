@@ -7,7 +7,8 @@
   var console = window.console || { log: function() {} };
 
   var serverURL   = '<%= root_url %>',
-    iframeFile  = 'pointer-to-controller.html',
+    pointer  = 'pointer-to-controller.html',
+    custom_iframe_path = '<%= project_iframe_path(@project) %>',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
@@ -76,7 +77,7 @@
     }
 
     var rpc = new easyXDM.Rpc({
-      remote: serverURL + iframeFile,
+      remote: serverURL + pointer,
       container: iframeContainer,
       props: {
         id: 'mech-bug-iframe',
@@ -117,7 +118,8 @@
             width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
             height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
             projectID: projectID,
-            url: window.location.href
+            url: window.location.href,
+            custom_iframe_path: custom_iframe_path
           };
         }
       }, 
