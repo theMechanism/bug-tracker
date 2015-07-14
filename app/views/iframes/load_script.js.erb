@@ -7,7 +7,7 @@
   var console = window.console || { log: function() {} };
 
   var serverURL   = '<%= root_url %>',
-    iframeFile  = '<%= project_iframe_path(@project) %>',
+    iframeFile  = 'pointer-to-controller.html',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
@@ -121,8 +121,10 @@
           };
         }
       }, 
-      request: function(){
-        
+      getMyContent: function(){
+        return {
+          url: 'this is the url'
+        }
       }
     });
   }
