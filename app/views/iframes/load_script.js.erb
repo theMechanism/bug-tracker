@@ -1,30 +1,18 @@
 /* global console, easyXDM */
-// <%= project_iframe_path(@project)%>
+// <%= project_iframe_path(@project) %>
 (function() {
 
   'use strict';
 
   var console = window.console || { log: function() {} };
 
-  var scriptName  = '<%= project_iframe_load_script_path(@project) %>',      // should match the name of this script
-    script_tag  = getScriptTag(scriptName),
-    serverURL   = '<%= root_url %>',
-    iframeFile  = 'footest.html',
+  var serverURL   = '<%= root_url %>',
+    iframeFile  = '<%= project_iframe_path(@project) %>',
     depends   = {
-      'easyXDM': serverURL + 'js/easyXDM.min.js',  
-      'appJS': serverURL + 'assets/iframes.js'
+      'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
 
-  // TODO -- don't monkey patch Object...
-  Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-  };
-
-  var scriptCount = Object.size(depends); // count of scripts required
+  var scriptCount = Object.getOwnPropertyNames(depends).length;
   var scriptLoads = 0;  // count of script loaded
 
   for (var key in depends) {
@@ -90,15 +78,13 @@
     var rpc = new easyXDM.Rpc({
       remote: serverURL + iframeFile,
       container: iframeContainer,
-      
       props: {
-        id: 'mech-bug-iframe project_id_<%= @project.id%>',
+        id: 'mech-bug-iframe',
         frameborder: '0',
         scrolling: 'no',
         marginwidth: '0',
         marginheight: '0',
         allowTransparency: 'true',
-        special_url: '<%= project_iframe_path(@project) %>',
         style: {
           height: '100%',
           width: '100%',
@@ -108,16 +94,9 @@
     },
     {
       local: {
-        getCustomStructure: function(passingString){
-          console.log();
-          $.getJSON(serverURL + 'iframe', function(r){
-            console.log('in ajax callback');
-            console.log(r);
-          });
-        },
         resizeiFrame: function (widthReq, heightReq, allowScroll) {
           var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-            windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+          windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
           var width = (widthReq < windowWidth) ? widthReq : windowWidth;
           var height = (heightReq < windowHeight) ? heightReq : windowHeight;
@@ -128,48 +107,24 @@
           var sc = (allowScroll) ? 'yes' : 'no';
           document.getElementById('mech-bug-iframe').scrolling = sc;
 
-                  return {
+          return {
             x: width,
             y: height
-                  };
-              },
-              parentInfo: function () {
-                return {
-                  width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-                  height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-                  projectID: projectID,
-                  url: window.location.href
-                };
-              }
-          }
-    });
-  }
-
-  // Extract "GET" parameters from a JS include querystring
-  function getScriptTag(script_name) {
-    // Find all script tags
-    var scripts = document.getElementsByTagName('script');
-    // Look through them trying to find ourselves
-    for(var i=0; i<scripts.length; i++) {
-      
-      if(scripts[i].src.indexOf( script_name) > -1) {
-        return scripts[i];
+            };
+        },
+        parentInfo: function () {
+          return {
+            width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+            height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+            projectID: projectID,
+            url: window.location.href
+          };
+        }
+      }, 
+      request: function(){
+        
       }
-    }
-    // No scripts match
-    return {};
-  }
-  function getParams(script_tag) {
-    // Get an array of key=value strings of params
-    var pa = script_tag.src.split('?').pop().split('&');
-
-    // Split each key=value into array, the construct js object
-    var p = {};
-    for(var j=0; j<pa.length; j++) {
-      var kv = pa[j].split('=');
-      p[kv[0]] = kv[1];
-    }
-    return p;
+    });
   }
 
 })();

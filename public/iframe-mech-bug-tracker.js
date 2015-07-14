@@ -1,13 +1,13 @@
 /* global jQuery, easyXDM, Modernizr, bowser, console, WebFont */
 
-// WebFont.load({
-// 	google: {
-// 		families: ['Open Sans:400,700']
-// 	},
-// 	active: mechBugInit
-// });
+WebFont.load({
+	google: {
+		families: ['Open Sans:400,700']
+	},
+	active: mechBugInit
+});
 
-mechBugInit();
+// mechBugInit();
 
 function mechBugInit() {
 	'use strict';
@@ -23,7 +23,7 @@ function mechBugInit() {
 	            parentInfo: {}
 	        }
 	    });
-
+		console.log(rpc);
 		var mechBugTracker = $('#mech-bug-tracker'),
 			mechBugReport = $('#mech-bug-report'),
 			mechBugResponse = $('#mech-bug-response'),
