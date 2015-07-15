@@ -7,23 +7,19 @@
 <body>
   <h3>i'm a new site, and deploy deploy</h3>
 
-  <script type="text/javascript">
-  setTimeout(
-    function(){
-      var a = document.createElement("script");
-      var b = document.getElementsByTagName("script")[0];
-      // a.src = "http://localhost:3000//mech-bug-tracker.js?projectID=41";
-      a.src = "http://localhost:3000/projects/41/getform" + "?callback=parseMechBugTrackerScript";
-      a.async = true;
-      a.type = "text/javascript";
-      b.parentNode.insertBefore(a,b)
-  }, 1);
 
-  function parseMechBugTrackerScript(r){
-    var script = r.js;
-    console.log(script);
-    new Function(script)(); 
-  }
+<script>
+setTimeout(
+  function(){
+    var a = document.createElement("script");
+    var b = document.getElementsByTagName("script")[0];
+    a.src = "http://localhost:3000/projects/3/iframe_load_script";
+    a.async = true;
+    a.type = "text/javascript";
+    b.parentNode.insertBefore(a,b)
+}, 1);
+
 </script>
+      
 </body>
 </html>
