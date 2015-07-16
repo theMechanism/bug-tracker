@@ -2,29 +2,30 @@
 
 console.log('drop in the big boy');
 
-// WebFont.load({
-//   google: {
-//     families: ['Open Sans:400,700']
-//   },
-//   active: mechBugInit
-// });
+WebFont.load({
+  google: {
+    families: ['Open Sans:400,700']
+  },
+  active: mechBugInit
+});
 
-mechBugInit();
+// mechBugInit();
 
 function mechBugInit() {
   'use strict';
 
   var console = window.console || { log: function() {} };
 
-  jQuery(document).ready(function($) {
+  // jQuery(document).ready(function($) {
 
-    var rpc = new easyXDM.Rpc({},
-      {
-          remote: {
-              resizeiFrame: {},
-              parentInfo: {}
-          }
-      });
+    // var rpc = new easyXDM.Rpc({},
+    //   {
+    //       remote: {
+    //           resizeiFrame: {},
+    //           parentInfo: {}
+    //       }
+    //   });
+    console.log('start init');
     
     var mechBugTracker = $('#mech-bug-tracker'),
       mechBugReport = $('#mech-bug-report'),
@@ -269,5 +270,5 @@ function mechBugInit() {
       }
     }
 
-  });
+  // });
 }

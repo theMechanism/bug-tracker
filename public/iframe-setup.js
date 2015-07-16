@@ -13,10 +13,13 @@ var rpc = new easyXDM.Rpc({},
 
 $(document).ready(function(){
   console.log(rpc);
-  rpc.parentInfo(function(parentInfo){console.log('via parentInfo func => ' + parentInfo.custom_iframe_path)})
 
   rpc.customIframeContent(function(customIframeContent){
     console.log('via customIframeContent => ' + customIframeContent.url);
+    $.get(customIframeContent.url, function(r){
+      // console.log(r);
+      $('body').append(r);
+    });
   });
 
 
