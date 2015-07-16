@@ -5,8 +5,7 @@ console.log('drop in the big boy');
 WebFont.load({
   google: {
     families: ['Open Sans:400,700']
-  },
-  active: mechBugInit
+  }
 });
 
 // mechBugInit();
@@ -26,7 +25,7 @@ function mechBugInit() {
     //       }
     //   });
     console.log('start init');
-    
+
     var mechBugTracker = $('#mech-bug-tracker'),
       mechBugReport = $('#mech-bug-report'),
       mechBugResponse = $('#mech-bug-response'),
@@ -54,7 +53,7 @@ function mechBugInit() {
       hasTransitions = (Modernizr.csstransforms && Modernizr.csstransitions),
       views = [mechBugReport, mechBugResponse, mechBugError, mechPullTab];
 
-
+      console.log(views);
     var cookieMonster = {
       setName: function(name) {
         $.cookie('mechBugTracker', name);

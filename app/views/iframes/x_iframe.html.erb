@@ -1,0 +1,64 @@
+    <div id="mech-bug-tracker">
+      <div id="mech-pull-tab" class="mech-pull-tab">
+        <div>Report A CHicken!</div>
+      </div>
+      <div class="mech-bug-wrap left" id="mech-bug-report">
+        <div class="mech-bug-padding">
+          <div class="mech-bug-logo"></div>
+          <div class="mech-bug-close">x</div>
+          <form id="mech-bug-form" role="form" action="/bugs" method="post">
+            <div class="form-group">
+              <input type="text" name="bug[name]" class="form-control" id="form-name" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <fieldset>
+                <textarea class="form-control" name="bug[description]" id="form-description" placeholder="Description of Bug"></textarea>
+              </fieldset>
+            </div>
+            <a id='mech-bug-submit' class="btn btn-default">Submit</a>
+            <!-- the href target should be client_url, served by controller -->
+            <a href='/' target='_blank' id='mech-bug-list' class="btn btn-default">View Bugs</a>
+          </form>
+        </div>
+      </div>
+      <div class="mech-bug-wrap down" id="mech-bug-response">
+        <div class="mech-bug-padding">
+          <div class="mech-bug-logo"></div>
+          <div class="mech-bug-close">x</div>
+          <div class='mech-bug-message'>
+            <h1>Thank you for your submission.</h1>
+            <div class="mech-bug-more"><span class='more'>See more...</span><span class='less'>See less...</span></div>
+          </div>
+          <div class="mech-bug-info" id="mech-bug-info">
+            <div>Bug ID #: <span id='mech-bug-id'></span></div>
+            <div>User Name: <span id='mech-bug-user-name'></span></div>
+            <div>Description: <span id='mech-bug-description'></span></div>
+            <div>URL: <span id='mech-bug-url'></span></div>
+            <div>Browser: <span id='mech-bug-browser'></span></div>
+            <div>Browser Version: <span id='mech-bug-browser-version'></span></div>
+            <div>Browser Width: <span id='mech-bug-width'></span></div>
+            <div>Browser Height: <span id='mech-bug-height'></span></div>
+            <div>Created At: <span id='mech-bug-created'></span></div>
+            <div>User Agent: <span id='mech-bug-ua'></span></div>
+            <div>Operating System: <span id='mech-bug-os'></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mech-bug-wrap down" id="mech-bug-error">
+        <div class="mech-bug-padding">
+          <div class="mech-bug-logo"></div>
+          <div class="mech-bug-close">x</div>
+          <div class='mech-bug-message'>
+            <h1>There was an error</h1>
+            <div class="mech-bug-more"><span class='more'>See more...</span><span class='less'>See less...</span></div>
+          </div>
+          <div class="mech-bug-info" id="mech-bug-error-info">
+          </div>
+        </div>
+      </div>
+    </div>
+    </script>
+    
+    <%= javascript_include_tag params[:controller], 'data-turbolinks-track' => true %>
+  <!-- </body>
+</html> -->

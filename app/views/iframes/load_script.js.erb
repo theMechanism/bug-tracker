@@ -9,6 +9,7 @@
   var serverURL   = '<%= root_url %>',
     pointer  = 'pointer-to-controller.html',
     custom_iframe_content = '<%= project_iframe_path(@project) %>',
+    iframe_js = "/assets/iframes.js",
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
@@ -124,7 +125,8 @@
         },
         customIframeContent: function(){
           return {
-            url: custom_iframe_content
+            url: custom_iframe_content,
+            iframe_js: iframe_js
           }
         }
       }

@@ -1,7 +1,6 @@
 module IframesHelper
 
-  def javascript_includer
-    puts 'js baby'
-    javascript_include_tag controller: 'iframes'
-  end
+  # def javascript_include_tag
+  #   puts 'js baby'
+  # end
 end

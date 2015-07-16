@@ -38,6 +38,7 @@ BugTracker::Application.routes.draw do
   # match "/getform" => "bugs#form", via: [:get]
   get "projects/:id/iframe_load_script" => "iframes#project_load_script", as: :project_iframe_load_script
   get "projects/:id/iframe" => "iframes#iframe", as: :project_iframe
+  get "projects/:id/iframe_js" => "iframes#iframe_js", as: :project_iframe_js
 
   get "iframe" => "iframes#iframe", as: :iframe
   get "projects/:id/iframe_style" => "iframes#style", as: :project_iframe_style
