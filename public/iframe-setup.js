@@ -12,7 +12,7 @@ var rpc = new easyXDM.Rpc({},
 });
 
 var returnedHtml;
-
+// $.getScript(customIframeContent.iframe_js);
 $(document).ready(function(){
   console.log(rpc);
 

@@ -7,12 +7,12 @@ class IframesController < ApplicationController
   layout 'iframe'
 
   def iframe
-    p '#'*80
-    p 'params'
-    p "#{params.inspect}"
-    p '#'*80
-    p 'request'
-    p "#{request.inspect}"
+    # p '#'*80
+    # p 'params'
+    # p "#{params.inspect}"
+    # p '#'*80
+    # p 'request'
+    # p "#{request.inspect}"
     @project = Project.find_by(dev_server_url: request.host)
     @bugs = @project.bugs
     render layout: false
