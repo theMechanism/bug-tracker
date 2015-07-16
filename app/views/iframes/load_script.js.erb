@@ -8,11 +8,12 @@
 
   var serverURL   = '<%= root_url %>',
     pointer  = 'pointer-to-controller.html',
-    custom_iframe_path = '<%= project_iframe_path(@project) %>',
+    custom_iframe_content = '<%= project_iframe_path(@project) %>',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
 
+    // console.log('custom_iframe_conten:=> ' + custom_iframe_content );
   var scriptCount = Object.getOwnPropertyNames(depends).length;
   var scriptLoads = 0;  // count of script loaded
 
@@ -119,13 +120,13 @@
             height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
             projectID: projectID,
             url: window.location.href,
-            custom_iframe_path: custom_iframe_path
+            custom_iframe_path: custom_iframe_content
           };
-        }
-      }, 
-      getMyContent: function(){
-        return {
-          url: 'this is the url'
+        },
+        customIframeContent: function(){
+          return {
+            url: custom_iframe_content
+          }
         }
       }
     });
