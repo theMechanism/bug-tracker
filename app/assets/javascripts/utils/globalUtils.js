@@ -19,17 +19,3 @@ var GlobalUtils = {
     }
   } 
 } 
-
-// function doThese (funcs, callback) {
-//       // this function takes an array of asynchronous functions with callbacks and executes the callback when they are all complete
-//       var counter = 0;
-//       $.each(funcs, function (index, func) {
-//         func(check);
-//       });
-//       function check() {
-//         counter++;
-//         if (counter === $(funcs).size()) {
-//           callback();
-//         }
-//       }
-//     }

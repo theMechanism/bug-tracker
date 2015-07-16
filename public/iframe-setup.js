@@ -1,6 +1,6 @@
 // the rpc functions are all defined in 
 // views/iframes/load_script.js.erb
-// the three empty objects are stubs until 
+// the three empty objects are stubs for the methods defined + queried from within the client's browser
 
 var rpc = new easyXDM.Rpc({},
 {
