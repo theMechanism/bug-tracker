@@ -13,17 +13,28 @@ class IframesController < ApplicationController
     # p '#'*80
     # p 'request'
     # p "#{request.inspect}"
-    @project = Project.find_by(dev_server_url: request.host)
+    p '#'*80
+    p 'parasmmmm'
+    p "#{params.inspect}"
+    @project = Project.find(params[:id])
     @bugs = @project.bugs
-    render layout: false
+    # render layout: false
     # render layout: false
     # respond_to do |format|
     #     format.html
     #     format.json { render json: @project }
     # end
-    # render json: {
-    #   content: render_to_string(partial: '/iframes/iframe.html.erb', :formats => [:html], locals: {project: @project, bugs: @bugs})
-    # }
+    render json: {
+      full_html: render_to_string(action: 'iframe', :formats => [:html], locals: {project: @project, bugs: @bugs}, layout: false),
+      components: {
+        parent: ,
+        mechPullTab:
+        mechBugReport:
+        mechBugResponse:
+        mechBugError:
+      }
+
+    }
   end
 
   def project_load_script

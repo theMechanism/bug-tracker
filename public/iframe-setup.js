@@ -5,11 +5,12 @@
 
 
 var returnedHtml;
+var rpc;
 // $.getScript(customIframeContent.iframe_js);
 $(document).ready(function(){
   console.log(rpc);
 
-  var rpc = new easyXDM.Rpc({},
+  rpc = new easyXDM.Rpc({},
   {
     remote: {
       resizeiFrame: {},
@@ -25,10 +26,11 @@ $(document).ready(function(){
     //   console.log(r);
     $.getScript(customIframeContent.iframe_js);
     // });
-    $.get(customIframeContent.url,function(r){
+    $.getJSON(customIframeContent.url,function(r){
       returnedHtml = r;
-      $('body').append(r);
+      $('body').append(r.content);
       mechBugInit();
+      console.log(r);
     });
   });
 
