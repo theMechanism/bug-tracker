@@ -5,3 +5,6 @@ the blog post that actually broke this down for me:
 
 http://pristinecrap.com/2013/12/31/easyxdm-made-easy-really/
 
+
+and about JS modules
+  http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html

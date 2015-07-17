@@ -11,21 +11,21 @@ WebFont.load({
 // mechBugInit();
 // var 
 var App;
-function mechBugInit() {
+function mechBugInit(htmlComponents) {
   'use strict';
 
   var console = window.console || { log: function() {} };
 
-    App = new ClientBugApp(rpc);
+    App = new ClientBugApp(rpc, htmlComponents);
     
     // Arbitrarily set to clients name-- is this the best use here? hold off
     // App.$domNodes.mechBugFormName.val(App.cookieMonster.retrieveName());
 
-    App.$domNodes.mechPullTab.x = 180;
+    // App.$domNodes.mechPullTab.x = 180;
 
-    $.each(App.views, function (index, element) {
-      App.$domNodes.mechBugTracker.css({'visibility': 'hidden'}).append(element);
-    });
+    // $.each(App.views, function (index, element) {
+    //   App.$domNodes.mechBugTracker.css({'visibility': 'hidden'}).append(element);
+    // });
 
     rpc.resizeiFrame(1000, 1000, false, function() {
       resizingFunctions.getDimensions(App.views, function() {

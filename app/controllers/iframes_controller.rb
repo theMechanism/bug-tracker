@@ -7,33 +7,14 @@ class IframesController < ApplicationController
   layout 'iframe'
 
   def iframe
-    # p '#'*80
-    # p 'params'
-    # p "#{params.inspect}"
-    # p '#'*80
-    # p 'request'
-    # p "#{request.inspect}"
     p '#'*80
     p 'parasmmmm'
     p "#{params.inspect}"
     @project = Project.find(params[:id])
     @bugs = @project.bugs
-    # render layout: false
-    # render layout: false
-    # respond_to do |format|
-    #     format.html
-    #     format.json { render json: @project }
-    # end
-    render json: {
-      full_html: render_to_string(action: 'iframe', :formats => [:html], locals: {project: @project, bugs: @bugs}, layout: false),
-      components: {
-        parent: ,
-        mechPullTab:
-        mechBugReport:
-        mechBugResponse:
-        mechBugError:
-      }
 
+    render json: {
+      html: render_to_string(action: 'iframe', :formats => [:html], locals: {project: @project, bugs: @bugs}, layout: false)
     }
   end
 
