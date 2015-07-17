@@ -16,9 +16,10 @@ function mechBugInit() {
 
   var console = window.console || { log: function() {} };
 
-    App = new ClientBugApp();
+    App = new ClientBugApp(rpc);
     
-    App.$domNodes.mechBugFormName.val(App.cookieMonster.retrieveName());
+    // Arbitrarily set to clients name-- is this the best use here? hold off
+    // App.$domNodes.mechBugFormName.val(App.cookieMonster.retrieveName());
 
     App.$domNodes.mechPullTab.x = 180;
 
