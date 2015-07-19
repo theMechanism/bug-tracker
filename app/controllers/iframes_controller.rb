@@ -12,7 +12,7 @@ class IframesController < ApplicationController
     p "#{params.inspect}"
     @project = Project.find(params[:id])
     @bugs = @project.bugs
-
+    @bug = @project.bugs.build
     render json: {
       html: render_to_string(action: 'iframe', :formats => [:html], locals: {project: @project, bugs: @bugs}, layout: false)
     }

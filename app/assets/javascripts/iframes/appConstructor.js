@@ -54,6 +54,7 @@ ClientBugApp.prototype = {
         });
       });
     });
+    // this.setState({selected_menu_option: '#form'});
   },
   setState: function(obj){
     var self = this;
