@@ -9,9 +9,10 @@ function getDomNodes($mountNode) {
       menu: {
         selects: $('.menu_select a')
       },
+      selected_content: $('#selected_content'),
       form: $('#mech-bug-form'),
-      bugsTable: 'table',
-      links: 'links'
+      bugsTable: $('#bugsTable'),
+      links: $('#links')
     },
     feedback: {
       response: $('#mech-bug-response'),

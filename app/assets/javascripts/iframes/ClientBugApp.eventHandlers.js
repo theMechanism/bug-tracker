@@ -12,6 +12,7 @@ ClientBugEventHandlers = function(App){
     App.resizingFunctions.fromTo(App.$domNodes.mechPullTab, App.$domNodes.controlPanel.parent);
   }
   handlers.menuSelect = function(e){
+    e.preventDefault();
     App.setState({selected_menu_option: $(e.target).attr('href')});
   }
   return handlers;

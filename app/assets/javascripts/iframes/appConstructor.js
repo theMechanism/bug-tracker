@@ -20,7 +20,8 @@ var ClientBugApp = function(crossDomRPC, html){
     expanded: false,
     selected_menu_option: ''
   };
-  this.testModule = TEST_MODULE(this);
+
+  // initialize module functions, pass the app context in for reference
   this.resizingFunctions = resizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
   this.init(html);
@@ -55,8 +56,23 @@ ClientBugApp.prototype = {
     });
   },
   setState: function(obj){
+    var self = this;
     var key = Object.getOwnPropertyNames(obj)[0];
-    this.state[key] = obj[key];
+    var isChange = ( self.state[key] !== obj[key] );
+    if (isChange){
+      self.state[key] = obj[key];
+      switch (key){
+        case 'selected_menu_option':
+          var nodeName = obj[key].match(/[a-zA-Z]+$/);
+          self.$domNodes.controlPanel.selected_content.html(
+            self.$domNodes.controlPanel[nodeName]);
+          break;
+        case 'expanded':
+          // do stuff
+          break;
+      }
+    } 
+    
   },
   remove: function(){
     var self = this;

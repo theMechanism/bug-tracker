@@ -10,9 +10,11 @@
       <div id="tabs">
 
         <%= render 'tabs_menu' %>
-        <%= render 'form' %>
-        <%= render 'table', bugs: @bugs %>
-        <%= render 'links', project: @project %>
+        <div id="selected_content">
+          <%= render 'form' %>
+          <%= render 'table', bugs: @bugs %>
+          <%= render 'links', project: @project %>
+        </div>
       </div>
     </div>
   </div>
