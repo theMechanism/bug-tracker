@@ -9,7 +9,7 @@
   var serverURL   = '<%= root_url %>',
     pointer  = 'pointer-to-controller.html',
     custom_iframe_content = '<%= project_iframe_path(@project) %>',
-    iframe_js = '<%= @js_path %>',
+    iframe_js = '<%= asset_path "iframes", type: :javascript %>',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };

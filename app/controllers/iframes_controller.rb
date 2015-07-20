@@ -28,7 +28,7 @@ class IframesController < ApplicationController
 
   def project_load_script
     @project = Project.find(params[:id])
-    @js_path = Rails.env == 'production' ? '/iframes.js' : '/assets/iframes.js'
+    # @js_path = asset_path "iframes", type: :javascript
     js = @project.active ? "load_script.js.erb" : "period_expired.js.erb"
     render :js => render_to_string(js)
   end
