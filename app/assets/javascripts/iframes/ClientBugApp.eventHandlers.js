@@ -17,10 +17,43 @@ ClientBugEventHandlers = function(App){
   };
   handlers.bugSubmit = function(e) {
     e.preventDefault();
-    console.log(e)
-    var submitFields = $(e.target).serializeArray();
-    console.log(submitFields);
+    var submitFields = {
+      'bug[name]': App.$domNodes.controlPanel.bugName.val(),
+      'bug[description]': App.$domNodes.controlPanel.bugDesc.val(),
+      'bug[os]': navigator.platform,
+      'bug[ua]': navigator.userAgent
+    };   
+    App.crossDomRPC.parentInfo(function(parentInfo){
+
+      submitFields['bug[project_id]'] = parentInfo.projectID;
+      submitFields['bug[url]'] = parentInfo.url;
+      
+      submitFields['bug[browser]'] = bowser.name;
+      submitFields['bug[browser_version]'] = bowser.version;
+      submitFields['bug[width]'] = parentInfo.width;
+      submitFields['bug[height]'] = parentInfo.height;
+      App.postToServer(submitFields);
+    }); 
   };
+  handlers.successfulBug = function(res){
+    console.log('success!!');
+  };
+  handlers.bugErrors = function(res){
+    console.log('oh shit');
+    App.$domNodes.feedback.errorInfo.detach();
+    App.$domNodes.feedback.error.height('auto');
+    $.each(res, function(index, error) {
+      App.$domNodes.feedback.errorInfo.append('<div>' + error + '</div>');
+    });
+
+    $('.mech-bug-padding', App.$domNodes.feedback.error).append(App.$domNodes.feedback.errorInfo);
+
+    App.$domNodes.controlPanel.form.trigger('reset');
+    // App.$domNodes.mechBugFormName.val(makeArray['bug[name]']);
+
+    App.resizingFunctions.fromTo(App.$domNodes.controlPanel.parent, App.$domNodes.feedback.error);
+
+  }
   return handlers;
   // handlers.bugSubmit = function(e) {
   //   e.preventDefault();

@@ -86,5 +86,19 @@ ClientBugApp.prototype = {
     this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
     this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
     // this.$domNodes.controlPanel.formSubmitButton.click(self.eventHandlers.handleSubmit);
+  }, 
+  postToServer: function(submitFields){
+    console.log('back in App, check the sub fields');
+    console.log(submitFields);
+    var self = this;
+    var url = self.$domNodes.controlPanel.form.attr('action');
+    $.post(url, submitFields).done(function(res){
+      if (res.id){
+        self.eventHandlers.successfulBug(res);
+      } else {
+        self.eventHandlers.bugErrors(res);
+      }
+    })
+    // App.$domNodes.controlPanel.formSubmitButton.addClass('loading');
   }
 }
