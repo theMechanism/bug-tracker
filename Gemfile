@@ -34,6 +34,7 @@ gem 'underscore-rails'
 gem 'react-rails', '~> 1.0' 
 
 gem "font-awesome-rails"
+gem 'faker'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -50,7 +51,7 @@ group :development, :test do
   gem 'capybara'
   gem 'quiet_assets'
   gem 'database_cleaner'
-  gem 'faker'
+  
   gem 'dotenv-rails'
   gem 'pry-byebug'
   # gem 'capybara-webkit' # headless testing would be preferable, but iframe tests fail. so selenium it is
