@@ -17,12 +17,12 @@ var App;
     });
 
     rpc.customIframeContent(function(customIframeContent){
-      $.getScript(customIframeContent.iframe_js);
-      $.getJSON(customIframeContent.url,function(r){
-        
-        App = new ClientBugApp(rpc, r.html);
-
-      });
+      $.getScript(customIframeContent.iframe_js)
+        .done($.getJSON(customIframeContent.url,function(r){
+          App = new ClientBugApp(rpc, r.html);
+        })
+      )
+      
     });
 
   });
