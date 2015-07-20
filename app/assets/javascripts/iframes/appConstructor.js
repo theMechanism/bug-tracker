@@ -68,7 +68,6 @@ ClientBugApp.prototype = {
             self.$domNodes.controlPanel[nodeName]);
           break;
         case 'expanded':
-          // do stuff
           break;
       }
     } 
@@ -100,7 +99,6 @@ ClientBugApp.prototype = {
     var self = this;
     this.crossDomRPC.customIframeContent(function(customIframeContent){
       $.get(customIframeContent.updated_bugs_table, function(res){
-        console.log(res);
         self.$domNodes.controlPanel.bugsTable = res.html;
       })
     });
