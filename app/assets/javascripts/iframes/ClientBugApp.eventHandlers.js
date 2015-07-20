@@ -36,7 +36,8 @@ ClientBugEventHandlers = function(App){
     }); 
   };
   handlers.successfulBug = function(res){
-    console.log('success!!');
+    App.resizingFunctions.fromTo(App.$domNodes.controlPanel.parent, App.$domNodes.feedback.response);
+    App.updateBugList();
   };
   handlers.bugErrors = function(res){
     console.log('oh shit');
@@ -49,8 +50,6 @@ ClientBugEventHandlers = function(App){
     $('.mech-bug-padding', App.$domNodes.feedback.error).append(App.$domNodes.feedback.errorInfo);
 
     App.$domNodes.controlPanel.form.trigger('reset');
-    // App.$domNodes.mechBugFormName.val(makeArray['bug[name]']);
-
     App.resizingFunctions.fromTo(App.$domNodes.controlPanel.parent, App.$domNodes.feedback.error);
 
   }

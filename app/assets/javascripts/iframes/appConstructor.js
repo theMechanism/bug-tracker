@@ -1,8 +1,7 @@
 var ClientBugApp = function(crossDomRPC, html){
   this.$mountNode = $('#mech-bug-tracker');
   this.$domNodes = {};
-  // this.views = [this.$domNodes.mechBugReport, this.$domNodes.mechBugResponse, this.$domNodes.mechBugError, this.$domNodes.mechPullTab];
-
+  
   // easyXDM library -- a bit tricky, see DevNotes folder 
   this.crossDomRPC = crossDomRPC;
 
@@ -37,7 +36,7 @@ ClientBugApp.prototype = {
     
     var pullTab = this.$domNodes.mechPullTab;
     pullTab.x = 180;
-    var views = [pullTab, self.$domNodes.controlPanel.parent];
+    var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
     
     this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
       self.resizingFunctions.getDimensions(views, function() {
@@ -85,11 +84,8 @@ ClientBugApp.prototype = {
     this.$domNodes.closeButtons.click(self.eventHandlers.close);
     this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
     this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
-    // this.$domNodes.controlPanel.formSubmitButton.click(self.eventHandlers.handleSubmit);
   }, 
   postToServer: function(submitFields){
-    console.log('back in App, check the sub fields');
-    console.log(submitFields);
     var self = this;
     var url = self.$domNodes.controlPanel.form.attr('action');
     $.post(url, submitFields).done(function(res){
@@ -98,7 +94,15 @@ ClientBugApp.prototype = {
       } else {
         self.eventHandlers.bugErrors(res);
       }
-    })
-    // App.$domNodes.controlPanel.formSubmitButton.addClass('loading');
+    });
+  },
+  updateBugList: function(){
+    var self = this;
+    this.crossDomRPC.customIframeContent(function(customIframeContent){
+      $.get(customIframeContent.updated_bugs_table, function(res){
+        console.log(res);
+        self.$domNodes.controlPanel.bugsTable = res.html;
+      })
+    });
   }
 }
