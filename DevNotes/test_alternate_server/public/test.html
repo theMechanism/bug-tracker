@@ -9,15 +9,32 @@
 
 
 <script>
+
+// LOCALHOST
+// setTimeout(
+//   function(){
+//     var a = document.createElement("script");
+//     var b = document.getElementsByTagName("script")[0];
+//     a.src = "http://localhost:3000/projects/3/iframe_load_script";
+//     a.async = true;
+//     a.type = "text/javascript";
+//     b.parentNode.insertBefore(a,b)
+// }, 1);
+
+// HEROKU SERVER
+
+
 setTimeout(
   function(){
     var a = document.createElement("script");
     var b = document.getElementsByTagName("script")[0];
-    a.src = "http://localhost:3000/projects/3/iframe_load_script";
+    a.src = "http://venus.themechanism.com/projects/1/iframe_load_script";
     a.async = true;
     a.type = "text/javascript";
     b.parentNode.insertBefore(a,b)
 }, 1);
+
+
 
 </script>
       
