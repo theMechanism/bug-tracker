@@ -10,6 +10,16 @@ BugTracker::Application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    # :domain => "mechanism.com",
+    :authentication => :login,
+    :user_name => ENV['GMAIL_ADDY'],
+    :password => ENV['GMAIL_PWORD']
+  }
+
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
