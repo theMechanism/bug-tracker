@@ -7,6 +7,9 @@ class IframesController < ApplicationController
   layout 'iframe'
 
   def iframe
+    p "#"*80
+    p 'params'
+    p "#{params.inspect}"
     @project = Project.find(params[:id])
     @bugs = @project.bugs
     @bug = @project.bugs.build
