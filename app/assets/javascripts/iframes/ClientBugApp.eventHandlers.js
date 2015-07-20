@@ -40,7 +40,6 @@ ClientBugEventHandlers = function(App){
     App.updateBugList();
   };
   handlers.bugErrors = function(res){
-    console.log('oh shit');
     App.$domNodes.feedback.errorInfo.detach();
     App.$domNodes.feedback.error.height('auto');
     $.each(res, function(index, error) {

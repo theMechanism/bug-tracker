@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-case Rails.env
-when "development"
+# case Rails.env
+# when "development"
 
   Admin.create(
     name: 'Avi FR',
@@ -89,6 +89,6 @@ when "development"
     )
   end
 
-when "production"
+# when "production"
    
-end
+# end
