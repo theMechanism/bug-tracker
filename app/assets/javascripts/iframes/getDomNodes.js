@@ -11,6 +11,7 @@ function getDomNodes($mountNode) {
       },
       selected_content: $('#selected_content'),
       form: $('form#new_bug'),
+      formSubmitButton: $('form a[href="#submit"]'),
       bugsTable: $('#bugsTable'),
       links: $('#links')
     },

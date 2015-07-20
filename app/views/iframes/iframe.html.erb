@@ -11,7 +11,7 @@
 
         <%= render 'tabs_menu' %>
         <div id="selected_content">
-          <%= render 'form' %>
+          <%= render 'form', bug: @bug, project: @project %>
           <%= render 'table', bugs: @bugs %>
           <%= render 'links', project: @project %>
         </div>

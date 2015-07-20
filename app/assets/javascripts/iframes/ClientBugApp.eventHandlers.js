@@ -10,11 +10,17 @@ ClientBugEventHandlers = function(App){
   };
   handlers.showControlPanel = function() {
     App.resizingFunctions.fromTo(App.$domNodes.mechPullTab, App.$domNodes.controlPanel.parent);
-  }
+  };
   handlers.menuSelect = function(e){
     e.preventDefault();
     App.setState({selected_menu_option: $(e.target).attr('href')});
-  }
+  };
+  handlers.bugSubmit = function(e) {
+    e.preventDefault();
+    console.log(e)
+    var submitFields = $(e.target).serializeArray();
+    console.log(submitFields);
+  };
   return handlers;
   // handlers.bugSubmit = function(e) {
   //   e.preventDefault();

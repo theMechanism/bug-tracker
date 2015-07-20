@@ -30,7 +30,11 @@ BugTracker::Application.routes.draw do
     get '/test_page' => 'widgets#test_page'
   end
 
-  resources :bugs
+  resources :bugs, except: :create
+
+  resources :projects do
+    resources :bugs, only: :create
+  end
   resource :clients
 
 

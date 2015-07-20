@@ -1,16 +1,16 @@
-<%= simple_form_for @bug do |f| %>
-
+<%= simple_form_for @bug, url: project_bugs_path(@project), remote: true	 do |f| %>
+ 
 	<%= f.input :name %>
 	<%= f.input :description %>
 
-	<%= f.input :url %>
-	<%= f.input :browser %>
-	<%= f.input :params %>
-	<%= f.input :width %>
-	<%= f.input :height %>
-	<%= f.input :browser_version %>
-	<%= f.input :os %>
-	<%= f.input :ua %>
+	<%= f.input :url, as: :hidden %>
+	<%= f.input :browser, as: :hidden %>
+	<%= f.input :params, as: :hidden %>
+	<%= f.input :width, as: :hidden %>
+	<%= f.input :height, as: :hidden %>
+	<%= f.input :browser_version, as: :hidden %>
+	<%= f.input :os, as: :hidden %>
+	<%= f.input :ua, as: :hidden %>
 
 	<%= f.button :submit %>
 

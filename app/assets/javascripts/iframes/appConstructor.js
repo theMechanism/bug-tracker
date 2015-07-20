@@ -21,7 +21,7 @@ var ClientBugApp = function(crossDomRPC, html){
     selected_menu_option: ''
   };
 
-  // initialize module functions, pass the app context in for reference
+  // initialize module functions, pass the App / 'this' context in for reference
   this.resizingFunctions = resizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
   this.init(html);
@@ -54,7 +54,7 @@ ClientBugApp.prototype = {
         });
       });
     });
-    // this.setState({selected_menu_option: '#form'});
+    this.setState({selected_menu_option: '#form'});
   },
   setState: function(obj){
     var self = this;
@@ -84,7 +84,7 @@ ClientBugApp.prototype = {
     this.$domNodes.mechPullTab.click(self.eventHandlers.showControlPanel);
     this.$domNodes.closeButtons.click(self.eventHandlers.close);
     this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
-    // this.$domNodes.controlPanel.form.submit(ClientBugEventHandlers.handleSubmit);
-    // this.$domNodes.mechBugSubmit.click(ClientBugEventHandlers.handleSubmit);
+    this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
+    // this.$domNodes.controlPanel.formSubmitButton.click(self.eventHandlers.handleSubmit);
   }
 }
