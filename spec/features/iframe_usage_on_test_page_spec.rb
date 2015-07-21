@@ -35,9 +35,7 @@ describe "iframe actions on test_page", type: :feature do
         fill_in('Name', :with => 'Fake Client')
         fill_in('Description', :with => 'oh my god this is teeeeerrrrriiiibbbblllleee')
         find('input[type="submit"]').click
-        # find('.mech-bug-message')
-        within_frame
-        wait_for_ajax
+        wait_for_iframe_ajax
         expect(page).to have_content('Thank')
         expect(Bug.count).to eq(first_bug_count + 1)
       end
