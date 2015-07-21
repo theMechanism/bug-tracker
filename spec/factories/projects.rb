@@ -9,5 +9,9 @@ FactoryGirl.define do
 
     association :client, factory: :client
     association :admin, factory: :project_manager
+
+    trait :active do
+      active true
+    end
   end
 end

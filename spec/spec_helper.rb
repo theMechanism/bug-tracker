@@ -30,6 +30,7 @@ RSpec.configure do |config|
   
   config.include Warden::Test::Helpers, type: :feature
   config.before :suite do
+    # Capybara.default_wait_time = 5
     Warden.test_mode!
   end
 

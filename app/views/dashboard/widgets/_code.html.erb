@@ -2,7 +2,7 @@ setTimeout(
   function(){
     var a = document.createElement("script");
     var b = document.getElementsByTagName("script")[0];
-    a.src = "<%= project_iframe_load_script_url(@project, {protocol: 'https'}) %>";
+    a.src = "<%= project_iframe_load_script_url(@project, {protocol: ssl_or_not_based_on_env }) %>";
     a.async = true;
     a.type = "text/javascript";
     b.parentNode.insertBefore(a,b)
