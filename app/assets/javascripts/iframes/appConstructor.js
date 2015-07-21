@@ -29,7 +29,7 @@ var ClientBugApp = function(crossDomRPC, html){
 ClientBugApp.prototype = {
   init: function(html){
     var self = this;
-    
+    this.crossDomRPC.customIframeContent(function(customIframeContent){console.log(customIframeContent);console.log('from init func')});
     this.$mountNode.css({'visibility': 'hidden'});
     this.$mountNode.append(html);
     this.$domNodes = getDomNodes(this.$mountNode);
