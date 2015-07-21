@@ -4,6 +4,7 @@ var ClientBugApp = function(crossDomRPC, html){
   
   // easyXDM library -- a bit tricky, see DevNotes folder 
   this.crossDomRPC = crossDomRPC;
+  this.sourceUrls = {};
 
   this.cookieMonster = {
     setName: function(name) {
@@ -29,6 +30,7 @@ var ClientBugApp = function(crossDomRPC, html){
 ClientBugApp.prototype = {
   init: function(html){
     var self = this;
+    this.cacheSourceUrls();
     this.crossDomRPC.customIframeContent(function(customIframeContent){
       var $head = $('head');
       self.createAndAppendStyle($head, customIframeContent.iframe_base_style);
@@ -60,13 +62,18 @@ ClientBugApp.prototype = {
     });
     this.setState({selected_menu_option: '#form'});
   },
+  cacheSourceUrls: function(){
+    var self = this;
+    this.crossDomRPC.customIframeContent(function(customIframeContent){
+      self.sourceUrls.style = customIframeContent.iframe_base_style;
+    });
+
+  },
   createAndAppendStyle: function($head, href){
-    console.log($head);
     var style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = href;
     $head.append(style);
-    console.log(style);
   },
   setState: function(obj){
     var self = this;
