@@ -1,4 +1,4 @@
-var ClientBugApp = function(crossDomRPC, html){
+var ClientBugApp = function(crossDomRPC){
   this.$mountNode = $('#mech-bug-tracker');
   this.$domNodes = {};
   
@@ -24,11 +24,11 @@ var ClientBugApp = function(crossDomRPC, html){
   // initialize module functions, pass the App / 'this' context in for reference
   this.resizingFunctions = resizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
-  this.init(html);
+  this.init();
 }
 
 ClientBugApp.prototype = {
-  init: function(html){
+  init: function(){
     var self = this;
     this.cacheSourceUrls();
     // this.crossDomRPC.customIframeContent(function(customIframeContent){
@@ -65,14 +65,45 @@ ClientBugApp.prototype = {
     var self = this;
     this.crossDomRPC.customIframeContent(function(customIframeContent){
       self.sourceUrls = customIframeContent;
-      self.buildContent();
+      self.getHtml();
     });
+  },
+  getHtml: function(){
+    var self = this;
+    $.get(self.sourceUrls.url, function(res){
+      self.html = res.html;
+      self.buildContent();
+    })
   },
   buildContent: function(){
     var self = this;
     var $head = $('head');
-    self.createAndAppendStyle($head, self.sourceUrls.iframe_base_style);
+    this.createAndAppendStyle($head, this.sourceUrls.iframe_base_style);
+    this.$mountNode.css({'visibility': 'hidden'});
+    this.$mountNode.append(self.html);
+    this.$domNodes = getDomNodes(this.$mountNode);
+    this.addListeners();
+    this.buildFirstScene();
+  },
+  buildFirstScene: function(){
+    var self = this;
+    var pullTab = this.$domNodes.mechPullTab;
+    pullTab.x = 180;
+    var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
     
+    this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
+      self.resizingFunctions.getDimensions(views, function() {
+        $.each(views, function (index, element) {
+          element.detach().css({'visibility': 'visible'});
+        });
+        self.$mountNode.append(pullTab);
+        
+        self.crossDomRPC.resizeiFrame(pullTab.x, pullTab.y, false, function() {
+          self.resizingFunctions.expand(pullTab);
+        });
+      });
+    });
+    this.setState({selected_menu_option: '#form'});
   },
   createAndAppendStyle: function($head, href){
     var style = document.createElement('link');
@@ -95,8 +126,7 @@ ClientBugApp.prototype = {
         case 'expanded':
           break;
       }
-    } 
-    
+    }    
   },
   remove: function(){
     var self = this;

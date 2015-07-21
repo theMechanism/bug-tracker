@@ -19,7 +19,7 @@ var App;
     rpc.customIframeContent(function(customIframeContent){
       $.getScript(customIframeContent.iframe_js, function(){
         $.getJSON(customIframeContent.url,function(r){
-          App = new ClientBugApp(rpc, r.html);
+          App = new ClientBugApp(rpc);
         })
       });
         
