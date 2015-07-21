@@ -100,7 +100,7 @@ body {
   top: 0;
 }
 #mech-bug-tracker .mech-bug-logo {
-  background: url(http://venus.themechanism.com/images/TheMechanism_FullLogo.png) no-repeat top left;
+  background: image-url("TheMechanism_FullLogo.png") no-repeat top left;
   height: 43px;
   left: 7px;
   position: absolute;
@@ -139,7 +139,7 @@ body {
   transition: transform 1s ease;
 }
 #mech-bug-tracker .mech-pull-tab div{
-  background: url(http://venus.themechanism.com/images/LilMech.png) 5px center no-repeat;
+  background: image-url("LilMech.png") 5px center no-repeat;
   /* the following line is for local development ONLY, comment it out for production! */
   /*background: url(http://localhost:3000/images/LilMech.png) left center no-repeat;*/
   padding: 6px 20px 6px 36px;
