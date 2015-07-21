@@ -58,6 +58,8 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 2.46.2'
 end
 
+gem 'simplecov', :require => false, :group => :test
+
 gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
