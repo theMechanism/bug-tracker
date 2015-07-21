@@ -27,6 +27,12 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
   config.include WaitForAjax, type: :feature
+  
+  config.include Warden::Test::Helpers, type: :feature
+  config.before :suite do
+    Warden.test_mode!
+  end
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
