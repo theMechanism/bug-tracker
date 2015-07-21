@@ -31,8 +31,7 @@ ClientBugApp.prototype = {
     var self = this;
     this.crossDomRPC.customIframeContent(function(customIframeContent){
       var $head = $('head');
-      console.log($head);
-      self.createAndAppendStyle(customIframeContent.iframe_base_style);
+      self.createAndAppendStyle($head, customIframeContent.iframe_base_style);
       // console.log(customIframeContent);
       // console.log('from init func');
     });
@@ -61,11 +60,12 @@ ClientBugApp.prototype = {
     });
     this.setState({selected_menu_option: '#form'});
   },
-  createAndAppendStyle: function(href){
-    
+  createAndAppendStyle: function($head, href){
+    console.log($head);
     var style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = href;
+    $head.append(style);
     console.log(style);
   },
   setState: function(obj){
