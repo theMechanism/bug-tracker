@@ -29,7 +29,11 @@ var ClientBugApp = function(crossDomRPC, html){
 ClientBugApp.prototype = {
   init: function(html){
     var self = this;
-    this.crossDomRPC.customIframeContent(function(customIframeContent){console.log(customIframeContent);console.log('from init func')});
+    this.crossDomRPC.customIframeContent(function(customIframeContent){
+      self.createAndAppendStyle(customIframeContent.iframe_base_style);
+      // console.log(customIframeContent);
+      // console.log('from init func');
+    });
     this.$mountNode.css({'visibility': 'hidden'});
     this.$mountNode.append(html);
     this.$domNodes = getDomNodes(this.$mountNode);
@@ -54,6 +58,10 @@ ClientBugApp.prototype = {
       });
     });
     this.setState({selected_menu_option: '#form'});
+  },
+  createAndAppendStyle: function(href){
+    console.log('href');
+    console.log(href);
   },
   setState: function(obj){
     var self = this;
