@@ -31,43 +31,48 @@ ClientBugApp.prototype = {
   init: function(html){
     var self = this;
     this.cacheSourceUrls();
-    this.crossDomRPC.customIframeContent(function(customIframeContent){
-      var $head = $('head');
-      self.createAndAppendStyle($head, customIframeContent.iframe_base_style);
-      // console.log(customIframeContent);
-      // console.log('from init func');
-    });
-    this.$mountNode.css({'visibility': 'hidden'});
-    this.$mountNode.append(html);
-    this.$domNodes = getDomNodes(this.$mountNode);
+    // this.crossDomRPC.customIframeContent(function(customIframeContent){
+      
+    //   // console.log(customIframeContent);
+    //   // console.log('from init func');
+    // });
+    // this.$mountNode.css({'visibility': 'hidden'});
+    // this.$mountNode.append(html);
+    // this.$domNodes = getDomNodes(this.$mountNode);
     
-    var pullTab = this.$domNodes.mechPullTab;
-    pullTab.x = 180;
-    var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
+    // var pullTab = this.$domNodes.mechPullTab;
+    // pullTab.x = 180;
+    // var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
     
-    this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
-      self.resizingFunctions.getDimensions(views, function() {
-        // console.log('check the views: ' + views);
-        $.each(views, function (index, element) {
-          element.detach().css({'visibility': 'visible'});
-        });
+    // this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
+    //   self.resizingFunctions.getDimensions(views, function() {
+    //     // console.log('check the views: ' + views);
+    //     $.each(views, function (index, element) {
+    //       element.detach().css({'visibility': 'visible'});
+    //     });
 
-        self.$mountNode.append(pullTab);
+    //     self.$mountNode.append(pullTab);
         
-        self.crossDomRPC.resizeiFrame(pullTab.x, pullTab.y, false, function() {
-          self.resizingFunctions.expand(pullTab);
-          self.addListeners();
-        });
-      });
-    });
-    this.setState({selected_menu_option: '#form'});
+    //     self.crossDomRPC.resizeiFrame(pullTab.x, pullTab.y, false, function() {
+    //       self.resizingFunctions.expand(pullTab);
+    //       self.addListeners();
+    //     });
+    //   });
+    // });
+    // this.setState({selected_menu_option: '#form'});
   },
   cacheSourceUrls: function(){
     var self = this;
     this.crossDomRPC.customIframeContent(function(customIframeContent){
-      self.sourceUrls.style = customIframeContent.iframe_base_style;
+      self.sourceUrls = customIframeContent;
+      self.buildContent();
     });
-
+  },
+  buildContent: function(){
+    var self = this;
+    var $head = $('head');
+    self.createAndAppendStyle($head, self.sourceUrls.iframe_base_style);
+    
   },
   createAndAppendStyle: function($head, href){
     var style = document.createElement('link');
