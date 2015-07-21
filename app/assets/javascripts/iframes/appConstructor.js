@@ -29,37 +29,7 @@ var ClientBugApp = function(crossDomRPC){
 
 ClientBugApp.prototype = {
   init: function(){
-    var self = this;
     this.cacheSourceUrls();
-    // this.crossDomRPC.customIframeContent(function(customIframeContent){
-      
-    //   // console.log(customIframeContent);
-    //   // console.log('from init func');
-    // });
-    // this.$mountNode.css({'visibility': 'hidden'});
-    // this.$mountNode.append(html);
-    // this.$domNodes = getDomNodes(this.$mountNode);
-    
-    // var pullTab = this.$domNodes.mechPullTab;
-    // pullTab.x = 180;
-    // var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
-    
-    // this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
-    //   self.resizingFunctions.getDimensions(views, function() {
-    //     // console.log('check the views: ' + views);
-    //     $.each(views, function (index, element) {
-    //       element.detach().css({'visibility': 'visible'});
-    //     });
-
-    //     self.$mountNode.append(pullTab);
-        
-    //     self.crossDomRPC.resizeiFrame(pullTab.x, pullTab.y, false, function() {
-    //       self.resizingFunctions.expand(pullTab);
-    //       self.addListeners();
-    //     });
-    //   });
-    // });
-    // this.setState({selected_menu_option: '#form'});
   },
   cacheSourceUrls: function(){
     var self = this;
@@ -82,8 +52,8 @@ ClientBugApp.prototype = {
     this.$mountNode.css({'visibility': 'hidden'});
     this.$mountNode.append(self.html);
     this.$domNodes = getDomNodes(this.$mountNode);
-    this.addListeners();
     this.buildFirstScene();
+    this.addListeners();
   },
   buildFirstScene: function(){
     var self = this;
