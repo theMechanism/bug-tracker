@@ -12,7 +12,9 @@ module WaitForAjax
   end
 
   def finished_all_iframe_ajax_requests?
-    within_frame find('#mech-bug-iframe') do
+    within_frame find('iframe') do
+      puts 'jq count'
+      puts page.evaluate_script('$.active')
       page.evaluate_script('$.active').zero?
     end
   end

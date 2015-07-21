@@ -14,8 +14,14 @@ class BugsController < ApplicationController
 	end
 
 	def create
-		@bug = Bug.new(bug_params)
+		p '#'*80 
+		p 'params'
+		p "#{params.inspect}"
+		project = Project.find(params[:project_id])
+		@bug = project.bugs.build(bug_params)
 		if @bug.save
+			p 'created'
+			p "#{@bug.inspect}"
 			render json: @bug
 			# redirect_to @bug, location: @bug, callback: params[:callback]
 			 # BugMailer.submit_email(@bug).deliver

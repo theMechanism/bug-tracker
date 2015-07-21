@@ -29,11 +29,11 @@ RSpec.configure do |config|
   config.include WaitForAjax, type: :feature
   
   config.include Warden::Test::Helpers, type: :feature
-  config.before :suite do
-    # Capybara.default_wait_time = 5
+
+  config.before type: :feature do
+    # Capybara.default_wait_time = 4
     Warden.test_mode!
   end
-
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
