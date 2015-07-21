@@ -10,6 +10,7 @@
     pointer  = 'pointer-to-controller.html',
     custom_iframe_content = '<%= project_iframe_path(@project) %>',
     iframe_js = '<%= asset_path "iframes", type: :javascript %>',
+    iframe_base_style = '<%= asset_path "iframes", type: :stylesheet %>',
     depends   = {
       'easyXDM': serverURL + 'js/easyXDM.min.js'
     };
@@ -127,7 +128,8 @@
           return {
             url: custom_iframe_content,
             iframe_js: iframe_js,
-            updated_bugs_table: custom_iframe_content + '/updated_bugs_table'
+            updated_bugs_table: custom_iframe_content + '/updated_bugs_table',
+            iframe_base_style: iframe_base_style
           }
         }
       }

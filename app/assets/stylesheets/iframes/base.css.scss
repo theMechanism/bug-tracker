@@ -1,0 +1,224 @@
+body {
+  margin: 0;
+}
+#mech-bug-tracker {
+  bottom: 0;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  left: 0px;
+  max-height: 100%;
+  position: absolute;
+  width: 400px;
+}
+#mech-bug-tracker,
+#mech-bug-tracker * {
+  box-sizing: border-box;
+}
+#mech-bug-tracker .mech-bug-wrap {
+  background-color: #59bae3; /* Old browsers */
+  background-image: -moz-linear-gradient(45deg,  #59bae3 0%, #59aae3 100%); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#59bae3), color-stop(100%,#59aae3)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* IE10+ */
+  background-image: linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#59bae3", endColorstr="#59aae3",GradientType=1 );
+  max-height: 100%;
+  overflow-y: auto;
+
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap {
+  -webkit-transition: -webkit-transform 1s ease;
+  -moz-transition: -moz-transform 1s ease;
+  -ms-transition: -ms-transform 1s ease;
+  -o-transition: -o-transform 1s ease;
+  transition: transform 1s ease;
+}
+#mech-bug-tracker .mech-bug-padding {
+  padding-top: 50px;
+}
+#mech-bug-tracker #mech-bug-report .mech-bug-padding {
+  padding: 50px 57px;
+}
+#mech-bug-tracker .mech-bug-wrap form {
+  margin: 0;
+}
+#mech-bug-tracker .mech-bug-wrap .form-group {
+  margin-bottom: 15px;
+}
+#mech-bug-tracker .mech-bug-wrap label {
+  display: block;
+  font-weight: bold;
+}
+#mech-bug-tracker .mech-bug-wrap input,
+#mech-bug-tracker .mech-bug-wrap textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+}
+#mech-bug-tracker .mech-bug-wrap textarea {
+  height: 100px;
+}
+#mech-bug-tracker .mech-bug-wrap fieldset {
+  padding: 0;
+  border: none;
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap.left {
+  transform: translate(-100%, 0px);
+  -webkit-transform: translate(-100%, 0px);
+  -moz-transform: translate(-100%, 0px);
+  -o-transform: translate(-100%, 0px);
+  -ms-transform: translate(-100%, 0px);
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap.down {
+  transform: translate(0px, 100%);
+  -webkit-transform: translate(0px, 100%);
+  -moz-transform: translate(0px, 100%);
+  -o-transform: translate(0px, 100%);
+  -ms-transform: translate(0px, 100%);
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-bug-wrap.active,
+.csstransforms.csstransitions #mech-bug-tracker .mech-pull-tab.active {
+  transform: translate(0px, 0px);
+  -webkit-transform: translate(0px, 0px);
+  -moz-transform: translate(0px, 0px);
+  -o-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+}
+#mech-bug-tracker .mech-bug-wrap .mech-bug-close {
+  background: #a6e7fe;
+  color:#64b9e1;
+  cursor: pointer;
+  padding: 6px 12px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#mech-bug-tracker .mech-bug-logo {
+  background: url(http://venus.themechanism.com/images/TheMechanism_FullLogo.png) no-repeat top left;
+  height: 43px;
+  left: 7px;
+  position: absolute;
+  top: 7px;
+  width: 300px;
+}
+#mech-bug-tracker .mech-pull-tab {
+  background: #59bae3; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #59bae3 0%, #59aae3 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#59bae3), color-stop(100%,#59aae3)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* IE10+ */
+  background: linear-gradient(45deg,  #59bae3 0%,#59aae3 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59bae3', endColorstr='#59aae3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  bottom: 0;
+  color: black;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 17px;
+  position: absolute;
+  left: 0;
+}
+.csstransforms.csstransitions #mech-bug-tracker .mech-pull-tab {
+  transform: translate(-100%, 0px);
+  -webkit-transform: translate(-100%, 0px);
+  -moz-transform: translate(-100%, 0px);
+  -o-transform: translate(-100%, 0px);
+  -ms-transform: translate(-100%, 0px);
+
+  -webkit-transition: -webkit-transform 1s ease;
+  -moz-transition: -moz-transform 1s ease;
+  -ms-transition: -ms-transform 1s ease;
+  -o-transition: -o-transform 1s ease;
+  transition: transform 1s ease;
+}
+#mech-bug-tracker .mech-pull-tab div{
+  background: url(http://venus.themechanism.com/images/LilMech.png) 5px center no-repeat;
+  /* the following line is for local development ONLY, comment it out for production! */
+  /*background: url(http://localhost:3000/images/LilMech.png) left center no-repeat;*/
+  padding: 6px 20px 6px 36px;
+}
+#mech-bug-tracker #mech-bug-submit, #mech-bug-tracker #mech-bug-list {
+  background:#a2e8fc;
+  border:0px;
+  box-shadow: 0px 0px 0px black;
+  color: black;
+  cursor:pointer;
+  display: inline-block;
+  font-size:14px;
+  font-weight:700;
+  height: 23px;
+  margin: 2px;
+  padding: 2px 6px;
+  text-decoration: none;
+  vertical-align: middle;
+  width: auto;
+}
+#mech-bug-tracker #mech-bug-submit.loading {
+  opacity: 0.5;
+}
+#mech-bug-tracker .mech-bug-message {
+  text-align: center;
+  /*text-align: right;*/
+  padding: 0 10px 10px;
+}
+#mech-bug-tracker .mech-bug-message h1{
+  color: white;
+  font-weight: 300;
+  font-size: 30px;
+  margin: 0px;
+  text-align: center;
+}
+#mech-bug-tracker .mech-bug-message .mech-bug-more {
+  background: #a6e7fe;
+  cursor: pointer;
+  /*display: inline-block;*/
+  padding: 0px 15px;
+}
+#mech-bug-tracker .mech-bug-info {
+  background: #a2e8fc;
+  -webkit-box-shadow: inset 0px 5px 5px 0px rgb(100, 100, 100);
+  -moz-box-shadow: inset 0px 5px 5px 0px rgb(100, 100, 100);
+  box-shadow: inset 0px 5px 5px 0px rgb(100, 100, 100);
+  display: none;
+  font-weight: bold;
+  padding: 10px;
+}
+#mech-bug-tracker .mech-bug-more .less {
+  display: none;
+}
+#mech-bug-tracker .mech-bug-wrap.expanded .mech-bug-info {
+  display: block;
+}
+#mech-bug-tracker .mech-bug-wrap.expanded .mech-bug-more .more {
+  display: none;
+}
+#mech-bug-tracker .mech-bug-wrap.expanded .mech-bug-more .less {
+  display: block;
+}
+#mech-bug-tracker .mech-bug-info span {
+  font-weight: normal;
+}
+@media only screen and (max-width: 399px){
+  #mech-bug-tracker {
+    width: 100%;
+  }
+  #mech-bug-tracker .mech-bug-logo {
+    width: 200px;
+  }
+  #mech-bug-tracker #mech-bug-report .mech-bug-padding {
+    padding: 50px 20px;
+  }
+}
+
+@media print {
+    * {
+      display: none;
+    }
+}
