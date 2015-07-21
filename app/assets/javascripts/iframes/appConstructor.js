@@ -24,6 +24,7 @@ var ClientBugApp = function(crossDomRPC){
   // initialize module functions, pass the App / 'this' context in for reference
   this.resizingFunctions = resizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
+  this.services = {}; // this should be module for all ajax functions
   this.init();
 }
 
