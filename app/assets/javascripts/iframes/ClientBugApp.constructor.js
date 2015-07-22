@@ -6,8 +6,8 @@ var ClientBugApp = function(crossDomRPC){
 
   // TODO -- no longer need to catch mountNode in separate DOM sweep -- can do with getDomNodes()
 
-  this.$mountNode = $('#mech-bug-tracker');
-  this.$domNodes = {};
+  // this.$mountNode = $('#mech-bug-tracker');
+  // this.$domNodes = {};
   
   // easyXDM library -- a bit tricky, see DevNotes folder 
   this.crossDomRPC = crossDomRPC;
@@ -31,7 +31,8 @@ var ClientBugApp = function(crossDomRPC){
   this.resizingFunctions = ClientBugAppResizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
   this.services = ClientBugAppServices(_Dispatcher); 
-  
+  this.domHooks = ClientBugAppDomHooks(_Dispatcher);
+
   _Dispatcher.register(this);
   this.init();
 }
@@ -41,9 +42,9 @@ ClientBugApp.prototype = {
     this.services.cacheSourceUrls(this.crossDomRPC);
   },
   buildContent: function(html){ 
-    this.$mountNode.css({'visibility': 'hidden'});
-    this.$mountNode.append(html);
-    this.$domNodes = getDomNodes(this.$mountNode);
+    // this.$mountNode.css({'visibility': 'hidden'});
+    // this.$mountNode.append(html);
+    this.domHooks.getDomNodes();
     this.buildFirstScene();
     this.addListeners();
   },
