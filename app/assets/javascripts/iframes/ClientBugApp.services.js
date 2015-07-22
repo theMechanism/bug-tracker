@@ -1,8 +1,9 @@
 var ClientBugAppServices = function(_Dispatcher) {
 
-  _Dispatcher.register(this);
   var services = {};
   var sourceUrls = {};
+
+  _Dispatcher.register(services);
 
   services.cacheSourceUrls = function(xdmRpc){
     xdmRpc.customIframeContent(function(customIframeContent){

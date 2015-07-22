@@ -3,7 +3,7 @@ ClientBugAppValidActions = (function(){
     // INIT: 'init',
     CREATE_AND_APPEND_STYLE: 'createAndAppendStyle',
     BUILD_CONTENT: 'buildContent',
-    CACHED_URLS: 'cachedUrls',
+    ADD_LISTENERS: 'addListeners',
     CHANGE_DISPLAYED_ELEMENT: 'changeDisplayedElement',
     HANDLE_SUBMIT: 'handleSubmit'
   };

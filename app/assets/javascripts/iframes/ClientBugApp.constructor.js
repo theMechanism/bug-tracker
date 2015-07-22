@@ -20,7 +20,7 @@ var ClientBugApp = function(crossDomRPC){
       return $.cookie('mechBugTracker');
     }
   };
-  this.hasTransitions = (Modernizr.csstransforms && Modernizr.csstransitions);
+  // this.hasTransitions = (Modernizr.csstransforms && Modernizr.csstransitions);
 
   this.state = {
     expanded: false,
@@ -28,10 +28,10 @@ var ClientBugApp = function(crossDomRPC){
   };
 
   // initialize module functions, pass the App / 'this' context in for reference
-  this.resizingFunctions = ClientBugAppResizingFunctions(this);
+  // this.resizingFunctions = ClientBugAppResizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
   this.services = ClientBugAppServices(_Dispatcher); 
-  this.domHooks = ClientBugAppDomHooks(_Dispatcher);
+  this.domHooks = ClientBugAppDomHooks(_Dispatcher, this.crossDomRPC);
 
   _Dispatcher.register(this);
   this.init();
@@ -44,37 +44,37 @@ ClientBugApp.prototype = {
   buildContent: function(html){ 
     // this.$mountNode.css({'visibility': 'hidden'});
     // this.$mountNode.append(html);
-    this.domHooks.getDomNodes();
-    this.buildFirstScene();
-    this.addListeners();
+    this.domHooks.getDomNodes(html);
+    // this.buildFirstScene();
+    // this.addListeners();
   },
-  buildFirstScene: function(){
-    var self = this;
-    var pullTab = this.$domNodes.mechPullTab;
-    pullTab.x = 180;
-    var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
+  // buildFirstScene: function(){
+  //   var self = this;
+  //   var pullTab = this.$domNodes.mechPullTab;
+  //   pullTab.x = 180;
+  //   var views = [pullTab, self.$domNodes.controlPanel.parent, self.$domNodes.feedback.error, self.$domNodes.feedback.response];
     
-    this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
-      self.resizingFunctions.getDimensions(views, function() {
-        $.each(views, function (index, element) {
-          element.detach().css({'visibility': 'visible'});
-        });
-        self.$mountNode.append(pullTab);
+  //   this.crossDomRPC.resizeiFrame(1000, 1000, false, function() {
+  //     self.resizingFunctions.getDimensions(views, function() {
+  //       $.each(views, function (index, element) {
+  //         element.detach().css({'visibility': 'visible'});
+  //       });
+  //       self.$mountNode.append(pullTab);
         
-        self.crossDomRPC.resizeiFrame(pullTab.x, pullTab.y, false, function() {
-          self.resizingFunctions.expand(pullTab);
-        });
-      });
-    });
-    this.setState({selected_menu_option: '#form'});
-  },
-  createAndAppendStyle: function(href){
-    var $head = $('head');
-    var style = document.createElement('link');
-    style.rel = 'stylesheet';
-    style.href = href;
-    $head.append(style);
-  },
+  //       self.crossDomRPC.resizeiFrame(pullTab.x, pullTab.y, false, function() {
+  //         self.resizingFunctions.expand(pullTab);
+  //       });
+  //     });
+  //   });
+  //   this.setState({selected_menu_option: '#form'});
+  // },
+  // createAndAppendStyle: function(href){
+  //   var $head = $('head');
+  //   var style = document.createElement('link');
+  //   style.rel = 'stylesheet';
+  //   style.href = href;
+  //   $head.append(style);
+  // },
   setState: function(obj){
     var self = this;
     var key = Object.getOwnPropertyNames(obj)[0];
@@ -97,10 +97,11 @@ ClientBugApp.prototype = {
     this.$mountNode.detach(self.components.pullTab);
   },
   addListeners: function(){
-    var self = this;
-    this.$domNodes.mechPullTab.click(self.eventHandlers.showControlPanel);
-    this.$domNodes.closeButtons.click(self.eventHandlers.close);
-    this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
-    this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
+    console.log(this.domHooks.handoffNodesForListeners())
+    // var self = this;
+    // this.$domNodes.mechPullTab.click(self.eventHandlers.showControlPanel);
+    // this.$domNodes.closeButtons.click(self.eventHandlers.close);
+    // this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
+    // this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
   }
 }
