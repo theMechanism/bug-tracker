@@ -9,11 +9,25 @@ var ClientBugAppDomHooks = function(_Dispatcher, xdmRpc) {
 
   var $nodes = {};
   var funcs = {}; 
+  var domState = {
+    expanded: undefined
+  };
   _Dispatcher.register(funcs);
   
 
-  funcs.testNodes = function(){
-    console.log($nodes);
+  funcs.stateChanged = function(newState){
+    switch(newState.expanded){
+      case true:
+        if (newState.expanded !== domState.expanded){
+          console.log('the expand must show')
+        }
+        break;
+      case false:
+        if (newState.expanded !== domState.expanded){
+          console.log('the expand must hide')
+        }
+        break;
+    }
   };
   funcs.getDomNodes = function(html){
     $mountNode.css({'visibility': 'hidden'});
@@ -47,7 +61,6 @@ var ClientBugAppDomHooks = function(_Dispatcher, xdmRpc) {
     funcs.buildFirstScene();
   };
   funcs.createAndAppendStyle = function(href){
-    console.log('adding style');
     var style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = href;
@@ -69,20 +82,15 @@ var ClientBugAppDomHooks = function(_Dispatcher, xdmRpc) {
         });
       });
     });
-    // this.setState({selected_menu_option: '#form'});
+    _Dispatcher.notify('ADD_LISTENERS');
   };
   funcs.handoffNodesForListeners = function(){
     return {
       pullTab: $nodes.pullTab,
       closeButtons: $nodes.closeButtons,
-      menuSelects: $nodes.menu.selects,
-      form: $nodes.form
+      menuSelects: $nodes.controlPanel.menu.selects,
+      form: $nodes.controlPanel.form
     };
-    // var self = this;
-    // this.$domNodes.mechPullTab.click(self.eventHandlers.showControlPanel);
-    // this.$domNodes.closeButtons.click(self.eventHandlers.close);
-    // this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
-    // this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
   }
 
   return funcs;

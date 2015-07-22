@@ -9,7 +9,8 @@ ClientBugEventHandlers = function(App){
     });
   };
   handlers.showControlPanel = function() {
-    App.resizingFunctions.fromTo(App.$domNodes.mechPullTab, App.$domNodes.controlPanel.parent);
+    App.setState({expanded: true});
+    // resizingFunctions.fromTo(App.$domNodes.mechPullTab, App.$domNodes.controlPanel.parent);
   };
   handlers.menuSelect = function(e){
     e.preventDefault();

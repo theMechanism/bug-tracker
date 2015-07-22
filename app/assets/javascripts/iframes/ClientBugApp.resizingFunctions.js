@@ -51,11 +51,11 @@ ClientBugAppResizingFunctions = function(xdmRpc, hasTransitions, $mountNode) {
     });
   };
   funcs.fromTo =  function(from, to, afterMinimize, afterExpand) {
-    App.$mountNode.append(to);
+    $mountNode.append(to);
     funcs.getDimensions([from, to], function() {
       var tWidth = (from.x < to.x) ? to.x : from.x,
         tHeight = (from.y < to.y) ? to.y : from.y;
-      App.crossDomRPC.resizeiFrame(tWidth, tHeight, true, function() {
+      xdmRpc.resizeiFrame(tWidth, tHeight, true, function() {
         var toDo = [
           function(callback) {
             funcs.minimize(from, function() {
@@ -71,7 +71,7 @@ ClientBugAppResizingFunctions = function(xdmRpc, hasTransitions, $mountNode) {
           }
         ];
         GlobalUtils.loadBefore(toDo, function() {
-          App.crossDomRPC.resizeiFrame(to.x, to.y, true);
+          xdmRpc.resizeiFrame(to.x, to.y, true);
         });
       });
     });
