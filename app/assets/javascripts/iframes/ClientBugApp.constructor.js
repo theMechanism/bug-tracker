@@ -25,7 +25,7 @@ var ClientBugApp = function(crossDomRPC){
   };
 
   // initialize module functions, pass the App / 'this' context in for reference
-  this.resizingFunctions = resizingFunctions(this);
+  this.resizingFunctions = ClientBugAppResizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
   this.services = ClientBugAppServices(this); 
 

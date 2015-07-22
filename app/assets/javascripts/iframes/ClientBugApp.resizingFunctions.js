@@ -1,4 +1,4 @@
-resizingFunctions = function(App) {
+ClientBugAppResizingFunctions = function(App) {
   var funcs = {};
   funcs.minimize = function(element, afterMinimize) {
     var aM = function () {
