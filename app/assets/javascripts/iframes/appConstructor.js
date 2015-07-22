@@ -1,4 +1,7 @@
 var ClientBugApp = function(crossDomRPC){
+  
+  // TODO -- no longer need to catch mountNode in separate DOM sweep -- can do with getDomNodes()
+
   this.$mountNode = $('#mech-bug-tracker');
   this.$domNodes = {};
   
@@ -49,6 +52,7 @@ ClientBugApp.prototype = {
   buildContent: function(){
     var self = this;
     var $head = $('head');
+    // place holder, as i assume there may be an additional style to append
     this.createAndAppendStyle($head, this.sourceUrls.iframe_base_style);
     this.$mountNode.css({'visibility': 'hidden'});
     this.$mountNode.append(self.html);
