@@ -1,26 +1,20 @@
-var ClientBugAppServices = function(App) {
+var ClientBugAppServices = function(_Dispatcher) {
+
+  _Dispatcher.register(this);
   var services = {};
   var sourceUrls = {};
 
-  services.testHtml = function(html){
-    console.log(html);
-  };
-  services.testUrls = function(){
-    console.log(sourceUrls);
-  };
-
-  services.cacheSourceUrls = function(){
-    App.crossDomRPC.customIframeContent(function(customIframeContent){
+  services.cacheSourceUrls = function(xdmRpc){
+    xdmRpc.customIframeContent(function(customIframeContent){
       sourceUrls = customIframeContent;
-      // Todos, pass the retrieved info to a Dispatcher
-      App.createAndAppendStyle(sourceUrls.iframe_base_style);
+      _Dispatcher.notify('CREATE_AND_APPEND_STYLE', sourceUrls.iframe_base_style);
       services.getHtml();
     });
   };
 
   services.getHtml = function(){
     $.get(sourceUrls.url, function(res){
-      App.buildContent(res.html);
+      _Dispatcher.notify('BUILD_CONTENT', res.html);
     })
   };
 

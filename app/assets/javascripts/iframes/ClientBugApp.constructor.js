@@ -1,5 +1,9 @@
 var ClientBugApp = function(crossDomRPC){
   
+  var _Dispatcher = new DispatcherV2(ClientBugAppValidActions);
+  // TODO -- dispatcher need not by accessible
+  this.dispatcher = _Dispatcher;
+
   // TODO -- no longer need to catch mountNode in separate DOM sweep -- can do with getDomNodes()
 
   this.$mountNode = $('#mech-bug-tracker');
@@ -7,7 +11,6 @@ var ClientBugApp = function(crossDomRPC){
   
   // easyXDM library -- a bit tricky, see DevNotes folder 
   this.crossDomRPC = crossDomRPC;
-  this.sourceUrls = {};
 
   this.cookieMonster = {
     setName: function(name) {
@@ -27,16 +30,17 @@ var ClientBugApp = function(crossDomRPC){
   // initialize module functions, pass the App / 'this' context in for reference
   this.resizingFunctions = ClientBugAppResizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
-  this.services = ClientBugAppServices(this); 
-
+  this.services = ClientBugAppServices(_Dispatcher); 
+  
+  _Dispatcher.register(this);
   this.init();
 }
 
 ClientBugApp.prototype = {
   init: function(){
-    this.services.cacheSourceUrls();
+    this.services.cacheSourceUrls(this.crossDomRPC);
   },
-  buildContent: function(html){    
+  buildContent: function(html){ 
     this.$mountNode.css({'visibility': 'hidden'});
     this.$mountNode.append(html);
     this.$domNodes = getDomNodes(this.$mountNode);
