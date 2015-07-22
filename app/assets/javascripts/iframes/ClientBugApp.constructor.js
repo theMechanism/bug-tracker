@@ -27,7 +27,8 @@ var ClientBugApp = function(crossDomRPC){
   // initialize module functions, pass the App / 'this' context in for reference
   this.resizingFunctions = resizingFunctions(this);
   this.eventHandlers = ClientBugEventHandlers(this);
-  this.services = {}; // this should be module for all ajax functions
+  this.services = ClientBugAppServices(this); 
+
   this.init();
 }
 
@@ -36,26 +37,25 @@ ClientBugApp.prototype = {
     this.cacheSourceUrls();
   },
   cacheSourceUrls: function(){
-    var self = this;
-    this.crossDomRPC.customIframeContent(function(customIframeContent){
-      self.sourceUrls = customIframeContent;
-      self.getHtml();
-    });
+    this.services.cacheSourceUrls();
+    // var self = this;
+    // this.crossDomRPC.customIframeContent(function(customIframeContent){
+    //   self.sourceUrls = customIframeContent;
+    //   self.getHtml();
+    // });
   },
-  getHtml: function(){
+  // getHtml: function(){
+  //   var self = this;
+  //   $.get(self.sourceUrls.url, function(res){
+  //     self.html = res.html;
+  //     self.buildContent();
+  //   })
+  // },
+  buildContent: function(html){
     var self = this;
-    $.get(self.sourceUrls.url, function(res){
-      self.html = res.html;
-      self.buildContent();
-    })
-  },
-  buildContent: function(){
-    var self = this;
-    var $head = $('head');
-    // place holder, as i assume there may be an additional style to append
-    this.createAndAppendStyle($head, this.sourceUrls.iframe_base_style);
+    
     this.$mountNode.css({'visibility': 'hidden'});
-    this.$mountNode.append(self.html);
+    this.$mountNode.append(html);
     this.$domNodes = getDomNodes(this.$mountNode);
     this.buildFirstScene();
     this.addListeners();
@@ -80,7 +80,8 @@ ClientBugApp.prototype = {
     });
     this.setState({selected_menu_option: '#form'});
   },
-  createAndAppendStyle: function($head, href){
+  createAndAppendStyle: function(href){
+    var $head = $('head');
     var style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = href;
