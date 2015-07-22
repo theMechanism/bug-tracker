@@ -32,12 +32,12 @@ ClientBugEventHandlers = function(App){
       submitFields['bug[browser_version]'] = bowser.version;
       submitFields['bug[width]'] = parentInfo.width;
       submitFields['bug[height]'] = parentInfo.height;
-      App.postToServer(submitFields);
+      App.services.postBugToServer(submitFields);
     }); 
   };
   handlers.successfulBug = function(res){
     App.resizingFunctions.fromTo(App.$domNodes.controlPanel.parent, App.$domNodes.feedback.response);
-    App.updateBugList();
+    App.services.updateBugList();
   };
   handlers.bugErrors = function(res){
     App.$domNodes.feedback.errorInfo.detach();

@@ -34,26 +34,9 @@ var ClientBugApp = function(crossDomRPC){
 
 ClientBugApp.prototype = {
   init: function(){
-    this.cacheSourceUrls();
-  },
-  cacheSourceUrls: function(){
     this.services.cacheSourceUrls();
-    // var self = this;
-    // this.crossDomRPC.customIframeContent(function(customIframeContent){
-    //   self.sourceUrls = customIframeContent;
-    //   self.getHtml();
-    // });
   },
-  // getHtml: function(){
-  //   var self = this;
-  //   $.get(self.sourceUrls.url, function(res){
-  //     self.html = res.html;
-  //     self.buildContent();
-  //   })
-  // },
-  buildContent: function(html){
-    var self = this;
-    
+  buildContent: function(html){    
     this.$mountNode.css({'visibility': 'hidden'});
     this.$mountNode.append(html);
     this.$domNodes = getDomNodes(this.$mountNode);
@@ -114,24 +97,5 @@ ClientBugApp.prototype = {
     this.$domNodes.closeButtons.click(self.eventHandlers.close);
     this.$domNodes.controlPanel.menu.selects.click(self.eventHandlers.menuSelect);
     this.$domNodes.controlPanel.form.submit( self.eventHandlers.bugSubmit);
-  }, 
-  postToServer: function(submitFields){
-    var self = this;
-    var url = self.$domNodes.controlPanel.form.attr('action');
-    $.post(url, submitFields).done(function(res){
-      if (res.id){
-        self.eventHandlers.successfulBug(res);
-      } else {
-        self.eventHandlers.bugErrors(res);
-      }
-    });
-  },
-  updateBugList: function(){
-    var self = this;
-    this.crossDomRPC.customIframeContent(function(customIframeContent){
-      $.get(customIframeContent.updated_bugs_table, function(res){
-        self.$domNodes.controlPanel.bugsTable = res.html;
-      })
-    });
   }
 }
