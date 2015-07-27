@@ -103,7 +103,7 @@ input.sign-in-submit{
 </style>
 
 <div class='form-wrap'>
-	<div class="sign-in-logo"><img src="http://venus.themechanism.com/images/TheMechanism_FullLogo.png" alt=""></div>
+	<div class="sign-in-logo"><%= image_tag 'TheMechanism_FullLogo.png' %></div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class='margin-top'>
   <%= f.email_field :email, autofocus: true, placeholder:'Email' %></div>
